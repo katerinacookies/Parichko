@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Parichko.Views.Register"
+             Title="Register">
+    <VerticalStackLayout
+        BackgroundColor="{StaticResource Cutesyblue}">
+
+        <Label
+            Text="Регистрация"
+            TextColor="{StaticResource Tertiary}"
+            Style="{StaticResource Headline}"
+            Padding="40, 70, 0, 0"
+            HorizontalOptions="Start"
+            SemanticProperties.HeadingLevel="Level1" />
+
+        <Label
+            Text="Можеш да промениш данните си по всяко време от настройки!"
+            Style="{StaticResource RegisterSubHeadline}"            
+            />
+
+        <Frame BackgroundColor="White"
+            CornerRadius="35"
+            VerticalOptions="Fill" 
+            HeightRequest="600"
+            Margin="0"
+            BorderColor="White"
+            >
+
+            <StackLayout>
+                <Frame
+                    Margin="0, 50, 0, 10"
+                    Style="{StaticResource SignFrame}">
+                    <Entry 
+                        Placeholder="Имейл" 
+                        Keyboard="Email"
+                        x:Name="EmailEntry"
+                        Text="{Binding Email}" 
+                        Style="{StaticResource SignForm}"/>
+                </Frame>
+
+                <Frame
+                    Style="{StaticResource SignFrame}">
+                    <Entry 
+                        Placeholder="Парола" 
+                        IsPassword="True"
+                        x:Name="PassEntry"
+                        Text="{Binding Email}" 
+                        Style="{StaticResource SignForm}"/>
+                </Frame>
+
+                <Frame
+                    Style="{StaticResource SignFrame}">
+                    <Entry 
+                        Placeholder="Повтори парола" 
+                        IsPassword="True"
+                        x:Name="PassRepeat"
+                        Text="{Binding Email}" 
+                        Style="{StaticResource SignForm}"/>
+                </Frame>
+
+                <Button
+                    x:Name="LoginBtn"
+                    Text="Регистрация" 
+                    Margin="0, 40, 0, 0"
+                    SemanticProperties.Hint="Препраща към страница за вход"
+                    HorizontalOptions="Fill"
+                    Style="{StaticResource LoginBtn}"/>
+
+                <Button
+                    x:Name="Forgottenpass"
+                    Text="Нямаш профил? Вход" 
+                    SemanticProperties.Hint="Препраща към страница за забравена парола" 
+                    HorizontalOptions="Fill"
+                    Style="{StaticResource Forgottenpass}"/>
+            </StackLayout>
+        </Frame>
+    </VerticalStackLayout>
+</ContentPage>

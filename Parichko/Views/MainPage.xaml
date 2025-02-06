@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Parichko.Views.MainPage"
+             BackgroundImageSource="background.png">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+            <Label
+                Padding="0, 80, 0, 0"
+                Text="Здравей!"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Label
+                Text="Аз съм Паричко и ще ти помогна да организираш бюджета си!"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+
+            <Image
+                Source="parichkologin.png"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a race car number eight" />
+
+            <Button
+                x:Name="LoginBtn"
+                Text="Вход" 
+                SemanticProperties.Hint="Препраща към страница за вход"
+                HorizontalOptions="Fill"
+                Style="{StaticResource LoginBtn}"
+                CornerRadius="20"
+                Clicked="OnLoginClicked"/>
+
+            <Button
+                x:Name="RegisterBtn"
+                Text="Регистрация" 
+                SemanticProperties.Hint="Препраща към страница за регистрация"
+                Clicked="OnRegisterClicked"
+                HorizontalOptions="Fill"
+                Style="{StaticResource RegisterBtn}"
+                CornerRadius="20"/>
+
+            <Button
+                x:Name="Forgottenpass"
+                Text="Забравена парола" 
+                SemanticProperties.Hint="Препраща към страница за забравена парола"
+                Padding="0"
+                HorizontalOptions="Fill"
+                Style="{StaticResource Forgottenpass}"/>
+
+            <Button
+                x:Name="Demo"
+                Text="Демо версия" 
+                SemanticProperties.Hint="Препраща към страница с демо версия"
+                Padding="0"
+                HorizontalOptions="Fill"
+                Style="{StaticResource DemoBtn}"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
