@@ -17,9 +17,10 @@ namespace Parichko.Models
         public decimal SavedAmount { get; set; }
         public short SavedPercent { get; set; }
         public string IconName { get; set; } = "default.png";
+        public string Color { get; set; }
         public bool Starred { get; set; } = false;
 
         //dali da e spisuk s potrebitelq ili prazen spisuk (samo za priqtelite mu)
-        public IList<UserGoal>? Savers { get; } = null;
+        public IList<UserGoal> Savers { get; set; } = new List<UserGoal>();
     }
 }

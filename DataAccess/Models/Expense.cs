@@ -12,6 +12,8 @@ namespace Parichko.Models
     {
         [Key]
         public int Id { get; set; }
+        public string Name { get; set; }
+        public DateTimeOffset Date { get; set; }
         public decimal Amount { get; set; }
         //trqbva da se napravi stoinost po podrazbirane
         public int CategoryId { get; set; }

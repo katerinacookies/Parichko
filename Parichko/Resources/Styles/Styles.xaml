@@ -224,7 +224,7 @@
     <Style TargetType="Label">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="OpenSansRegular" />
+        <Setter Property="FontFamily" Value="AtkinsonRegular" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
@@ -251,6 +251,7 @@
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontFamily" Value="AtkinsonBold"/>
     </Style>
 
     <Style TargetType="Label" x:Key="SubHeadline">
@@ -266,6 +267,7 @@
         <Setter Property="FontSize" Value="21" />
         <Setter Property="HorizontalOptions" Value="Start" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="FontFamily" Value="AtkinsonBold"/>
     </Style>
 
     <Style TargetType="Label" x:Key="RegisterSubHeadline">

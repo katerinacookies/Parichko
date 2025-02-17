@@ -9,7 +9,7 @@
 
         private async void OnLoginClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("Login");
+            await Shell.Current.GoToAsync("///Login");
         }
         private async void OnRegisterClicked(object sender, EventArgs e)
         {
@@ -19,7 +19,7 @@
                 return;
             }
 
-            await Shell.Current.GoToAsync("Register");
+            await Shell.Current.GoToAsync("///Register");
         }
     }
 

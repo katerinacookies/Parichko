@@ -13,28 +13,29 @@
                 Padding="0, 80, 0, 0"
                 Text="Здравей!"
                 Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+                SemanticProperties.HeadingLevel="Level1"
+                SemanticProperties.Description="Здравей" />
 
             <Label
                 Text="Аз съм Паричко и ще ти помогна да организираш бюджета си!"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                SemanticProperties.Description="Аз съм Паричко и ще ти помогна да организираш бюджета си" />
 
             <Image
                 Source="parichkologin.png"
                 HeightRequest="185"
                 Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a race car number eight" />
+                SemanticProperties.Description="Изображение на аватара на приложението Паричко, който е златна монета" />
 
             <Button
                 x:Name="LoginBtn"
                 Text="Вход" 
-                SemanticProperties.Hint="Препраща към страница за вход"
                 HorizontalOptions="Fill"
                 Style="{StaticResource LoginBtn}"
                 CornerRadius="20"
-                Clicked="OnLoginClicked"/>
+                Clicked="OnLoginClicked"
+                SemanticProperties.Description="Препраща към страница за вход"/>
 
             <Button
                 x:Name="RegisterBtn"
@@ -43,23 +44,24 @@
                 Clicked="OnRegisterClicked"
                 HorizontalOptions="Fill"
                 Style="{StaticResource RegisterBtn}"
-                CornerRadius="20"/>
+                CornerRadius="20"
+                SemanticProperties.Description="Препраща към страница за регистрация"/>
 
             <Button
                 x:Name="Forgottenpass"
                 Text="Забравена парола" 
-                SemanticProperties.Hint="Препраща към страница за забравена парола"
                 Padding="0"
                 HorizontalOptions="Fill"
-                Style="{StaticResource Forgottenpass}"/>
+                Style="{StaticResource Forgottenpass}"
+                SemanticProperties.Description="Препраща към страница за забравена парола"/>
 
             <Button
                 x:Name="Demo"
                 Text="Демо версия" 
-                SemanticProperties.Hint="Препраща към страница с демо версия"
                 Padding="0"
                 HorizontalOptions="Fill"
-                Style="{StaticResource DemoBtn}"/>
+                Style="{StaticResource DemoBtn}"
+                SemanticProperties.Description="Препраща към страница с демо версия"/>
 
         </VerticalStackLayout>
     </ScrollView>

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Parichko.Data;
 
@@ -10,9 +11,11 @@ using Parichko.Data;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ParichkoDbContext))]
-    partial class ParichkoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250216163742_DbNamesChange")]
+    partial class DbNamesChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.12");

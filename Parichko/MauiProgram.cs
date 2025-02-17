@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Parichko.Data;
+using DataAccess;
 
 namespace Parichko
 {
@@ -15,6 +16,10 @@ namespace Parichko
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("AtkinsonHyperlegible-Bold.ttf", "AtkinsonBold");
+                    fonts.AddFont("AtkinsonHyperlegible-BoldItalic.ttf", "AtkinsonBoldItalic");
+                    fonts.AddFont("AtkinsonHyperlegible-Italic.ttf", "AtkinsonItalic");
+                    fonts.AddFont("AtkinsonHyperlegible-Regular.ttf", "AtkinsonRegular");
                 });
 
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "parichko.db");

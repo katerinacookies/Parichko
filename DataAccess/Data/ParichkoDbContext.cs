@@ -7,6 +7,7 @@ using System.Data;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Parichko.Models;
+using DataAccess.Models;
 
 namespace Parichko.Data
 {
@@ -57,6 +58,10 @@ namespace Parichko.Data
                 .HasOne(i => i.UserProfile)
                 .WithMany(up => up.Incomes)
                 .HasForeignKey(i => i.UserProfileId);
+            modelBuilder.Entity<FriendRequest>()
+                .HasOne(i => i.ToUser)
+                .WithMany(up => up.FriendRequests)
+                .HasForeignKey(i => i.ToUserId);
             //Много към много - 1 потребител има много цели и една цел има много потребители
             modelBuilder.Entity<UserGoal>()
                 .HasKey(ug => new { ug.GoalId, ug.UserProfileId });
@@ -78,5 +83,6 @@ namespace Parichko.Data
         public DbSet<Income> Incomes { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Login> Logins { get; set; }
+        public DbSet<FriendRequest> FriendRequests { get; set; }
     }
 }

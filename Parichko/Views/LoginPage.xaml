@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Parichko.Views.Register"
-             Title="Register">
+             x:Class="Parichko.Views.LoginPage"
+             Title="Login">
     <VerticalStackLayout
         BackgroundColor="{StaticResource Cutesyblue}">
 
         <Label
-            Text="Регистрация"
+            Text="Вход"
             TextColor="{StaticResource Tertiary}"
             Style="{StaticResource Headline}"
-            Padding="40, 70, 0, 0"
+            Padding="40, 40, 0, 0"
             HorizontalOptions="Start"
             SemanticProperties.HeadingLevel="Level1"/>
 
         <Label
-            Text="Можеш да промениш данните си по всяко време от настройки!"
+            Text="Влез в профила си или се регистрирай!"
             Style="{StaticResource RegisterSubHeadline}"            
             />
 
@@ -31,6 +31,7 @@
                 <Frame
                     Margin="0, 50, 0, 10"
                     Style="{StaticResource SignFrame}">
+                    
                     <Entry 
                         Placeholder="Имейл" 
                         Keyboard="Email"
@@ -42,6 +43,7 @@
 
                 <Frame
                     Style="{StaticResource SignFrame}">
+
                     <Entry 
                         Placeholder="Парола" 
                         IsPassword="True"
@@ -51,31 +53,27 @@
                         SemanticProperties.Hint="Въведи своята парола"/>
                 </Frame>
 
-                <Frame
-                    Style="{StaticResource SignFrame}">
-                    <Entry 
-                        Placeholder="Повтори парола" 
-                        IsPassword="True"
-                        x:Name="PassRepeat"
-                        Text="{Binding Email}" 
-                        Style="{StaticResource SignForm}"
-                        SemanticProperties.Hint="Повтори паролата си"/>
-                </Frame>
-
                 <Button
                     x:Name="LoginBtn"
-                    Text="Регистрация" 
+                    Text="Вход" 
                     Margin="0, 40, 0, 0"
                     HorizontalOptions="Fill"
                     Style="{StaticResource LoginBtn}"
-                    SemanticProperties.Description="Препраща към страница за вход"/>
+                    SemanticProperties.Description="Препраща към началната страница в приложението"/>
 
                 <Button
                     x:Name="Forgottenpass"
-                    Text="Нямаш профил? Вход" 
+                    Text="Забравена парола" 
                     SemanticProperties.Description="Препраща към страница за забравена парола" 
                     HorizontalOptions="Fill"
                     Style="{StaticResource Forgottenpass}"/>
+
+                <Image
+                    Source="parichkologinslay.png"
+                    HeightRequest="185"
+                    Aspect="AspectFit"
+                    SemanticProperties.Description="Изображение на аватара на приложението Паричко, който е златна монета" />
+
             </StackLayout>
         </Frame>
     </VerticalStackLayout>

@@ -12,6 +12,7 @@ namespace Parichko.Models
     {
         [Key]
         public int Id { get; set; }
+        public string Name { get; set; }
         public decimal Amount { get; set; }
         public DateTimeOffset Date { get; set; } = DateTimeOffset.Now;
         public UserProfile UserProfile { get; set; }

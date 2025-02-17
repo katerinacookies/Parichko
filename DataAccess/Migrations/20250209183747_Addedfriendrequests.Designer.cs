@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Parichko.Data;
 
@@ -10,9 +11,11 @@ using Parichko.Data;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ParichkoDbContext))]
-    partial class ParichkoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250209183747_Addedfriendrequests")]
+    partial class Addedfriendrequests
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.12");
@@ -108,13 +111,6 @@ namespace DataAccess.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("UserProfileId")
                         .HasColumnType("INTEGER");
 
@@ -132,10 +128,6 @@ namespace DataAccess.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<decimal>("GoalAmount")
                         .HasColumnType("TEXT");
@@ -172,10 +164,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTimeOffset>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserProfileId")
@@ -272,7 +260,7 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("Parichko.Models.UserProfile", "ToUser")
-                        .WithMany("FriendRequests")
+                        .WithMany()
                         .HasForeignKey("ToUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -376,8 +364,6 @@ namespace DataAccess.Migrations
                     b.Navigation("Advices");
 
                     b.Navigation("Expenses");
-
-                    b.Navigation("FriendRequests");
 
                     b.Navigation("Friends");
 
