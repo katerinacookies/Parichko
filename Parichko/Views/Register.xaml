@@ -5,6 +5,10 @@
              Title="Register">
     <VerticalStackLayout
         BackgroundColor="{StaticResource Cutesyblue}">
+        <ActivityIndicator x:Name="LoadingIndicator" 
+            IsRunning="False" 
+            IsVisible="False"
+            Color="Blue"/>
 
         <Label
             Text="Регистрация"
@@ -28,11 +32,7 @@
             >
 
             <StackLayout>
-                <ActivityIndicator x:Name="LoadingIndicator" 
-                   IsRunning="False" 
-                   IsVisible="False"
-                   Color="Blue"/>
-                
+
                 <Frame
                     Margin="0, 50, 0, 10"
                     Style="{StaticResource SignFrame}">
@@ -73,7 +73,8 @@
                     Margin="0, 40, 0, 0"
                     HorizontalOptions="Fill"
                     Style="{StaticResource LoginBtn}"
-                    SemanticProperties.Description="Препраща към страница за вход"/>
+                    SemanticProperties.Description="Препраща към страница за вход"
+                    Clicked="OnRegisterClicked"/>
 
                 <Button
                     x:Name="Forgottenpass"

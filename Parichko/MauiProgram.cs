@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Logging;
 using Parichko.Data;
 using DataAccess;
+using Parichko.ViewModels;
+using Parichko.Views;
 
 namespace Parichko
 {
@@ -22,9 +24,23 @@ namespace Parichko
                     fonts.AddFont("AtkinsonHyperlegible-Regular.ttf", "AtkinsonRegular");
                 });
 
-            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "parichko.db");
+            builder.Services.AddTransient<RegisterViewModel>();
+            builder.Services.AddTransient<Register>();
+
+
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "ParichkoDb.db");
+            
+            //string dbPath = Path.Combine("/data/data/com.parichko/databases", "ParichkoDb.db");
+            //string dbPath = Path.Combine("C:\\Parichko\\DataAccess\\bin\\Debug\\net8.0", "ParichkoDb.db");
             builder.Services.AddDbContext<ParichkoDbContext>(options =>
-                options.UseSqlite($"Data Source={dbPath}"));
+                options.UseSqlite($"Filename={dbPath}"));
+
+            builder.Services.AddSingleton<ParichkoDbContext>(provider =>
+                new ParichkoDbContext(dbPath)); //  Pass the path to the context constructor!
+            
+
+            //builder.Services.AddDbContext<ParichkoDbContext>(options =>
+            //  options.UseSqlite($"Data Source={dbPath}"));
 
 
 #if DEBUG

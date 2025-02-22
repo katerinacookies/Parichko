@@ -4,28 +4,38 @@ using Parichko.Data;
 using Parichko.Models;
 using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
+using Parichko.ViewModels;
 
 namespace Parichko.Views;
 
 public partial class Register : ContentPage
 {
-	private readonly ParichkoDbContext _context;
-	public Register()
+	private readonly RegisterViewModel _viewModel;
+	public Register(RegisterViewModel viewModel)
 	{
 		InitializeComponent();
-        _context = new ParichkoDbContext();
+        //_context = new ParichkoDbContext();
+        _viewModel = viewModel;
         //_context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
     private async void OnRegisterClicked(object sender, EventArgs e)
     {
+        //await DisplayAlert("Debug", "Button Clicked!", "OK");
+
+        //await Shell.Current.GoToAsync("///HomePage");
+
         try
         {
             string userEmail = EmailEntry.Text.ToLower();
             string userPass = PassEntry.Text.ToString();
             string userPass2 = PassRepeat.Text.ToString();
 
-            if (string.IsNullOrWhiteSpace(userEmail) || string.IsNullOrWhiteSpace(userPass) || string.IsNullOrWhiteSpace(userPass2))
+            await _viewModel.RegisterAsync(userEmail, userPass, userPass2);
+
+            await Shell.Current.GoToAsync("///HomePage");
+            
+            /*if (string.IsNullOrWhiteSpace(userEmail) || string.IsNullOrWhiteSpace(userPass) || string.IsNullOrWhiteSpace(userPass2))
             {
                 await DisplayAlert("Възникна грешка", "Полетата за попълване са задължителни!", "Добре");
                 return;
@@ -49,75 +59,93 @@ public partial class Register : ContentPage
             LoadingIndicator.IsVisible = true;
             LoadingIndicator.IsRunning = true;
 
-
-            bool isSuccess = await Task.Run(async () =>
+            Login userFromDbFunc = await Task.Run(async () =>
             {
-                try
-                {
-                    Login userFromDb = await _context.Logins
+                Login userFromDb = await _context.Logins
                         .AsNoTracking() //Оптимизира куерито
                         .FirstOrDefaultAsync(l => l.Email == userEmail);
 
-                    if (userFromDb != null)
-                    {
-                        MainThread.BeginInvokeOnMainThread(async () =>
-                        {
-                            await DisplayAlert("Възникна грешка", "Потребител с такъв имейл вече съществува.", "Добре");
-                        });
-                        return false;
-                    }
+                return userFromDb;
+            });
 
-                    Login newLogin = new Login()
-                    {
-                        Email = userEmail,
-                        PasswordHash = userPass
-                    };
-                    UserProfile newProfile = new UserProfile()
-                    {
-                        Login = newLogin
-                    };
-                    newLogin.UserProfile = newProfile;
+            if (userFromDbFunc != null)
+            {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await DisplayAlert("Възникна грешка", "Потребител с такъв имейл вече съществува.", "Добре");
+                });
+                return;
+            }
+            else 
+            {
+                await DisplayAlert("Възникна грешка", "mai e ok.", "Добре");
+            }*/
 
-                    //kak da polzvam CreatAsync tuk?
-                    await _context.Logins.AddAsync(newLogin);
-                    await _context.UserProfiles.AddAsync(newProfile);
-                    await _context.SaveChangesAsync();
 
-                    Preferences.Set("LoggedUserId", newProfile.Id);
+        /*bool isSuccess = await Task.Run(async () =>
+        {
+            try
+            {
+                Login userFromDb = await _context.Logins
+                    .AsNoTracking() //Оптимизира куерито
+                    .FirstOrDefaultAsync(l => l.Email == userEmail);
 
-                    return true;
-                    //UI навигация и алерти  трябва да са в основната нишка
-                    /*MainThread.BeginInvokeOnMainThread(async () =>
-                    {
-                        await DisplayAlert("Яко", "Акаунтът ти е създаден успешно!", "Добре");
-                        await Shell.Current.GoToAsync("///HomePage");
-                    });*/
-                }
-                catch (Exception ex)
+                if (userFromDb != null)
                 {
                     MainThread.BeginInvokeOnMainThread(async () =>
                     {
-                        await DisplayAlert("Error", $"DB Error: {ex.Message}", "OK");
+                        await DisplayAlert("Възникна грешка", "Потребител с такъв имейл вече съществува.", "Добре");
                     });
                     return false;
                 }
-            });
-                
-            
 
-            // Hide Loading Indicator & Enable Button Again
-            LoginBtn.IsEnabled = true;
-            LoadingIndicator.IsRunning = false;
-            LoadingIndicator.IsVisible = false;
+                Login newLogin = new Login()
+                {
+                    Email = userEmail,
+                    PasswordHash = userPass
+                };
+                UserProfile newProfile = new UserProfile()
+                {
+                    Login = newLogin
+                };
+                newLogin.UserProfile = newProfile;
 
-            if (isSuccess)
-            {
-                await Shell.Current.GoToAsync("///HomePage");
+                //kak da polzvam CreatAsync tuk?
+                await _context.Logins.AddAsync(newLogin);
+                await _context.UserProfiles.AddAsync(newProfile);
+                await _context.SaveChangesAsync();
+
+                Preferences.Set("LoggedUserId", newProfile.Id);
+
+                return true;
+                //UI навигация и алерти  трябва да са в основната нишка
+
             }
-        }
-        catch(Exception ex)
+            catch (Exception ex)
+            {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await DisplayAlert("Error", $"DB Error: {ex.Message}", "OK");
+                });
+                return false;
+            }
+        });
+
+
+
+        // Hide Loading Indicator & Enable Button Again
+        LoginBtn.IsEnabled = true;
+        LoadingIndicator.IsRunning = false;
+        LoadingIndicator.IsVisible = false;
+
+        if (isSuccess)
         {
-            await DisplayAlert("Error", $"Unexpected Error: {ex.Message}", "OK");
-        }
+            await Shell.Current.GoToAsync("///HomePage");
+        }*/
+    }
+    catch(Exception ex)
+    {
+        await DisplayAlert("Error", $"Unexpected Error: {ex.Message}", "OK");
+    }
     }
 }

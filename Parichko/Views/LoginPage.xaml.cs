@@ -2,15 +2,16 @@ using DataAccess;
 using Microsoft.Extensions.DependencyInjection;
 using Parichko.Data;
 using Parichko.Models;
+using Parichko.ViewModels;
 namespace Parichko.Views;
 
 public partial class LoginPage : ContentPage
 {
-    private readonly ParichkoDbContext _context;
-	public LoginPage()
+    private readonly LoginViewModel _viewModel;
+	public LoginPage(LoginViewModel viewModel)
 	{
 		InitializeComponent();
-        _context = new ParichkoDbContext();
+        _viewModel = viewModel;
 	}
 
     private async void OnLoginClicked(object sender, EventArgs e)
@@ -19,7 +20,7 @@ public partial class LoginPage : ContentPage
         string userPass = PassEntry.Text.ToLower().ToString();
 
         //var user = await _context.FindAsync<Login>(userEmail);
-        Login login = _context.Logins.Where(l => l.Email == userEmail && l.PasswordHash == userPass).FirstOrDefault();
+        /*Login login = _context.Logins.Where(l => l.Email == userEmail && l.PasswordHash == userPass).FirstOrDefault();
 
         if(login != null)
         {
@@ -32,6 +33,6 @@ public partial class LoginPage : ContentPage
         else
         {
             await DisplayAlert("Възникна проблем", "Грешен имейл или парола.", "Добре");
-        }
+        }*/
     }
 }

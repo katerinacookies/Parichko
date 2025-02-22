@@ -14,19 +14,24 @@ namespace Parichko.Data
     public class ParichkoDbContext : DbContext
     {
         private static string dbFileName = "ParichkoDb.db";
-        private static string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dbFileName);
+        private static string _dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dbFileName);
 
-        public ParichkoDbContext()
+
+        //public ParichkoDbContext()
+        //{
+        //    EnsureDatabaseExists().Wait();
+        //}
+        public ParichkoDbContext(string dbPath)
         {
-            EnsureDatabaseExists().Wait();
+            _dbPath = dbPath;
         }
 
         private static async Task EnsureDatabaseExists()
         {
-            if (!File.Exists(dbPath))
+            if (!File.Exists(_dbPath))
             {
                 //using var stream = await FileSystem.OpenAppPackageFileAsync(dbFileName);
-                using var fileStream = File.Create(dbPath);
+                using var fileStream = File.Create(_dbPath);
                 await fileStream.FlushAsync();
             }
         }
@@ -35,7 +40,7 @@ namespace Parichko.Data
         {
             //string dbPath = Path.Combine(FileSystem.AppDataDirectory, "ParichkoDb.db");
             //Console.WriteLine($"Database path: {dbPath}");
-            options.UseSqlite($"Filename={dbPath}");
+            options.UseSqlite($"Filename={_dbPath}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
