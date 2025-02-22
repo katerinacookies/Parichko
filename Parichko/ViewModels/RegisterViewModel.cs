@@ -25,9 +25,8 @@ namespace Parichko.ViewModels
             {
                 MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    await Shell.Current.DisplayAlert("dbpath", $"Database Path: {}", "OK");
+                    await Shell.Current.DisplayAlert("dbpath", $"Database Path: {dbPath}", "OK");
                 });
-
                 if (_context == null)
                 {
                     await Shell.Current.DisplayAlert("shi", "null context", "ok");
