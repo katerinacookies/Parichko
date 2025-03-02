@@ -23,13 +23,13 @@ namespace Parichko.ViewModels
         {
             try
             {
-                MainThread.InvokeOnMainThreadAsync(async () =>
-                {
-                    await Shell.Current.DisplayAlert("dbpath", $"Database Path: {dbPath}", "OK");
-                });
+                
                 if (_context == null)
                 {
-                    await Shell.Current.DisplayAlert("shi", "null context", "ok");
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("shi", "null context", "ok");
+                    });
                     return false;
                 }
                 userEmail = userEmail?.Trim().ToLower();
@@ -38,13 +38,19 @@ namespace Parichko.ViewModels
 
                 if(string.IsNullOrWhiteSpace(userEmail) || string.IsNullOrWhiteSpace(userPass) || string.IsNullOrWhiteSpace(userPass2))
                 {
-                    await Shell.Current.DisplayAlert("Грешка", "Попълнете всички полета!", "Добре");
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("Грешка", "Попълнете всички полета!", "Добре");
+                    });
                     return false;
                 }
 
                 if(userPass != userPass2)
                 {
-                    await Shell.Current.DisplayAlert("Грешка", "Паролите не съвпадат :(", "Дорбе");
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("Грешка", "Паролите не съвпадат :(", "Дорбе");
+                    });
                     return false;
                 }
 
@@ -54,7 +60,10 @@ namespace Parichko.ViewModels
 
                 if(userFromDb != null)
                 {
-                    await Shell.Current.DisplayAlert("Грешка", "Този потребител вече съществува!", "Добре");
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("Грешка", "Този потребител вече съществува!", "Добре");
+                    });
                     return false;
                 }
 
@@ -74,17 +83,63 @@ namespace Parichko.ViewModels
 
                     await _context.Logins.AddAsync(newLogin);
                     await _context.UserProfiles.AddAsync(newProfile);
-                    await _context.SaveChangesAsync();
+
+                    try
+                    {
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        await MainThread.InvokeOnMainThreadAsync(() =>
+                        {
+                            Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                        });
+                        if (ex.InnerException != null)
+                        {
+                            await MainThread.InvokeOnMainThreadAsync(() =>
+                            {
+                                Shell.Current.DisplayAlert("Грешка", ex.InnerException.Message, "Добре");
+                            });
+                            if(ex.InnerException.InnerException != null)
+                            {
+                                await MainThread.InvokeOnMainThreadAsync(() =>
+                                {
+                                    Shell.Current.DisplayAlert("Грешка", ex.InnerException.InnerException.Message, "Добре");
+                                });
+                            }
+                        }
+                    }
 
                     Preferences.Set("LoggedUserId", newProfile.Id);
                 });
 
-                await Shell.Current.GoToAsync("///HomePage");
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.GoToAsync("///HomePage");
+                });
                 return true;
             }
             catch(Exception ex)
             {
-                await Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                });
+
+                if(ex.InnerException != null)
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("Грешка", ex.InnerException.Message, "Добре");
+                    });
+                    if(ex.InnerException.InnerException != null)
+                    {
+                        await MainThread.InvokeOnMainThreadAsync(() =>
+                        {
+                            Shell.Current.DisplayAlert("Грешка", ex.InnerException.InnerException.Message, "Добре");
+                        });
+                    }
+                }
                 return false;
             }
         }

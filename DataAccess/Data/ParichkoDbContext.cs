@@ -13,34 +13,42 @@ namespace Parichko.Data
 {
     public class ParichkoDbContext : DbContext
     {
-        private static string dbFileName = "ParichkoDb.db";
-        private static string _dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, dbFileName);
+        public static string _dbPath;
 
 
-        //public ParichkoDbContext()
-        //{
-        //    EnsureDatabaseExists().Wait();
-        //}
+        public ParichkoDbContext()
+        {
+
+            _dbPath = $"C:\\Parichko\\DataAccess\\Parichko.db";
+            //EnsureDatabaseExists().Wait();
+        }
         public ParichkoDbContext(string dbPath)
         {
-            _dbPath = dbPath;
+            _dbPath = dbPath ?? throw new ArgumentNullException(nameof(dbPath));
+
+            Database.EnsureCreated();
         }
 
         private static async Task EnsureDatabaseExists()
-        {
-            if (!File.Exists(_dbPath))
-            {
-                //using var stream = await FileSystem.OpenAppPackageFileAsync(dbFileName);
-                using var fileStream = File.Create(_dbPath);
-                await fileStream.FlushAsync();
-            }
-        }
+         {
+             if (!File.Exists(_dbPath))
+             {
+                 //using var stream = await FileSystem.OpenAppPackageFileAsync(dbFileName);
+                 using var fileStream = File.Create(_dbPath);
+                 await fileStream.FlushAsync();
+             }
+         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             //string dbPath = Path.Combine(FileSystem.AppDataDirectory, "ParichkoDb.db");
             //Console.WriteLine($"Database path: {dbPath}");
-            options.UseSqlite($"Filename={_dbPath}");
+            //options.UseSqlite($"Filename={_dbPath}");
+
+            if (!options.IsConfigured)
+                //options.UseSqlite($"Data Source={Environment.CurrentDirectory}\\Parichko.db;");
+                //options.UseSqlite($"Data Source={Environment.CurrentDirectory}\\Parichko.db;");
+                options.UseSqlite($"Data Source={_dbPath}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -49,7 +57,7 @@ namespace Parichko.Data
             modelBuilder.Entity<UserProfile>()
                 .HasOne(up => up.Login)
                 .WithOne(l => l.UserProfile)
-                .HasForeignKey<UserProfile>(up => up.Id);
+                .HasForeignKey<UserProfile>(up => up.LoginId);
             //1 към много - 1 профил има много съвети, разходи
             modelBuilder.Entity<Advice>()
                 .HasOne(a => a.UserProfile)

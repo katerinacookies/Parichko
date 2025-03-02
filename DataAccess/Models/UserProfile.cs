@@ -15,6 +15,7 @@ namespace Parichko.Models
         public int Id { get; set; }
         public string DisplayName { get; set; }
         public Login Login { get; set; }
+        public int LoginId { get; set; }
         public string ProfilePic { get; set; } = "default.jpg";
         public IList<Expense> Expenses { get; set; } = new List<Expense>();
         public IList<Income> Incomes { get; set; } = new List<Income>();

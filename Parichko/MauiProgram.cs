@@ -27,24 +27,15 @@ namespace Parichko
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<Register>();
 
-
-            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "ParichkoDb.db");
+            string dbPath = Path.Combine(@"C:\Parichko\DataAccess\Parichko.db");
             
             //string dbPath = Path.Combine("/data/data/com.parichko/databases", "ParichkoDb.db");
             //string dbPath = Path.Combine("C:\\Parichko\\DataAccess\\bin\\Debug\\net8.0", "ParichkoDb.db");
             builder.Services.AddDbContext<ParichkoDbContext>(options =>
-                options.UseSqlite($"Filename={dbPath}"));
-
-            builder.Services.AddSingleton<ParichkoDbContext>(provider =>
-                new ParichkoDbContext(dbPath)); //  Pass the path to the context constructor!
+                options.UseSqlite($"Data Source={dbPath}"));
             
-
-            //builder.Services.AddDbContext<ParichkoDbContext>(options =>
-            //  options.UseSqlite($"Data Source={dbPath}"));
-
-
 #if DEBUG
-            builder.Logging.AddDebug();
+                builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
