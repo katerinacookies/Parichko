@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="designParichko.QuestionsNext"
+             BackgroundImageSource="background.png">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="0,0"
+            Spacing="25">
+
+            <Button
+                Style="{StaticResource BackBtn}"/>
+            
+            
+            <Label
+                Text="Следват няколко въпроса..."
+                TextColor="{StaticResource Tertiary}"
+                Style="{StaticResource Headline}"
+                Padding="10, 0, 0, 0"
+                HorizontalOptions="Start"
+                SemanticProperties.HeadingLevel="Level1" />
+            
+            <Label
+                Text="Те ще ми помогнат да науча повече за теб, но ако искаш, можеш да ги пропуснеш."
+                TextColor="{StaticResource Tertiary}"
+                Padding="40, 0, 40, 0"
+                FontSize="21"
+                HorizontalOptions="Start"
+                Style="{StaticResource SubHeadline}"
+                />
+
+            <Image
+                Source="parichkothinks.png"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a race car number eight"/>
+
+            <Label
+                Text="Всичко можеш да промениш по-късно от настройките в профила си!"
+                TextColor="{StaticResource Tertiary}"
+                Padding="40, 0, 40, 0"
+                FontSize="21"
+                HorizontalOptions="Start"
+                Style="{StaticResource SubHeadline}"
+                />
+
+            <Button
+                x:Name="LoginBtn"
+                Text="Разбрах!" 
+                SemanticProperties.Hint="Продължава към първия въпрос"
+                HorizontalOptions="Fill"
+                Style="{StaticResource LoginBtn}"
+                CornerRadius="30"/>
+
+            <!--Tozi buton ne se vizualizira i ne znam zashto-->
+            <Button
+                x:Name="SkipBtn"
+                Text="Пропусни" 
+                SemanticProperties.Hint="Препраща към страница за регистрация"
+                HorizontalOptions="Fill"
+                Style="{StaticResource RegisterBtn}"
+                CornerRadius="20"/>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

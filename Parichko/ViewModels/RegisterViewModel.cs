@@ -76,13 +76,16 @@ namespace Parichko.ViewModels
                     };
                     var newProfile = new UserProfile
                     {
-                        Login = newLogin
+                        Login = newLogin,
+                        DisplayName = "Proba"
                     };
 
                     newLogin.UserProfile = newProfile;
 
                     await _context.Logins.AddAsync(newLogin);
                     await _context.UserProfiles.AddAsync(newProfile);
+                    Preferences.Set("LoggedUserId", newProfile.Id);
+                    Preferences.Set("LoggedUserName", newProfile.DisplayName);
 
                     try
                     {
@@ -106,6 +109,13 @@ namespace Parichko.ViewModels
                                 {
                                     Shell.Current.DisplayAlert("Грешка", ex.InnerException.InnerException.Message, "Добре");
                                 });
+                                if (ex.InnerException.InnerException.InnerException != null)
+                                {
+                                    await MainThread.InvokeOnMainThreadAsync(() =>
+                                    {
+                                        Shell.Current.DisplayAlert("Грешка", ex.InnerException.InnerException.InnerException.Message, "Добре");
+                                    });
+                                }
                             }
                         }
                     }
@@ -138,6 +148,13 @@ namespace Parichko.ViewModels
                         {
                             Shell.Current.DisplayAlert("Грешка", ex.InnerException.InnerException.Message, "Добре");
                         });
+                        if (ex.InnerException.InnerException.InnerException != null)
+                        {
+                            await MainThread.InvokeOnMainThreadAsync(() =>
+                            {
+                                Shell.Current.DisplayAlert("Грешка", ex.InnerException.InnerException.InnerException.Message, "Добре");
+                            });
+                        }
                     }
                 }
                 return false;

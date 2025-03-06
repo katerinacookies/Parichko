@@ -5,7 +5,8 @@
              Title="HomePage">
     <VerticalStackLayout>
         <Label 
-            Text="Home page!"
+            x:Name="displayhi"
+            x:Uid="displayhi"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
     </VerticalStackLayout>

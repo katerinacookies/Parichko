@@ -40,32 +40,19 @@ namespace Parichko.ViewModels
 
                 var userFromDb = await Task.Run(async () =>
                     _context.Logins.FirstOrDefault(l => l.Email == userEmail && l.PasswordHash == userPass));
+                var userprofileFromDb = await Task.Run(async () =>
+                    _context.UserProfiles.FirstOrDefault(u => u.LoginId == userFromDb.Id));
 
-                if (userFromDb != null)
+                if (userFromDb == null)
                 {
-                    await Shell.Current.DisplayAlert("Грешка", "Този потребител вече съществува!", "Добре");
+                    await Shell.Current.DisplayAlert("Грешка", "Няма такъв потребител!", "Добре");
                     return false;
                 }
 
                 await Task.Run(async () =>
                 {
-                    var newLogin = new Login
-                    {
-                        Email = userEmail,
-                        PasswordHash = userPass
-                    };
-                    var newProfile = new UserProfile
-                    {
-                        Login = newLogin
-                    };
-
-                    newLogin.UserProfile = newProfile;
-
-                    await _context.Logins.AddAsync(newLogin);
-                    await _context.UserProfiles.AddAsync(newProfile);
-                    await _context.SaveChangesAsync();
-
-                    Preferences.Set("LoggedUserId", newProfile.Id);
+                    Preferences.Set("LoggedUserId", userprofileFromDb.Id);
+                    Preferences.Set("LoggedUserName", userprofileFromDb.DisplayName);
                 });
 
                 await Shell.Current.GoToAsync("///HomePage");

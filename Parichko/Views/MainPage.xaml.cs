@@ -9,7 +9,12 @@
 
         private async void OnLoginClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("///Login");
+            if (Shell.Current == null)
+            {
+                await DisplayAlert("Error", "Shell.Current is null!", "OK");
+                return;
+            }
+            await Shell.Current.GoToAsync("///LoginPage");
         }
         private async void OnRegisterClicked(object sender, EventArgs e)
         {

@@ -13,11 +13,18 @@ public partial class LoginPage : ContentPage
 		InitializeComponent();
         _viewModel = viewModel;
 	}
+    public LoginPage()
+    {
 
+    }
     private async void OnLoginClicked(object sender, EventArgs e)
     {
         string userEmail = EmailEntry.Text.ToLower().ToString();
         string userPass = PassEntry.Text.ToLower().ToString();
+
+        await _viewModel.LoginAsync(userEmail, userPass);
+
+        //await Shell.Current.GoToAsync("///HomePage");
 
         //var user = await _context.FindAsync<Login>(userEmail);
         /*Login login = _context.Logins.Where(l => l.Email == userEmail && l.PasswordHash == userPass).FirstOrDefault();

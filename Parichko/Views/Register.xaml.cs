@@ -33,7 +33,7 @@ public partial class Register : ContentPage
 
             await _viewModel.RegisterAsync(userEmail, userPass, userPass2);
 
-            await Shell.Current.GoToAsync("///HomePage");
+            //await Shell.Current.GoToAsync("///HomePage");
             
             /*if (string.IsNullOrWhiteSpace(userEmail) || string.IsNullOrWhiteSpace(userPass) || string.IsNullOrWhiteSpace(userPass2))
             {

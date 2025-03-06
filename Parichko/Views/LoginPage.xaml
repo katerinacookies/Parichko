@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.LoginPage"
-             Title="Login">
+             Title="LoginPage">
     <VerticalStackLayout
         BackgroundColor="{StaticResource Cutesyblue}">
 
@@ -15,6 +15,7 @@
             SemanticProperties.HeadingLevel="Level1"/>
 
         <Label
+            x:Name="Hi"
             Text="Влез в профила си или се регистрирай!"
             Style="{StaticResource RegisterSubHeadline}"            
             />
