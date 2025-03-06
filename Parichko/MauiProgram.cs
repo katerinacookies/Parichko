@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Parichko.Data;
+using Parichko.Utilities;
 using DataAccess;
 using Parichko.ViewModels;
+using CommunityToolkit.Maui;
 using Parichko.Views;
+using Parichko.Data;
 
 namespace Parichko
 {
@@ -14,6 +17,7 @@ namespace Parichko
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -24,15 +28,29 @@ namespace Parichko
                     fonts.AddFont("AtkinsonHyperlegible-Regular.ttf", "AtkinsonRegular");
                 });
 
+            //ot videoto
+            builder.Services.AddDbContext<ParichkoDbContext>();
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<Register>();
+            var dbContext = new ParichkoDbContext();
+            dbContext.Database.EnsureDeleted();
+            dbContext.Database.EnsureCreated();
+            dbContext.Dispose();
+            //ot videoto
 
-            string dbPath = Path.Combine(@"C:\Parichko\DataAccess\Parichko.db");
-            
-            //string dbPath = Path.Combine("/data/data/com.parichko/databases", "ParichkoDb.db");
-            //string dbPath = Path.Combine("C:\\Parichko\\DataAccess\\bin\\Debug\\net8.0", "ParichkoDb.db");
+            /*builder.Services.AddTransient<RegisterViewModel>();
+            builder.Services.AddTransient<Register>();
+
+            //string dbPath = Path.Combine(@"C:\Parichko\DataAccess\Parichko.db");
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "Parichkodb.db");
+
+           // dbPath = dbPath.TrimStart('/', '\\');
+           //File.SetAttributes(dbPath, FileAttributes.Normal);
+           //string dbPath = Path.Combine("C:\\Parichko\\DataAccess\\bin\\Debug\\net8.0", "ParichkoDb.db");
             builder.Services.AddDbContext<ParichkoDbContext>(options =>
                 options.UseSqlite($"Data Source={dbPath}"));
+                //options.UseSqlite(dbPath));*/
+
             
 #if DEBUG
                 builder.Logging.AddDebug();

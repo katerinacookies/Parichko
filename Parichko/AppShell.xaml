@@ -19,9 +19,9 @@
     Route="Register" />
 
     <ShellContent 
-    Title="LoginPage"
-    Route="LoginPage" 
-    ContentTemplate="{DataTemplate v:LoginPage}" />
+        Title="LoginPage"
+        Route="LoginPage" 
+        ContentTemplate="{DataTemplate v:LoginPage}" /> 
 
     <ShellContent 
         Title="HomePage"
