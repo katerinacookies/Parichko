@@ -228,6 +228,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Parichko.Models.UserProfile", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("BannersOn")
@@ -241,6 +242,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("HighContrast")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LoginId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ProfilePic")
@@ -257,6 +261,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LoginId")
+                        .IsUnique();
 
                     b.HasIndex("UserProfileId");
 
@@ -344,7 +351,7 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Parichko.Models.Login", "Login")
                         .WithOne("UserProfile")
-                        .HasForeignKey("Parichko.Models.UserProfile", "Id")
+                        .HasForeignKey("Parichko.Models.UserProfile", "LoginId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -11,8 +11,8 @@ using Parichko.Data;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ParichkoDbContext))]
-    [Migration("20250210135553_FriendRequestsAdded")]
-    partial class FriendRequestsAdded
+    [Migration("20250227055438_Initial5")]
+    partial class Initial5
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,6 +111,13 @@ namespace DataAccess.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTimeOffset>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("UserProfileId")
                         .HasColumnType("INTEGER");
 
@@ -128,6 +135,10 @@ namespace DataAccess.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<decimal>("GoalAmount")
                         .HasColumnType("TEXT");
@@ -164,6 +175,10 @@ namespace DataAccess.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTimeOffset>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserProfileId")
@@ -216,6 +231,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Parichko.Models.UserProfile", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("BannersOn")
@@ -229,6 +245,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("HighContrast")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LoginId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ProfilePic")
@@ -245,6 +264,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LoginId")
+                        .IsUnique();
 
                     b.HasIndex("UserProfileId");
 
@@ -332,7 +354,7 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Parichko.Models.Login", "Login")
                         .WithOne("UserProfile")
-                        .HasForeignKey("Parichko.Models.UserProfile", "Id")
+                        .HasForeignKey("Parichko.Models.UserProfile", "LoginId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Initial5 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,6 +37,7 @@ namespace DataAccess.Migrations
                     SavedAmount = table.Column<decimal>(type: "TEXT", nullable: false),
                     SavedPercent = table.Column<short>(type: "INTEGER", nullable: false),
                     IconName = table.Column<string>(type: "TEXT", nullable: false),
+                    Color = table.Column<string>(type: "TEXT", nullable: false),
                     Starred = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -63,8 +64,10 @@ namespace DataAccess.Migrations
                 name: "UserProfiles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     DisplayName = table.Column<string>(type: "TEXT", nullable: false),
+                    LoginId = table.Column<int>(type: "INTEGER", nullable: false),
                     ProfilePic = table.Column<string>(type: "TEXT", nullable: false),
                     FontSize = table.Column<int>(type: "INTEGER", nullable: false),
                     HighContrast = table.Column<bool>(type: "INTEGER", nullable: false),
@@ -77,8 +80,8 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_UserProfiles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserProfiles_Logins_Id",
-                        column: x => x.Id,
+                        name: "FK_UserProfiles_Logins_LoginId",
+                        column: x => x.LoginId,
                         principalTable: "Logins",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -118,6 +121,8 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Date = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     Amount = table.Column<decimal>(type: "TEXT", nullable: false),
                     CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
                     UserProfileId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -140,11 +145,39 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FriendRequests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FromUserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ToUserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FriendRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FriendRequests_UserProfiles_FromUserId",
+                        column: x => x.FromUserId,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FriendRequests_UserProfiles_ToUserId",
+                        column: x => x.ToUserId,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Incomes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     Amount = table.Column<decimal>(type: "TEXT", nullable: false),
                     Date = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     UserProfileId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -200,6 +233,16 @@ namespace DataAccess.Migrations
                 column: "UserProfileId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_FriendRequests_FromUserId",
+                table: "FriendRequests",
+                column: "FromUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FriendRequests_ToUserId",
+                table: "FriendRequests",
+                column: "ToUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Incomes_UserProfileId",
                 table: "Incomes",
                 column: "UserProfileId");
@@ -208,6 +251,12 @@ namespace DataAccess.Migrations
                 name: "IX_UserGoal_UserProfileId",
                 table: "UserGoal",
                 column: "UserProfileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserProfiles_LoginId",
+                table: "UserProfiles",
+                column: "LoginId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserProfiles_UserProfileId",
@@ -223,6 +272,9 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Expenses");
+
+            migrationBuilder.DropTable(
+                name: "FriendRequests");
 
             migrationBuilder.DropTable(
                 name: "Incomes");

@@ -16,17 +16,17 @@ namespace Parichko.Data
         public static string _dbPath;
 
 
-        public ParichkoDbContext()
+        /*public ParichkoDbContext()
         {
 
-            _dbPath = $"C:\\Parichko\\DataAccess\\Parichko.db";
+            _dbPath = @"C:\Parichko\DataAccess\Parichko.db";
             //EnsureDatabaseExists().Wait();
-        }
+        }*/
         public ParichkoDbContext(string dbPath)
         {
             _dbPath = dbPath ?? throw new ArgumentNullException(nameof(dbPath));
 
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         private static async Task EnsureDatabaseExists()
@@ -48,7 +48,8 @@ namespace Parichko.Data
             if (!options.IsConfigured)
                 //options.UseSqlite($"Data Source={Environment.CurrentDirectory}\\Parichko.db;");
                 //options.UseSqlite($"Data Source={Environment.CurrentDirectory}\\Parichko.db;");
-                options.UseSqlite($"Data Source={_dbPath}");
+                options.UseSqlite($"Data Source={_dbPath}"); //ivaniliev
+                //options.UseSqlite(_dbPath);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
