@@ -19,13 +19,13 @@ namespace Parichko.ViewModels
             _context = context;
         }
 
-        public async Task<bool> LoginAsync(string userEmail, string userPass)
+        public async Task<bool> LoginAsync(string? userEmail, string? userPass)
         {
             try
             {
                 if (_context == null)
                 {
-                    await Shell.Current.DisplayAlert("shi", "null context", "ok");
+                    await Shell.Current.DisplayAlert("Грешка", "Нъл контекст", "Добре");
                     return false;
                 }
                 userEmail = userEmail?.Trim().ToLower();
@@ -40,12 +40,20 @@ namespace Parichko.ViewModels
 
                 var userFromDb = await Task.Run(async () =>
                     _context.Logins.FirstOrDefault(l => l.Email == userEmail && l.PasswordHash == userPass));
-                var userprofileFromDb = await Task.Run(async () =>
-                    _context.UserProfiles.FirstOrDefault(u => u.LoginId == userFromDb.Id));
+                
 
                 if (userFromDb == null)
                 {
                     await Shell.Current.DisplayAlert("Грешка", "Няма такъв потребител!", "Добре");
+                    return false;
+                }
+
+                var userprofileFromDb = await Task.Run(async () =>
+                    _context.UserProfiles.FirstOrDefault(u => u.LoginId == userFromDb.Id));
+
+                if (userprofileFromDb == null)
+                {
+                    await Shell.Current.DisplayAlert("Грешка", "Няма такъв потребителски профил!", "Добре");
                     return false;
                 }
 
@@ -61,6 +69,10 @@ namespace Parichko.ViewModels
             catch (Exception ex)
             {
                 await Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                if(ex.InnerException != null)
+                {
+                    await Shell.Current.DisplayAlert("Грешка", ex.InnerException.Message, "Добре");
+                }
                 return false;
             }
         }

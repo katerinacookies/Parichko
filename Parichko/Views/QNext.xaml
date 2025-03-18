@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="designParichko.QuestionsNext"
+             x:Class="Parichko.Views.QNext"
+             Shell.FlyoutBehavior="Disabled"
              BackgroundImageSource="background.png">
 
     <ScrollView>
@@ -11,8 +12,8 @@
 
             <Button
                 Style="{StaticResource BackBtn}"/>
-            
-            
+
+
             <Label
                 Text="Следват няколко въпроса..."
                 TextColor="{StaticResource Tertiary}"
@@ -20,7 +21,7 @@
                 Padding="10, 0, 0, 0"
                 HorizontalOptions="Start"
                 SemanticProperties.HeadingLevel="Level1" />
-            
+
             <Label
                 Text="Те ще ми помогнат да науча повече за теб, но ако искаш, можеш да ги пропуснеш."
                 TextColor="{StaticResource Tertiary}"
@@ -46,12 +47,13 @@
                 />
 
             <Button
-                x:Name="LoginBtn"
+                x:Name="GotitBtn"
                 Text="Разбрах!" 
                 SemanticProperties.Hint="Продължава към първия въпрос"
                 HorizontalOptions="Fill"
                 Style="{StaticResource LoginBtn}"
-                CornerRadius="30"/>
+                CornerRadius="20"
+                Clicked="OnGotitClicked"/>
 
             <!--Tozi buton ne se vizualizira i ne znam zashto-->
             <Button

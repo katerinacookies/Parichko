@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.LoginPage"
+             Shell.FlyoutBehavior="Disabled"
              Title="LoginPage">
     <VerticalStackLayout
         BackgroundColor="{StaticResource Cutesyblue}">
@@ -60,14 +61,16 @@
                     Margin="0, 40, 0, 0"
                     HorizontalOptions="Fill"
                     Style="{StaticResource LoginBtn}"
-                    SemanticProperties.Description="Препраща към началната страница в приложението"/>
+                    SemanticProperties.Description="Препраща към началната страница в приложението"
+                    Clicked="OnLoginClicked"/>
 
                 <Button
                     x:Name="Forgottenpass"
                     Text="Забравена парола" 
                     SemanticProperties.Description="Препраща към страница за забравена парола" 
                     HorizontalOptions="Fill"
-                    Style="{StaticResource Forgottenpass}"/>
+                    Style="{StaticResource Forgottenpass}"
+                    />
 
                 <Image
                     Source="parichkologinslay.png"

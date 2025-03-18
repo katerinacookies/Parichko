@@ -4,6 +4,7 @@
     {
         public MainPage()
         {
+            Application.Current.MainPage = new AppShell();
             InitializeComponent();
         }
 

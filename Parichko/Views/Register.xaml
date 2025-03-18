@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.Register"
+             Shell.FlyoutBehavior="Disabled"
              Title="Register">
     <VerticalStackLayout
         BackgroundColor="{StaticResource Cutesyblue}">
@@ -78,10 +79,11 @@
 
                 <Button
                     x:Name="Forgottenpass"
-                    Text="Нямаш профил? Вход" 
+                    Text="Имаш профил? Вход" 
                     SemanticProperties.Description="Препраща към страница за забравена парола" 
                     HorizontalOptions="Fill"
-                    Style="{StaticResource Forgottenpass}"/>
+                    Style="{StaticResource Forgottenpass}"
+                    Clicked="OnNoprofileClicked"/>
             </StackLayout>
         </Frame>
     </VerticalStackLayout>

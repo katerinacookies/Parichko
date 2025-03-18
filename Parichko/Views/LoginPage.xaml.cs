@@ -13,14 +13,10 @@ public partial class LoginPage : ContentPage
 		InitializeComponent();
         _viewModel = viewModel;
 	}
-    public LoginPage()
-    {
-
-    }
     private async void OnLoginClicked(object sender, EventArgs e)
     {
         string userEmail = EmailEntry.Text.ToLower().ToString();
-        string userPass = PassEntry.Text.ToLower().ToString();
+        string userPass = PassEntry.Text.ToString();
 
         await _viewModel.LoginAsync(userEmail, userPass);
 

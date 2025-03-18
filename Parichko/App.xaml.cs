@@ -1,4 +1,6 @@
-﻿namespace Parichko
+﻿using Parichko.Views;
+
+namespace Parichko
 {
     public partial class App : Application
     {
@@ -6,20 +8,30 @@
         {
             InitializeComponent();
 
+            MainPage = new AppShell();
+
             if (UserIsLoggedIn())
             {
-                //MainPage = new QuestionsVisualDifficulties();
+                Shell.Current.GoToAsync("///HomePage");
             }
             else
             {
-                MainPage = new AppShell();
+                Shell.Current.GoToAsync("///MainPage");
             }
         }
 
         private bool UserIsLoggedIn()
         {
-            // 
-            return false;
+            var userId = Preferences.Get("LoggedUserId", null);
+            if(userId != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
         }
     }
 }

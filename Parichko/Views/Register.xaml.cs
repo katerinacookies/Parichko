@@ -19,6 +19,10 @@ public partial class Register : ContentPage
         //_context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
+    private async void OnNoprofileClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///LoginPage");
+    }
     private async void OnRegisterClicked(object sender, EventArgs e)
     {
         //await DisplayAlert("Debug", "Button Clicked!", "OK");

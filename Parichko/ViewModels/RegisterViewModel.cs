@@ -19,11 +19,10 @@ namespace Parichko.ViewModels
             _context = context;
         }
 
-        public async Task<bool> RegisterAsync(string userEmail, string userPass, string userPass2)
+        public async Task<bool> RegisterAsync(string? userEmail, string? userPass, string? userPass2)
         {
             try
             {
-                
                 if (_context == null)
                 {
                     await MainThread.InvokeOnMainThreadAsync(() =>
@@ -85,7 +84,7 @@ namespace Parichko.ViewModels
                     await _context.Logins.AddAsync(newLogin);
                     await _context.UserProfiles.AddAsync(newProfile);
                     Preferences.Set("LoggedUserId", newProfile.Id);
-                    Preferences.Set("LoggedUserName", newProfile.DisplayName);
+                    
 
                     try
                     {
@@ -125,7 +124,7 @@ namespace Parichko.ViewModels
 
                 await MainThread.InvokeOnMainThreadAsync(() =>
                 {
-                    Shell.Current.GoToAsync("///HomePage");
+                    Shell.Current.GoToAsync("///QNext");
                 });
                 return true;
             }

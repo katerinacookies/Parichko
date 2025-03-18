@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Parichko.Views.QName"
+             Shell.FlyoutBehavior="Disabled"
+             Title="QName">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="0,0"
+            Spacing="25">
+
+            <Button
+                x:Name="BackBtn"
+                Style="{StaticResource BackBtn}"/>
+
+
+            <Label
+                Text="Как искаш да се обръщам към теб?"
+                TextColor="{StaticResource Tertiary}"
+                Style="{StaticResource Headline}"
+                Padding="10, 0, 0, 0"
+                HorizontalOptions="Start"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Label
+                Text="Напиши името си или потребителско име!."
+                TextColor="{StaticResource Tertiary}"
+                Padding="40, 0, 40, 0"
+                FontSize="21"
+                HorizontalOptions="Start"
+                Style="{StaticResource SubHeadline}"
+                />
+
+            <Frame
+                Margin="0, 60, 0, 10"
+                Style="{StaticResource SignFrame}">
+                <Entry 
+                    Placeholder="Твоето име или прякор" 
+                    Keyboard="Email"
+                    x:Name="UsernameEntry"
+                    Text="" 
+                    Style="{StaticResource SignForm}"/>
+            </Frame>
+
+
+            <Button
+                x:Name="ForwardBtn"
+                Text="Напред" 
+                SemanticProperties.Hint="Продължава към първия въпрос"
+                HorizontalOptions="Fill"
+                Style="{StaticResource LoginBtn}"
+                CornerRadius="30"
+                Clicked="OnForwardBtnClicked"/>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

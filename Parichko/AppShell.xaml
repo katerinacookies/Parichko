@@ -8,20 +8,64 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Parichko">
 
-    <ShellContent
-    Title="Home"
-    ContentTemplate="{DataTemplate v:MainPage}"
-    Route="MainPage" />
+    <FlyoutItem Title="Menu" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+        Title="Начало"
+        ContentTemplate="{DataTemplate v:HomePage}"
+        Route="" 
+        Icon="homehouse.png"/>
+
+        <ShellContent
+        Title="Цели"
+        ContentTemplate="{DataTemplate v:HomePage}"
+        Route="" 
+        Icon="goalsicon.png"/>
+
+        <ShellContent
+        Title=""
+        ContentTemplate="{DataTemplate v:HomePage}"
+        Route="" 
+        />
+
+        <ShellContent
+        Title="Съвети"
+        ContentTemplate="{DataTemplate v:HomePage}"
+        Route="" 
+        Icon="adviceicon.png"/>
+
+        <ShellContent
+        Title="Профил"
+        ContentTemplate="{DataTemplate v:ProfilePage}"
+        Route="ProfilePage" 
+        Icon="profileicon.png"/>
+
+    </FlyoutItem>
+
 
     <ShellContent 
-    Title="Register" 
-    ContentTemplate="{DataTemplate v:Register}" 
-    Route="Register" />
+        Title="Register" 
+        ContentTemplate="{DataTemplate v:Register}" 
+        Route="Register" />
 
     <ShellContent 
         Title="LoginPage"
         Route="LoginPage" 
-        ContentTemplate="{DataTemplate v:LoginPage}" /> 
+        ContentTemplate="{DataTemplate v:LoginPage}" />
+
+    <ShellContent 
+        Title="QNext"
+        Route="QNext" 
+        ContentTemplate="{DataTemplate v:QNext}" />
+
+    <ShellContent 
+        Title="QName"
+        Route="QName" 
+        ContentTemplate="{DataTemplate v:QName}" />
+
+    <ShellContent 
+        Title="MainPage"
+        Route="MainPage" 
+        ContentTemplate="{DataTemplate v:MainPage}" />
 
     <ShellContent 
         Title="HomePage"

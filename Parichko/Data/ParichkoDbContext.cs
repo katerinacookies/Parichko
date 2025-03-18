@@ -14,13 +14,15 @@ namespace Parichko.Data
 {
     public class ParichkoDbContext : DbContext
     {
-        
-        /*public ParichkoDbContext()
+        private readonly string _dbPath;
+        public ParichkoDbContext()
         {
+            //chat
+            _dbPath = PathDb.GetPath("Parichko.db");
 
-            _dbPath = @"C:\Parichko\DataAccess\Parichko.db";
+            
             //EnsureDatabaseExists().Wait();
-        }*/
+        }
         /*public ParichkoDbContext(string dbPath)
         {
             _dbPath = dbPath ?? throw new ArgumentNullException(nameof(dbPath));
@@ -43,8 +45,13 @@ namespace Parichko.Data
             //string dbPath = Path.Combine(FileSystem.AppDataDirectory, "ParichkoDb.db");
             //Console.WriteLine($"Database path: {dbPath}");
             //options.UseSqlite($"Filename={_dbPath}");
-
-            string connDb = $"Filename={PathDb.GetPath("Parichko.db")}";
+            if (string.IsNullOrEmpty(_dbPath))
+            {
+                throw new Exception("Database path is not set!");
+            }
+            //string connDb = $"Filename={PathDb.GetPath("Parichko.db")}";
+            //chat
+            string connDb = $"Filename={_dbPath}";
             options.UseSqlite(connDb);
         }
 

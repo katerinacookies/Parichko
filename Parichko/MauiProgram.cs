@@ -4,7 +4,6 @@ using Parichko.Data;
 using Parichko.Utilities;
 using DataAccess;
 using Parichko.ViewModels;
-using CommunityToolkit.Maui;
 using Parichko.Views;
 using Parichko.Data;
 
@@ -17,7 +16,6 @@ namespace Parichko
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -28,15 +26,28 @@ namespace Parichko
                     fonts.AddFont("AtkinsonHyperlegible-Regular.ttf", "AtkinsonRegular");
                 });
 
-            //ot videoto
+            //chgpt
+            
             builder.Services.AddDbContext<ParichkoDbContext>();
-            builder.Services.AddTransient<RegisterViewModel>();
-            builder.Services.AddTransient<Register>();
-            var dbContext = new ParichkoDbContext();
-            dbContext.Database.EnsureDeleted();
-            dbContext.Database.EnsureCreated();
+            var dbContext = builder.Services.BuildServiceProvider().GetRequiredService<ParichkoDbContext>();
+            dbContext.Database.Migrate();
             dbContext.Dispose();
             //ot videoto
+            //builder.Services.AddDbContext<ParichkoDbContext>();
+            builder.Services.AddTransient<RegisterViewModel>();
+            builder.Services.AddTransient<Register>();
+            builder.Services.AddTransient<QName>();
+            builder.Services.AddTransient<QNameViewModel>();
+            builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<ProfilePage>();
+            //var dbContext = new ParichkoDbContext();
+            //dbContext.Database.EnsureDeleted();
+            //dbContext.Database.EnsureCreated();
+            //dbContext.Dispose();
+            //ot videoto
+
+            
 
             /*builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<Register>();
@@ -51,9 +62,9 @@ namespace Parichko
                 options.UseSqlite($"Data Source={dbPath}"));
                 //options.UseSqlite(dbPath));*/
 
-            
+
 #if DEBUG
-                builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

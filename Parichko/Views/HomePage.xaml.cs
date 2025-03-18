@@ -10,7 +10,8 @@ public partial class HomePage : ContentPage
 
 	public async Task Displaythename()
 	{
-		string name = Preferences.Get("LoggedUserName", null);
+		//? await
+		string name = Preferences.Get("LoggedUserName", "");
 		displayhi.Text = "Здравей, " + name;
 	}
 }
