@@ -18,7 +18,8 @@
             <ShellContent ContentTemplate="{DataTemplate v:ProfilePage}" Route="ProfilePage"/>
         </Tab>
         <Tab Title=""
-           >
+            Icon="addicon.png"
+            >
             <ShellContent ContentTemplate="{DataTemplate v:PopupPlus}" Route=""/>
         </Tab>
         <Tab Title="Съвети"
@@ -91,7 +92,12 @@ Route="QName"
 ContentTemplate="{DataTemplate v:QName}" />
 
     <ShellContent 
+Title="AdminHomePage"
+Route="AdminHomePage" 
+ContentTemplate="{DataTemplate v:AdminHomePage}" />
+
+    <!--<ShellContent 
 Title="HomePage"
 Route="HomePage" 
-ContentTemplate="{DataTemplate v:HomePage}" />
+ContentTemplate="{DataTemplate v:HomePage}" />-->
 </Shell>

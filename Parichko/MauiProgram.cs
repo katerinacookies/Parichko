@@ -40,6 +40,8 @@ namespace Parichko
             builder.Services.AddTransient<Register>();
             builder.Services.AddTransient<QName>();
             builder.Services.AddTransient<QNameViewModel>();
+            builder.Services.AddTransient<AdminHomePage>();
+            builder.Services.AddTransient<AdminHomePageViewModel>();
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<PopupViewModel>();
             builder.Services.AddTransient<LoginPage>();

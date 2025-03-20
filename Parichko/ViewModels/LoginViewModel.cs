@@ -63,7 +63,13 @@ namespace Parichko.ViewModels
                     Preferences.Set("LoggedUserName", userprofileFromDb.DisplayName);
                 });
 
-                await Shell.Current.GoToAsync("///HomePage");
+                if(userEmail == "admin@admin.com")
+                {
+                    await Shell.Current.GoToAsync("///AdminHomePage?refresh=true");
+                    return true;
+                }
+
+                await Shell.Current.GoToAsync("///HomePage?refresh=true");
                 return true;
             }
             catch (Exception ex)

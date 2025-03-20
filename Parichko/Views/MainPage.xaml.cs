@@ -14,6 +14,7 @@
                 await DisplayAlert("Error", "Shell.Current is null!", "OK");
                 return;
             }
+
             await Shell.Current.GoToAsync("///LoginPage");
         }
         private async void OnRegisterClicked(object sender, EventArgs e)

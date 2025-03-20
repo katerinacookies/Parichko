@@ -124,7 +124,7 @@ namespace Parichko.ViewModels
 
                 await MainThread.InvokeOnMainThreadAsync(() =>
                 {
-                    Shell.Current.GoToAsync("///QNext");
+                    Shell.Current.GoToAsync("///QNext?refresh=true");
                 });
                 return true;
             }

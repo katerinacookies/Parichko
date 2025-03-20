@@ -88,7 +88,7 @@ namespace Parichko.ViewModels
                     }
                 }
 
-                await Shell.Current.GoToAsync("///HomePage");
+                await Shell.Current.GoToAsync("///HomePage?refresh=true");
                 return true;
             }
             catch(Exception ex)

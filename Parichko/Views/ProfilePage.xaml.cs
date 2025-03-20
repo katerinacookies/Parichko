@@ -18,7 +18,8 @@ public partial class ProfilePage : ContentPage
 	public async void OnLogoutClicked(object sender, EventArgs e)
 	{
 		RestartShell();
-        await Shell.Current.GoToAsync("///MainPage");
+        await Shell.Current.GoToAsync("//MainPage?refresh=true");
+
 	}
 	private async void RestartShell()
 	{
