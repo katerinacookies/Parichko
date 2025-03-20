@@ -17,6 +17,18 @@
             Icon="goalsicon.png">
             <ShellContent ContentTemplate="{DataTemplate v:ProfilePage}" Route="ProfilePage"/>
         </Tab>
+        <Tab Title=""
+           >
+            <ShellContent ContentTemplate="{DataTemplate v:PopupPlus}" Route=""/>
+        </Tab>
+        <Tab Title="Съвети"
+    Icon="adviceicon.png">
+            <ShellContent ContentTemplate="{DataTemplate v:ProfilePage}" Route="ProfilePage"/>
+        </Tab>
+        <Tab Title="Профил"
+            Icon="profileicon.png">
+            <ShellContent ContentTemplate="{DataTemplate v:ProfilePage}" Route="ProfilePage"/>
+        </Tab>
     </TabBar>
 
     <!--<FlyoutItem Title="Menu" FlyoutDisplayOptions="AsMultipleItems">
