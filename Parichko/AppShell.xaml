@@ -8,8 +8,18 @@
     Title="Parichko">
 
 
+    <TabBar>
+        <Tab Title="Начало"
+             Icon="homehouse.png">
+            <ShellContent ContentTemplate="{DataTemplate v:HomePage}" Route="HomePage"/>  
+        </Tab>
+        <Tab Title="Цели"
+            Icon="goalsicon.png">
+            <ShellContent ContentTemplate="{DataTemplate v:ProfilePage}" Route="ProfilePage"/>
+        </Tab>
+    </TabBar>
 
-    <FlyoutItem Title="Menu" FlyoutDisplayOptions="AsMultipleItems">
+    <!--<FlyoutItem Title="Menu" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
         Title="Начало"
         ContentTemplate="{DataTemplate v:HomePage}"
@@ -41,7 +51,7 @@
         Route="ProfilePage" 
         Icon="profileicon.png"/>
 
-    </FlyoutItem>
+    </FlyoutItem>-->
 
     <ShellContent 
 Title="Register" 
