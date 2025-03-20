@@ -12,18 +12,20 @@ namespace Parichko
 
             if (UserIsLoggedIn())
             {
+                //MainPage = new HomePage();
                 Shell.Current.GoToAsync("///HomePage");
             }
             else
             {
+                //MainPage = new MainPage();
                 Shell.Current.GoToAsync("///MainPage");
             }
         }
 
         private bool UserIsLoggedIn()
         {
-            var userId = Preferences.Get("LoggedUserId", null);
-            if(userId != null)
+            int userId = Preferences.Get("LoggedUserId", 0);
+            if(userId != 0)
             {
                 return true;
             }

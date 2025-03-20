@@ -6,7 +6,7 @@ public partial class HomePage : ContentPage
 	{
 		InitializeComponent();
 		Displaythename();
-	}
+    }
 
 	public async Task Displaythename()
 	{

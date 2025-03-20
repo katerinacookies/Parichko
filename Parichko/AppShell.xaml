@@ -5,32 +5,34 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Parichko"
     xmlns:v="clr-namespace:Parichko.Views"
-    Shell.FlyoutBehavior="Disabled"
     Title="Parichko">
+
+
 
     <FlyoutItem Title="Menu" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
         Title="Начало"
         ContentTemplate="{DataTemplate v:HomePage}"
-        Route="" 
+        Route="ProfilePage" 
         Icon="homehouse.png"/>
 
         <ShellContent
         Title="Цели"
-        ContentTemplate="{DataTemplate v:HomePage}"
-        Route="" 
+        ContentTemplate="{DataTemplate v:ProfilePage}"
+        Route="ProfilePage" 
         Icon="goalsicon.png"/>
 
         <ShellContent
         Title=""
-        ContentTemplate="{DataTemplate v:HomePage}"
-        Route="" 
+        ContentTemplate="{DataTemplate v:ProfilePage}"
+        Route="ProfilePage" 
+        
         />
 
         <ShellContent
         Title="Съвети"
-        ContentTemplate="{DataTemplate v:HomePage}"
-        Route="" 
+        ContentTemplate="{DataTemplate v:ProfilePage}"
+        Route="ProfilePage" 
         Icon="adviceicon.png"/>
 
         <ShellContent
@@ -41,35 +43,33 @@
 
     </FlyoutItem>
 
+    <ShellContent 
+Title="Register" 
+ContentTemplate="{DataTemplate v:Register}" 
+Route="Register" />
 
     <ShellContent 
-        Title="Register" 
-        ContentTemplate="{DataTemplate v:Register}" 
-        Route="Register" />
+Title="MainPage"
+Route="MainPage" 
+ContentTemplate="{DataTemplate v:MainPage}" />
 
     <ShellContent 
-        Title="LoginPage"
-        Route="LoginPage" 
-        ContentTemplate="{DataTemplate v:LoginPage}" />
+Title="LoginPage"
+Route="LoginPage" 
+ContentTemplate="{DataTemplate v:LoginPage}" />
 
     <ShellContent 
-        Title="QNext"
-        Route="QNext" 
-        ContentTemplate="{DataTemplate v:QNext}" />
+Title="QNext"
+Route="QNext" 
+ContentTemplate="{DataTemplate v:QNext}" />
 
     <ShellContent 
-        Title="QName"
-        Route="QName" 
-        ContentTemplate="{DataTemplate v:QName}" />
+Title="QName"
+Route="QName" 
+ContentTemplate="{DataTemplate v:QName}" />
 
     <ShellContent 
-        Title="MainPage"
-        Route="MainPage" 
-        ContentTemplate="{DataTemplate v:MainPage}" />
-
-    <ShellContent 
-        Title="HomePage"
-        Route="HomePage" 
-        ContentTemplate="{DataTemplate v:HomePage}" />
-
+Title="HomePage"
+Route="HomePage" 
+ContentTemplate="{DataTemplate v:HomePage}" />
 </Shell>

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Parichko.Data;
 using Parichko.Utilities;
 using DataAccess;
+using CommunityToolkit.Maui;
 using Parichko.ViewModels;
 using Parichko.Views;
 using Parichko.Data;
@@ -16,6 +17,7 @@ namespace Parichko
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -39,6 +41,7 @@ namespace Parichko
             builder.Services.AddTransient<QName>();
             builder.Services.AddTransient<QNameViewModel>();
             builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<PopupViewModel>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<ProfilePage>();
             //var dbContext = new ParichkoDbContext();
