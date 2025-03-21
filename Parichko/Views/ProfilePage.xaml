@@ -5,7 +5,8 @@
              Shell.NavBarIsVisible="False"
              Title="ProfilePage">
     <VerticalStackLayout
-        BackgroundColor="#efecec">
+        BackgroundColor="#efecec"
+        Padding="30, 10">
         <Image Source="icon.png"
                WidthRequest="100"
                HeightRequest="100">
@@ -14,6 +15,7 @@
             </Image.Clip>
         </Image>
 
+        
         <Label
             x:Name="displayName"
             x:Uid="displayName"
@@ -21,20 +23,57 @@
             HorizontalOptions="Center"
             TextColor="{StaticResource PrimaryDarkText}"
             FontAttributes="Bold"
-            Style="{StaticResource SubHeadline}"/>
-        <Label
-            x:Name="displayEmail"
-            x:Uid="displayEmail"
-            Text="a"
-            HorizontalOptions="Center"
-            TextColor="White"
-            FontAttributes="None"
-            Style="{StaticResource SubHeadline}"/>
-        <Button
-            Text="LogOut"
-            TextColor="Red"
-            Clicked="OnLogoutClicked"
-            />
+            Style="{StaticResource SubHeadline}"
+            Padding="0, 0, 0, 15"/>
+        <Frame
+            BackgroundColor="{StaticResource Primary}"
+            BorderColor="Transparent"
+            CornerRadius="20"
+            HeightRequest="35"
+            WidthRequest="300"
+            Padding="0, 0, 0, 0">
+            <Label
+                x:Name="displayEmail"
+                x:Uid="displayEmail"
+                Text="email@email.com"
+                TextColor="White"
+                FontSize="25"
+                FontAttributes="None"
+                Style="{StaticResource SubHeadline}"/>  
+        </Frame>
+        <Frame
+            Style="{StaticResource ProfileFrame}">
+            <VerticalStackLayout>
+                <Button
+                Text="Информация / Помощ"
+                Style="{StaticResource ProfileBtns}"/>
+                <Button
+                Text="Изход"
+                TextColor="Red"
+                Clicked="OnLogoutClicked"
+                BackgroundColor="White"
+                Style="{StaticResource ProfileBtns}"
+                />
+            </VerticalStackLayout>
+        </Frame>
+        <Frame
+            Style="{StaticResource ProfileFrame}">
+            <VerticalStackLayout>
+                <Button
+                    Text="Приятели"
+                    Style="{StaticResource ProfileBtns}"/>
+                <Button
+                    Text="Категория разходи"
+                    Style="{StaticResource ProfileBtns}"/>
+                <Button
+                    Text="Моите цели"
+                    Style="{StaticResource ProfileBtns}"/>
+                <Button
+                    Text="Приходи и разходи"
+                    Style="{StaticResource ProfileBtns}"/>  
+            </VerticalStackLayout>
+        </Frame>
+        
     </VerticalStackLayout>
     
 </ContentPage>

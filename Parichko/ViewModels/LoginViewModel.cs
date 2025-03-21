@@ -61,6 +61,8 @@ namespace Parichko.ViewModels
                 {
                     Preferences.Set("LoggedUserId", userprofileFromDb.Id);
                     Preferences.Set("LoggedUserName", userprofileFromDb.DisplayName);
+                    Preferences.Set("LoggedUserEmail", userEmail);
+                    Preferences.Set("LoggedUserPic", userprofileFromDb.ProfilePic);
                 });
 
                 if(userEmail == "admin@admin.com")

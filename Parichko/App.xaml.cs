@@ -12,8 +12,16 @@ namespace Parichko
 
             if (UserIsLoggedIn())
             {
+                if(Preferences.Get("LoggedUserName", "") == "Admin")
+                {
+                    Shell.Current.GoToAsync("///AdminHomePage");
+                }
                 //MainPage = new HomePage();
-                Shell.Current.GoToAsync("///HomePage");
+                else
+                {
+                    Shell.Current.GoToAsync("///HomePage");
+                }
+                
             }
             else
             {

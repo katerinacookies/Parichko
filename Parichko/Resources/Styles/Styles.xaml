@@ -23,6 +23,7 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
 
+    <!--Добавени от мен-->
     <Style x:Key="LoginBtn" TargetType="Button">
         <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
         <Setter Property="FontSize" Value="20"/>
@@ -81,6 +82,23 @@
         <Setter Property="HeightRequest" Value="70"/>
         <Setter Property="ContentLayout" Value="Left,10"/>
         <Setter Property="BackgroundColor" Value="Transparent"/>
+    </Style>
+
+    <Style TargetType="Frame" x:Key="ProfileFrame">
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="CornerRadius" Value="20"/>
+        <Setter Property="BorderColor" Value="White"/>
+        <Setter Property="Padding" Value="10, 10, 10, 0"/>
+        <Setter Property="Margin" Value="0, 30, 0, 0"/>
+    </Style>
+    <Style TargetType="Button" x:Key="ProfileBtns">
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="BorderColor" Value="Transparent"/>
+        <Setter Property="TextColor" Value="Grey"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <!--kak da go centriram otdqsno-->
+        <Setter Property="Padding" Value="0, 0, 0, 10"/>
     </Style>
 
     <!-- <Style TargetType="Button">

@@ -22,17 +22,31 @@ namespace Parichko.ViewModels
             _context = context;
         }
 
-        public async void LoadUsers()
+        public async Task<bool> LoadUsersAsync()
         {
-            var usersFromDb = _context.UserProfiles.ToList();
-
-            Users.Clear();
-
-            foreach (var user in usersFromDb)
+            try
             {
-                Users.Add(user);
+                var usersFromDb = _context.UserProfiles
+                                     .Include(up => up.Login).ToList();
+
+                Users.Clear();
+
+                foreach (var user in usersFromDb)
+                {
+                    Users.Add(user);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                });
+                return false;
             }
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

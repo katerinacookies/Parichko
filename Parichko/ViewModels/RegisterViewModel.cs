@@ -84,7 +84,7 @@ namespace Parichko.ViewModels
                     await _context.Logins.AddAsync(newLogin);
                     await _context.UserProfiles.AddAsync(newProfile);
                     Preferences.Set("LoggedUserId", newProfile.Id);
-                    
+                    Preferences.Set("LoggedUserEmail", userEmail);
 
                     try
                     {
