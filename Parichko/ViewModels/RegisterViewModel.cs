@@ -27,7 +27,7 @@ namespace Parichko.ViewModels
                 {
                     await MainThread.InvokeOnMainThreadAsync(() =>
                     {
-                        Shell.Current.DisplayAlert("shi", "null context", "ok");
+                        Shell.Current.DisplayAlert("Грешка", "Контекстът е нъл.", "Добре");
                     });
                     return false;
                 }

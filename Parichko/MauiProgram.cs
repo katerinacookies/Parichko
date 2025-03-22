@@ -35,17 +35,19 @@ namespace Parichko
             dbContext.Database.Migrate();
             dbContext.Dispose();
             //ot videoto
-            //builder.Services.AddDbContext<ParichkoDbContext>();
+            builder.Services.AddDbContext<ParichkoDbContext>();
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<Register>();
             builder.Services.AddTransient<QName>();
             builder.Services.AddTransient<QNameViewModel>();
             builder.Services.AddTransient<AdminHomePage>();
+            builder.Services.AddTransient<GoalsPage>();
             builder.Services.AddTransient<AdminHomePageViewModel>();
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<PopupViewModel>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<ProfilePage>();
+            //tuk kato nqma bd kak da stane che da raboti i sus i bez
             //var dbContext = new ParichkoDbContext();
             //dbContext.Database.EnsureDeleted();
             //dbContext.Database.EnsureCreated();

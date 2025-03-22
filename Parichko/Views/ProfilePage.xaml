@@ -9,17 +9,18 @@
         Padding="30, 10">
         <Image Source="icon.png"
                WidthRequest="100"
-               HeightRequest="100">
+               HeightRequest="100"
+               Margin="30">
             <Image.Clip>
                 <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50"/>
             </Image.Clip>
         </Image>
 
-        
+
         <Label
             x:Name="displayName"
             x:Uid="displayName"
-            Text="a"
+            Text="име"
             HorizontalOptions="Center"
             TextColor="{StaticResource PrimaryDarkText}"
             FontAttributes="Bold"
@@ -39,14 +40,23 @@
                 TextColor="White"
                 FontSize="25"
                 FontAttributes="None"
-                Style="{StaticResource SubHeadline}"/>  
+                Style="{StaticResource SubHeadline}"/>
         </Frame>
         <Frame
             Style="{StaticResource ProfileFrame}">
             <VerticalStackLayout>
                 <Button
-                Text="Информация / Помощ"
-                Style="{StaticResource ProfileBtns}"/>
+                    Text="Промяна на личните данни"
+                    Style="{StaticResource ProfileBtns}"/>
+                <Button
+                    Text="Настройки за изгледа"
+                    Style="{StaticResource ProfileBtns}"/>
+                <Button
+                    Text="Информация / Помощ"
+                    Style="{StaticResource ProfileBtns}"/>
+                <Button
+                    Text="Известия"
+                    Style="{StaticResource ProfileBtns}"/>
                 <Button
                 Text="Изход"
                 TextColor="Red"
@@ -70,10 +80,8 @@
                     Style="{StaticResource ProfileBtns}"/>
                 <Button
                     Text="Приходи и разходи"
-                    Style="{StaticResource ProfileBtns}"/>  
+                    Style="{StaticResource ProfileBtns}"/>
             </VerticalStackLayout>
         </Frame>
-        
     </VerticalStackLayout>
-    
 </ContentPage>

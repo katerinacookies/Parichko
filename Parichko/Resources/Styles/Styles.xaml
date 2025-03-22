@@ -97,8 +97,8 @@
         <Setter Property="TextColor" Value="Grey"/>
         <Setter Property="FontSize" Value="17"/>
         <Setter Property="FontAttributes" Value="Bold"/>
-        <!--kak da go centriram otdqsno-->
-        <Setter Property="Padding" Value="0, 0, 0, 10"/>
+        <Setter Property="HorizontalOptions" Value="Start"/>
+        <Setter Property="Padding" Value="25, 0, 0, 20"/>
     </Style>
 
     <!-- <Style TargetType="Button">
