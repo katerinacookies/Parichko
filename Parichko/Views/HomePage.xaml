@@ -5,7 +5,8 @@
              Shell.FlyoutItemIsVisible="False"
              Title="HomePage"
              >
-    <VerticalStackLayout>
+    <VerticalStackLayout
+        Padding="30">
         <Label 
             x:Name="displayhi"
             x:Uid="displayhi"
@@ -14,5 +15,37 @@
             TextColor="{StaticResource PrimaryDarkText}"
             FontAttributes="Bold"
             Style="{StaticResource SubHeadline}"/>
+
+        <Grid ColumnDefinitions="*,*" RowDefinitions="*,*">
+            <!--Лява половина-->
+            <Frame
+                Grid.Column="0"
+                Grid.RowSpan="2"
+                BackgroundColor="LightPink"
+                CornerRadius="20"
+                Padding="20"
+                Margin="0, 20, 5, 10">
+                
+            </Frame>
+            <!--Дясна половина-->
+            <Frame
+                Grid.Column="1"
+                Grid.Row="0"
+                BackgroundColor="LightBlue"
+                CornerRadius="10"
+                Padding="20"
+                Margin="5, 20, 0, 5">
+                
+            </Frame>
+            <Frame
+                Grid.Column="1"
+                Grid.Row="1"
+                BackgroundColor="LightSalmon"
+                CornerRadius="10"
+                Padding="20"
+                Margin="5, 5, 0, 10">
+                
+            </Frame>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

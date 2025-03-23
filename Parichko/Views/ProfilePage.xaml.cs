@@ -22,7 +22,32 @@ public partial class ProfilePage : ContentPage
         await Shell.Current.GoToAsync("//MainPage?refresh=true");
 
 	}
-	private static async void RestartShell()
+    public async void OnFriendsClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///");
+
+    }
+    public async void OnCategoryClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///AddCategoryPage");
+
+    }
+    public async void OnGoalClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///AddGoalPage");
+
+    }
+    public async void OnIncomeClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///AddIncomePage");
+
+    }
+    public async void OnExpenseClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///AddExpensePage");
+
+    }
+    private static void RestartShell()
 	{
         Preferences.Clear();
 		//Application.Current.MainPage = new AppShell();

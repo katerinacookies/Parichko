@@ -40,6 +40,11 @@ namespace Parichko
             builder.Services.AddTransient<Register>();
             builder.Services.AddTransient<QName>();
             builder.Services.AddTransient<QNameViewModel>();
+            builder.Services.AddTransient<AddIncomePage>();
+            builder.Services.AddTransient<AddExpensePage>();
+            builder.Services.AddTransient<AddGoalPage>();
+            builder.Services.AddTransient<AddCategoryPage>();
+            builder.Services.AddTransient<CategoryViewModel>();
             builder.Services.AddTransient<AdminHomePage>();
             builder.Services.AddTransient<GoalsPage>();
             builder.Services.AddTransient<AdminHomePageViewModel>();

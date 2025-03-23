@@ -22,6 +22,5 @@ public partial class AdminHomePage : ContentPage
     {
 		Preferences.Clear();
         await Shell.Current.GoToAsync("//MainPage?refresh=true");
-
     }
 }

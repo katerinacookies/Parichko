@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Parichko.Views.AddCategoryPage"
+             Title="AddCategory"
+             BackgroundColor="White">
+    <VerticalStackLayout
+        Padding="20, 10, 20, 10">
+        <Frame
+            BackgroundColor="#ffdbe8"
+            CornerRadius="30"
+            BorderColor="Transparent">
+            <VerticalStackLayout>
+                <Frame
+                    Padding="12"
+                    CornerRadius="15">
+                    <Entry
+                        Placeholder="Име"
+                        x:Name="CatnameEntry"/>
+                </Frame>
+                <Frame
+                    CornerRadius="15"
+                    Padding="12">
+                    <Entry
+                        Placeholder="Цвят"
+                        x:Name="ColorEntry"/>
+                </Frame>
+                <Frame
+                    CornerRadius="15"
+                    Padding="12">
+                    <Entry
+                        Placeholder="Иконка"
+                        x:Name="IconEntry"/>
+                </Frame>
+                <Button
+                    Text="Добави"
+                    BackgroundColor="{StaticResource Primary}"
+                    Clicked="OnAddClicked"
+                    Margin="0, 20"
+                    CornerRadius="30"
+                    WidthRequest="300"/>
+            </VerticalStackLayout>
+        </Frame>
+        <CollectionView ItemsSource="{Binding Categories}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" CornerRadius="10">
+                        <StackLayout>
+                            <Label TextColor="Black" Text="{Binding Name}" FontSize="14" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

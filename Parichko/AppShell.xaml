@@ -17,10 +17,12 @@
             Icon="goalsicon.png">
             <ShellContent ContentTemplate="{DataTemplate v:GoalsPage}" Route="GoalsPage"/>
         </Tab>
-        <Tab Title=""
-            Icon="addicon.png"
-            >
-            <ShellContent ContentTemplate="{DataTemplate v:PopupPlus}" Route=""/>
+        <Tab 
+            Icon="addicon.png">
+            <ShellContent Title="Разходи" ContentTemplate="{DataTemplate v:AddExpensePage}" Route="AddExpensePage"/>
+            <ShellContent Title="Приходи" ContentTemplate="{DataTemplate v:AddIncomePage}" Route="AddIncomePage"/>
+            <ShellContent Title="Цели" ContentTemplate="{DataTemplate v:AddGoalPage}" Route="AddGoalPage"/>
+            <ShellContent Title="Категории" ContentTemplate="{DataTemplate v:AddCategoryPage}" Route="AddCategoryPage"/>
         </Tab>
         <Tab Title="Съвети"
     Icon="adviceicon.png">

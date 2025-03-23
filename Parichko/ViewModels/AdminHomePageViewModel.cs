@@ -14,7 +14,6 @@ namespace Parichko.ViewModels
     public class AdminHomePageViewModel
     {
         private readonly ParichkoDbContext _context;
-
         public ObservableCollection<UserProfile> Users { get; set; } = new();
 
         public AdminHomePageViewModel(ParichkoDbContext context)

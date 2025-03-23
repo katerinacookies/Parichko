@@ -73,6 +73,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\AddCategoryPage.xaml.cs">
+	    <DependentUpon>AddCategoryPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\AddIncomePage.xaml.cs">
+	    <DependentUpon>AddIncomePage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
@@ -82,7 +88,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\AddPage.xaml">
+	  <MauiXaml Update="Views\AddCategoryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AddExpensePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AddGoalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AddIncomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\AdminHomePage.xaml">

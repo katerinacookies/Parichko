@@ -74,13 +74,20 @@
                     Style="{StaticResource ProfileBtns}"/>
                 <Button
                     Text="Категория разходи"
-                    Style="{StaticResource ProfileBtns}"/>
+                    Style="{StaticResource ProfileBtns}"
+                    Clicked="OnCategoryClicked"/>
                 <Button
                     Text="Моите цели"
-                    Style="{StaticResource ProfileBtns}"/>
+                    Style="{StaticResource ProfileBtns}"
+                    Clicked="OnGoalClicked"/>
                 <Button
-                    Text="Приходи и разходи"
-                    Style="{StaticResource ProfileBtns}"/>
+                    Text="Приходи"
+                    Style="{StaticResource ProfileBtns}"
+                    Clicked="OnIncomeClicked"/>
+                <Button
+                    Text="Разходи"
+                    Style="{StaticResource ProfileBtns}"
+                    Clicked="OnExpenseClicked"/>
             </VerticalStackLayout>
         </Frame>
     </VerticalStackLayout>
