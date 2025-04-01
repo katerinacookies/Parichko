@@ -47,6 +47,7 @@
                     <Frame Padding="10" Margin="5" CornerRadius="10">
                         <StackLayout>
                             <Label TextColor="Black" Text="{Binding Name}" FontSize="14" />
+                            <Label TextColor="Black" Text="{Binding Id}" FontSize="14" />
                         </StackLayout>
                     </Frame>
                 </DataTemplate>

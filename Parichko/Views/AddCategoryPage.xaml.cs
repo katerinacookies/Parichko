@@ -20,9 +20,9 @@ public partial class AddCategoryPage : ContentPage
     }
     private async void OnAddClicked(object sender, EventArgs e)
     {
-        string catName = CatnameEntry.ToString();
-        string catColor = ColorEntry.ToString();
-        string catIcon = IconEntry.ToString();
+        string catName = CatnameEntry.Text.ToString();
+        string catColor = ColorEntry.Text.ToString();
+        string catIcon = IconEntry.Text.ToString();
         await _viewModel.AddCategoryAsync(catName, catColor, catIcon);
     }
 }

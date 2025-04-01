@@ -18,7 +18,7 @@ namespace Parichko.ViewModels
         public CategoryViewModel(ParichkoDbContext context)
         {
             _context = context;
-            LoadCatsAsync();
+            //LoadCatsAsync();
         }
         public async Task<bool> LoadCatsAsync()
         {
@@ -44,7 +44,7 @@ namespace Parichko.ViewModels
             }
         }
 
-        public async Task<bool> AddCategoryAsync(string? name, string? color, string? iconName)
+        public async Task<bool> AddCategoryAsync(string name, string? color, string iconName)
         {
             try
             {
@@ -94,6 +94,11 @@ namespace Parichko.ViewModels
                     try
                     {
                         await _context.SaveChangesAsync();
+                        //проверка за категорията
+                        await MainThread.InvokeOnMainThreadAsync(() =>
+                        {
+                            Shell.Current.DisplayAlert("Грешка", name, newCat.Id.ToString());
+                        });
                         return true;
                     }
                     catch (Exception ex)
