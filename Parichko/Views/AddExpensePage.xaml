@@ -6,31 +6,26 @@
     <VerticalStackLayout
         Padding="20, 10, 20, 10">
         <Frame
-            BackgroundColor="#ffdbe8"
-            CornerRadius="30"
-            BorderColor="Transparent">
+            Style="{StaticResource AddPageFrame}">
             <VerticalStackLayout>
                 <Frame
-            Padding="12"
-            CornerRadius="15">
+                    Style="{StaticResource AddEntryFrame}">
                     <Entry
-                Placeholder="Име"
-                x:Name="IncomenameEntry"/>
+                        Placeholder="Име"
+                        x:Name="IncomenameEntry"
+                        Style="{StaticResource AddEntry}"
+                        />
                 </Frame>
                 <Frame
-            CornerRadius="15"
-            Padding="12">
+                    Style="{StaticResource AddEntryFrame}">
                     <Entry
-                Placeholder="Цвят"
-                x:Name="IncomeAmountEntry"/>
+                        Placeholder="Цвят"
+                        x:Name="IncomeAmountEntry"
+                        Style="{StaticResource AddEntry}"/>
                 </Frame>
                 <Button
-            Text="Добави"
-            BackgroundColor="{StaticResource Primary}"
-            
-            Margin="0, 20"
-            CornerRadius="30"
-            WidthRequest="300"/>
+                    Text="Добави"
+                    Style="{StaticResource AddButton}"/>
             </VerticalStackLayout>
         </Frame>
         <CollectionView ItemsSource="{Binding Incomes}">

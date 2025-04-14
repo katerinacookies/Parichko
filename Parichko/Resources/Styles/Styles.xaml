@@ -127,6 +127,32 @@
         </Setter>
     </Style>-->
 
+    <!--AddStuffStyles-->
+    <Style TargetType="Frame" x:Key="AddPageFrame">
+        <Setter Property="BackgroundColor" Value="#ffdbe8"/>
+        <Setter Property="CornerRadius" Value="30"/>
+        <Setter Property="BorderColor" Value="Transparent"/>
+    </Style>
+    <Style TargetType="Frame" x:Key="AddEntryFrame">
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="CornerRadius" Value="15"/>
+        <Setter Property="Margin" Value="0, 0, 0, 10"/>
+        <Setter Property="BorderColor" Value="Transparent"/>
+    </Style>
+    <Style TargetType="Entry" x:Key="AddEntry">
+        <Setter Property="PlaceholderColor" Value="{StaticResource Primary}"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource Primary}"/>
+        <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+    </Style>
+    <Style TargetType="Button" x:Key="AddButton">
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+        <Setter Property="Margin" Value="0, 20, 0, 0"/>
+        <Setter Property="CornerRadius" Value="30"/>
+        <Setter Property="WidthRequest" Value="330"/>
+        <Setter Property="HeightRequest" Value="50"/>
+    </Style>
+
+
     <Style TargetType="CheckBox">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
         <Setter Property="MinimumHeightRequest" Value="44"/>

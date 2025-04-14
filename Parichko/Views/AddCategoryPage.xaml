@@ -3,42 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.AddCategoryPage"
              Title="AddCategory"
-             BackgroundColor="White">
+             BackgroundColor="#efecec">
     <VerticalStackLayout
         Padding="20, 10, 20, 10">
         <Frame
-            BackgroundColor="#ffdbe8"
-            CornerRadius="30"
-            BorderColor="Transparent">
+            Style="{StaticResource AddPageFrame}">
             <VerticalStackLayout>
                 <Frame
-                    Padding="12"
-                    CornerRadius="15">
+                    Style="{StaticResource AddEntryFrame}">
                     <Entry
                         Placeholder="Име"
-                        x:Name="CatnameEntry"/>
+                        x:Name="CatnameEntry"
+                        Style="{StaticResource AddEntry}"/>
                 </Frame>
                 <Frame
-                    CornerRadius="15"
-                    Padding="12">
+                    Style="{StaticResource AddEntryFrame}">
                     <Entry
                         Placeholder="Цвят"
-                        x:Name="ColorEntry"/>
+                        x:Name="ColorEntry"
+                        Style="{StaticResource AddEntry}"/>
                 </Frame>
                 <Frame
-                    CornerRadius="15"
-                    Padding="12">
+                    Style="{StaticResource AddEntryFrame}">
                     <Entry
                         Placeholder="Иконка"
-                        x:Name="IconEntry"/>
+                        x:Name="IconEntry"
+                        Style="{StaticResource AddEntry}"/>
                 </Frame>
                 <Button
                     Text="Добави"
-                    BackgroundColor="{StaticResource Primary}"
-                    Clicked="OnAddClicked"
-                    Margin="0, 20"
-                    CornerRadius="30"
-                    WidthRequest="300"/>
+                    Style="{StaticResource AddButton}"/>
             </VerticalStackLayout>
         </Frame>
         <CollectionView ItemsSource="{Binding Categories}">
