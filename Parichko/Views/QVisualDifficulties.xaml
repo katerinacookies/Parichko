@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Parichko.Views.QVisualDifficulties"
+             Title="QVisualDifficulties">
+    <VerticalStackLayout>
+        <Button
+            />
+        <Label 
+            Text="Имаш ли зрителни затруднения?"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label
+            Text="Ще ти помогна да персонализираш своя изглед!"/>
+        <CheckBox
+            />
+        <CheckBox
+            />
+
+        <Button
+            Text="Hapred"/>
+        <Button
+            Text="Propusni"/>
+    </VerticalStackLayout>
+</ContentPage>
