@@ -158,6 +158,7 @@
         <Setter Property="Padding" Value="20"/>
         <Setter Property="CornerRadius" Value="30"/>        
         <Setter Property="BorderColor" Value="Transparent"/>        
+        <Setter Property="HeightRequest" Value="70"/>        
     </Style>
 
     <Style TargetType="CheckBox">

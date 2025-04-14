@@ -44,17 +44,22 @@
                             ColumnDefinitions="*,*,*"
                             RowDefinitions="*">
                             <Image
-                                Grid.Column="0"/>
+                                Grid.Column="0"
+                                
+                                HeightRequest="100"
+                                WidthRequest="100"
+                                />
                             <Label 
                                 Grid.Column="1"
                                 TextColor="Black" 
                                 Text="{Binding Name}" 
                                 FontSize="14" />
-                            <Label 
+                            <Image
                                 Grid.Column="2"
-                                TextColor="Black" 
-                                Text="{Binding Id}" 
-                                FontSize="14" />
+                                Source="heartbreak.png"
+                                HeightRequest="40"
+                                WidthRequest="40"
+                                Margin="0"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>
