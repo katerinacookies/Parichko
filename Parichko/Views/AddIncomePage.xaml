@@ -3,10 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.AddIncomePage"
              Title="AddIncomePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout
+    Padding="20, 10, 20, 10">
+        <Frame
+        BackgroundColor="#ffdbe8"
+        CornerRadius="30"
+        BorderColor="Transparent">
+            <VerticalStackLayout>
+                <Frame
+                Padding="12"
+                CornerRadius="15">
+                    <Entry
+                    Placeholder="Име"
+                    x:Name="IncomenameEntry"/>
+                </Frame>
+                <Frame
+                CornerRadius="15"
+                Padding="12">
+                    <Entry
+                    Placeholder="Цвят"
+                    x:Name="IncomeAmountEntry"/>
+                </Frame>
+                <Button
+                Text="Добави"
+                BackgroundColor="{StaticResource Primary}"
+                Clicked="OnAddClicked"
+                Margin="0, 20"
+                CornerRadius="30"
+                WidthRequest="300"/>
+            </VerticalStackLayout>
+        </Frame>
+        <CollectionView ItemsSource="{Binding Incomes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" CornerRadius="10">
+                        <StackLayout>
+                            <Label TextColor="Black" Text="{Binding Name}" FontSize="14" />
+                            <Label TextColor="Black" Text="{Binding Id}" FontSize="14" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>

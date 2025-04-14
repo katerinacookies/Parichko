@@ -31,16 +31,18 @@ namespace Parichko
             //chgpt
             
             builder.Services.AddDbContext<ParichkoDbContext>();
-            var dbContext = builder.Services.BuildServiceProvider().GetRequiredService<ParichkoDbContext>();
-            dbContext.Database.Migrate();
-            dbContext.Dispose();
+            //var dbContext = builder.Services.BuildServiceProvider().GetRequiredService<ParichkoDbContext>();
+            //dbContext.Database.EnsureCreated(); //добавих си го
+            //dbContext.Database.Migrate();
+            //dbContext.Dispose();
             //ot videoto
-            builder.Services.AddDbContext<ParichkoDbContext>();
+            //builder.Services.AddDbContext<ParichkoDbContext>();
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<Register>();
             builder.Services.AddTransient<QName>();
             builder.Services.AddTransient<QNameViewModel>();
             builder.Services.AddTransient<AddIncomePage>();
+            builder.Services.AddTransient<IncomeViewModel>();
             builder.Services.AddTransient<AddExpensePage>();
             builder.Services.AddTransient<AddGoalPage>();
             builder.Services.AddTransient<AddCategoryPage>();
@@ -53,10 +55,10 @@ namespace Parichko
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<ProfilePage>();
             //tuk kato nqma bd kak da stane che da raboti i sus i bez
-            //var dbContext = new ParichkoDbContext();
+            var dbContext = new ParichkoDbContext();
             //dbContext.Database.EnsureDeleted();
-            //dbContext.Database.EnsureCreated();
-            //dbContext.Dispose();
+            dbContext.Database.EnsureCreated();
+            dbContext.Dispose();
             //ot videoto
 
             

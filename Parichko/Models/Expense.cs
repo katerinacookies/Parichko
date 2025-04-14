@@ -17,6 +17,7 @@ namespace Parichko.Models
         public decimal Amount { get; set; }
         //trqbva da se napravi stoinost po podrazbirane
         public int CategoryId { get; set; }
+        public Category Category { get; set; }
         public UserProfile UserProfile { get; set; }
         public int UserProfileId { get; set; }
 
