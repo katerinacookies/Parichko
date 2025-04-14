@@ -2,11 +2,78 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.FriendsPage"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="True"
              Title="FriendsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout
+        Padding="30, 0, 30, 0">
+        <Grid
+            ColumnDefinitions="*,*"
+            RowDefinitions="*">
+            <Frame
+                Grid.Column="0"
+                BorderColor="Transparent"
+                HorizontalOptions="Start">
+                <Button
+                    x:Name="BackBtn"
+                    Style="{StaticResource BackBtn}"
+                    Clicked="OnBackClicked"/>
+            </Frame>
+            <Frame
+                Grid.Column="1"
+                BorderColor="Transparent"
+                HorizontalOptions="End">
+                <Image
+                    Source="profileicon.png"
+                    WidthRequest="50"
+                    HeightRequest="50"/>
+            </Frame>
+        </Grid>
+        <Grid
+            ColumnDefinitions="*,*"
+            RowDefinitions="*">
+            <Frame
+                Grid.Column="0"
+                BorderColor="Transparent">
+                <Label
+                    Text="Приятели"/>
+            </Frame>
+            <Frame
+                Grid.Column="1"
+                BorderColor="Transparent">
+                <Label
+                    Text="0"
+                    HorizontalTextAlignment="End"/>
+            </Frame>
+        </Grid>
+        <Frame
+            BackgroundColor="{StaticResource Cutesyblue}"
+            BorderColor="Transparent">
+            <Grid
+                ColumnDefinitions="*,*"
+                RowDefinitions="*">
+                <Image
+                    Source="profileicon.png"
+                    HeightRequest="30"
+                    WidthRequest="30"
+                    HorizontalOptions="Start"
+                    Grid.Column="0"/>
+                <Entry
+                    Grid.Column="1"
+                    HorizontalTextAlignment="End"
+                    Placeholder="Потърси приятел чрез имейл..."/>
+            </Grid>
+        </Frame>
+        <Label
+            Text="Покани за приятелство"/>
+        <CollectionView>
+            
+        </CollectionView>
+        <Label
+            Text="Приятели"
+            HorizontalTextAlignment="Start"/>
+        <CollectionView>
+            
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>

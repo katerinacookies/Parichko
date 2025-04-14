@@ -25,8 +25,8 @@
             <ShellContent Title="Категории" ContentTemplate="{DataTemplate v:AddCategoryPage}" Route="AddCategoryPage"/>
         </Tab>
         <Tab Title="Съвети"
-    Icon="adviceicon.png">
-            <ShellContent ContentTemplate="{DataTemplate v:ProfilePage}" Route="ProfilePage"/>
+            Icon="adviceicon.png">
+            <ShellContent ContentTemplate="{DataTemplate v:AdvicePage}" Route="AdvicePage"/>
         </Tab>
         <Tab Title="Профил"
             Icon="profileicon.png">
@@ -102,6 +102,11 @@
         Title="GoalsPage"
         Route="GoalsPage" 
         ContentTemplate="{DataTemplate v:GoalsPage}" />
+
+    <ShellContent 
+        Title="FriendsPage"
+        Route="FriendsPage" 
+        ContentTemplate="{DataTemplate v:FriendsPage}" />
 
     <!--<ShellContent 
 Title="HomePage"

@@ -24,7 +24,7 @@ public partial class ProfilePage : ContentPage
 	}
     public async void OnFriendsClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("///");
+        await Shell.Current.GoToAsync("///FriendsPage");
 
     }
     public async void OnCategoryClicked(object sender, EventArgs e)

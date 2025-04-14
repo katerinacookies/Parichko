@@ -71,7 +71,8 @@
             <VerticalStackLayout>
                 <Button
                     Text="Приятели"
-                    Style="{StaticResource ProfileBtns}"/>
+                    Style="{StaticResource ProfileBtns}"
+                    Clicked="OnFriendsClicked"/>
                 <Button
                     Text="Категория разходи"
                     Style="{StaticResource ProfileBtns}"
