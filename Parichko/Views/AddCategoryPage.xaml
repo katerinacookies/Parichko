@@ -38,11 +38,24 @@
         <CollectionView ItemsSource="{Binding Categories}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5" CornerRadius="10">
-                        <StackLayout>
-                            <Label TextColor="Black" Text="{Binding Name}" FontSize="14" />
-                            <Label TextColor="Black" Text="{Binding Id}" FontSize="14" />
-                        </StackLayout>
+                    <Frame 
+                        Style="{StaticResource EntityFrame}">
+                        <Grid
+                            ColumnDefinitions="*,*,*"
+                            RowDefinitions="*">
+                            <Image
+                                Grid.Column="0"/>
+                            <Label 
+                                Grid.Column="1"
+                                TextColor="Black" 
+                                Text="{Binding Name}" 
+                                FontSize="14" />
+                            <Label 
+                                Grid.Column="2"
+                                TextColor="Black" 
+                                Text="{Binding Id}" 
+                                FontSize="14" />
+                        </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
