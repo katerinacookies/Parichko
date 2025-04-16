@@ -12,29 +12,52 @@
                     Style="{StaticResource AddEntryFrame}">
                     <Entry
                         Placeholder="Име"
-                        x:Name="IncomenameEntry"
+                        x:Name="ExpensenameEntry"
                         Style="{StaticResource AddEntry}"
                         />
                 </Frame>
                 <Frame
                     Style="{StaticResource AddEntryFrame}">
                     <Entry
-                        Placeholder="Цвят"
-                        x:Name="IncomeAmountEntry"
+                        Placeholder="Стойност"
+                        x:Name="ExpenseAmountEntry"
                         Style="{StaticResource AddEntry}"/>
                 </Frame>
+                <!--<Picker
+                    x:Name="CategoryDropdown"
+                    Title="Категория">
+                    
+                </Picker>-->
+                <CollectionView 
+                    x:Name="categoryDropdown"
+                    IsVisible="False"
+                    SelectionMode="Single"
+                    
+                    Margin="0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame
+                                >
+                                <Label
+                                    Text="{Binding}"/>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                
                 <Button
                     Text="Добави"
-                    Style="{StaticResource AddButton}"/>
+                    Style="{StaticResource AddButton}"
+                    Clicked="OnAddClicked"/>
             </VerticalStackLayout>
         </Frame>
-        <CollectionView ItemsSource="{Binding Incomes}">
+        <CollectionView ItemsSource="{Binding Expenses}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" Margin="5" CornerRadius="10">
                         <StackLayout>
                             <Label TextColor="Black" Text="{Binding Name}" FontSize="14" />
-                            <Label TextColor="Black" Text="{Binding Id}" FontSize="14" />
+                            <Label TextColor="Black" Text="{Binding Amount}" FontSize="14" />
                         </StackLayout>
                     </Frame>
                 </DataTemplate>

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.HomePage" 
              Shell.FlyoutItemIsVisible="False"
+             Shell.NavBarIsVisible="False"
              Title="HomePage"
              >
     <VerticalStackLayout
@@ -21,27 +22,40 @@
             <Frame
                 Grid.Column="0"
                 Grid.RowSpan="2"
-                BackgroundColor="LightPink"
-                CornerRadius="20"
+                BackgroundColor="#ffdbe8"
+                CornerRadius="30"
                 Padding="20"
-                Margin="0, 20, 5, 10">
-                
+                HeightRequest="350"
+                Margin="0, 20, 5, 10"
+                BorderColor="Transparent">
+                <VerticalStackLayout>
+                    <Frame>
+
+                    </Frame>
+
+                    <Label
+                        Text="Седмична /nдейност"/>
+                    <Label
+                        Text="Разходи в лв на ден"/>
+                </VerticalStackLayout>
             </Frame>
             <!--Дясна половина-->
             <Frame
                 Grid.Column="1"
                 Grid.Row="0"
-                BackgroundColor="LightBlue"
-                CornerRadius="10"
+                BackgroundColor="#ffe7db"
+                CornerRadius="30"
                 Padding="20"
-                Margin="5, 20, 0, 5">
+                Margin="5, 20, 0, 5"
+                BorderColor="Transparent">
                 
             </Frame>
             <Frame
                 Grid.Column="1"
                 Grid.Row="1"
-                BackgroundColor="LightSalmon"
-                CornerRadius="10"
+                BackgroundColor="#c2f0fc"
+                BorderColor="Transparent"
+                CornerRadius="30"
                 Padding="20"
                 Margin="5, 5, 0, 10">
                 

@@ -71,6 +71,10 @@ namespace Parichko.Data
                 .HasOne(e => e.UserProfile)
                 .WithMany(up => up.Expenses)
                 .HasForeignKey(e => e.UserProfileId);
+            modelBuilder.Entity<Expense>()
+                .HasOne(e => e.Category)
+                .WithMany(c => c.Expenses)
+                .HasForeignKey(e => e.CategoryId);
             modelBuilder.Entity<Income>()
                 .HasOne(i => i.UserProfile)
                 .WithMany(up => up.Incomes)

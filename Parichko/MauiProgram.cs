@@ -44,6 +44,7 @@ namespace Parichko
             builder.Services.AddTransient<AddIncomePage>();
             builder.Services.AddTransient<IncomeViewModel>();
             builder.Services.AddTransient<AddExpensePage>();
+            builder.Services.AddTransient<ExpenseViewModel>();
             builder.Services.AddTransient<AddGoalPage>();
             builder.Services.AddTransient<AddCategoryPage>();
             builder.Services.AddTransient<CategoryViewModel>();

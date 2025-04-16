@@ -1,4 +1,5 @@
-﻿using Parichko.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Parichko.Data;
 using Parichko.Models;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace Parichko.ViewModels
             }
         }
 
-        public async Task<bool> AddExpenseAsync(string? name, decimal amount, int categoryId)
+        public async Task<bool> AddExpenseAsync(string? name, decimal amount, string categoryId)
         {
             try
             {
@@ -70,7 +71,7 @@ namespace Parichko.ViewModels
                 //Проверка за категорията
                
                 var categoryFromDb = await Task.Run(async () =>
-                    _context.Categories.FirstOrDefault(c => c.Id == categoryId));
+                    _context.Categories.FirstOrDefault(c => c.Name == categoryId));
                
                 if(categoryFromDb == null)
                 {
@@ -95,7 +96,7 @@ namespace Parichko.ViewModels
                     {
                         Name = name,
                         Amount = amount,
-                        CategoryId = categoryId,
+                        CategoryId = categoryFromDb.Id,
                         Category = categoryFromDb
                     };
 
@@ -167,6 +168,19 @@ namespace Parichko.ViewModels
                         }
                     }
                 }
+                return false;
+            }
+        }
+
+        public async Task<bool> CategoriesForDropdown(List<Category> categories)
+        {
+            try
+            {
+                categories = await _context.Categories.ToListAsync();
+                return true;
+            }
+            catch(Exception ex)
+            {
                 return false;
             }
         }
