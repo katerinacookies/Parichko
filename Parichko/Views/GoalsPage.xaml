@@ -5,7 +5,7 @@
              Shell.NavBarIsVisible="False"
              Title="GoalsPage">
     <VerticalStackLayout
-        Padding="20, 10, 20, 10">
+        Padding="25, 10, 25, 10">
         <Label 
             Text="Твоите цели"
             VerticalOptions="Center" 
@@ -56,7 +56,8 @@
                 Text="Виж всички"
                 TextColor="Grey"
                 HorizontalOptions="End"
-                BackgroundColor="Transparent"/>
+                BackgroundColor="Transparent"
+                Padding="0"/>
         </Grid>
         
         <Frame
@@ -68,7 +69,8 @@
                 <Frame
                     Padding="0"
                     BorderColor="Transparent"
-                    BackgroundColor="Transparent">
+                    BackgroundColor="Transparent"
+                    Margin="0, 0, 25, 0">
                     <VerticalStackLayout>
                         <Image
                             Source="heartbreak.png"
@@ -78,6 +80,19 @@
                             Text="Кольо"/>
                     </VerticalStackLayout>
                 </Frame>
+                <Frame
+                    Padding="0"
+                    BorderColor="Transparent"
+                    BackgroundColor="Transparent">
+                    <VerticalStackLayout>
+                        <Image
+                            Source="heartbreak.png"
+                            HeightRequest="40"
+                            WidthRequest="40"/>
+                        <Label
+                            Text="Калина"/>
+                    </VerticalStackLayout>
+                </Frame>    
             </HorizontalStackLayout>
         </Frame>
         <Label
@@ -85,7 +100,8 @@
         <Frame
             BackgroundColor="#ffdbe8"
             BorderColor="Transparent"
-            Padding="10">
+            Padding="10"
+            Margin="0, 10">
             <HorizontalStackLayout>
                 <Image
                     Source="parichkoadvice.png"
@@ -107,17 +123,51 @@
                 Text="Виж всички"
                 TextColor="Grey"
                 HorizontalOptions="End"
-                BackgroundColor="Transparent"/> 
+                BackgroundColor="Transparent"
+                Padding="0"/> 
         </Grid>
         
         <Frame
             BackgroundColor="Transparent"
-            BorderColor="Transparent">
+            BorderColor="Transparent"
+            Padding="0"
+            Margin="0, 10">
             <VerticalStackLayout>
                 <Frame
                     BackgroundColor="LightYellow"
-                    BorderColor="Transparent">
-
+                    BorderColor="Transparent"
+                    Padding="10">
+                    <Grid
+                        ColumnDefinitions="*,*,*"
+                        RowDefinitions="*,*,*">
+                        <Image
+                            Grid.Column="0"
+                            Source="parichkoadvice.png"
+                            HeightRequest="40"
+                            WidthRequest="40"
+                            HorizontalOptions="Start"/>
+                        <Label
+                            Text="Апартамент"
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            HorizontalTextAlignment="Start"/>
+                        <Label
+                            Text="10.10.2024 - 10.05.2025"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            HorizontalTextAlignment="Start"
+                            VerticalTextAlignment="Start"/>
+                        <Label
+                            Text="---------------"
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            HorizontalTextAlignment="Start"/>
+                        <Label
+                            Text="54%"
+                            Grid.Column="2"
+                            HorizontalTextAlignment="End"
+                            VerticalTextAlignment="Center"/>
+                    </Grid>
                 </Frame>
                 <CollectionView>
                     <CollectionView.ItemTemplate>
