@@ -83,6 +83,8 @@ namespace Parichko.Data
                 .HasOne(i => i.ToUser)
                 .WithMany(up => up.FriendRequests)
                 .HasForeignKey(i => i.ToUserId);
+            //modelBuilder.Entity<UserProfile>()
+            //    .HasMany(up => up.FriendRequests);
             //Много към много - 1 потребител има много цели и една цел има много потребители
             modelBuilder.Entity<UserGoal>()
                 .HasKey(ug => new { ug.GoalId, ug.UserProfileId });
