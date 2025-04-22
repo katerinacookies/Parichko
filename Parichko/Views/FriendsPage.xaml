@@ -83,19 +83,19 @@
                             <Image
                                 Grid.Column="0"
                                 Source="parichkoadvice.png"
-                                HeightRequest="100"
-                                WidthRequest="100"
+                                HeightRequest="40"
+                                WidthRequest="40"
                                  />
                             <Label 
                                 Grid.Column="1"
+                                Grid.Row="0"
                                 TextColor="Black" 
-                                Text="{Binding FromUser.Login.Email}" 
-                                FontSize="14" />
+                                Text="{Binding FromUser.Login.Email}"/>
                             <Label 
                                 Grid.Column="1"
+                                Grid.Row="1"
                                 TextColor="Black" 
-                                Text="{Binding FromUser.Name}" 
-                                FontSize="14" />
+                                Text="{Binding FromUser.Name}" />
                             <Image
                                 Grid.Column="3"
                                 Source="heartbreak.png"

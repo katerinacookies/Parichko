@@ -26,7 +26,10 @@ namespace Parichko.ViewModels
         {
             try
             {
-                var requestsFromDb = _context.FriendRequests.Where(r => r.ToUserId == Preferences.Get("LoggedUserId", 0) && r.Status == DataAccess.Recources.Status.Pending).ToList();
+                var requestsFromDb = _context.FriendRequests
+                    .Include(r => r.FromUser)
+                    .Where(r => r.ToUserId == Preferences.Get("LoggedUserId", 0) && r.Status == DataAccess.Recources.Status.Pending)
+                    .ToList();
 
                 FriendRequests.Clear();
 
