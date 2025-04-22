@@ -1,4 +1,5 @@
-﻿using Parichko.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Parichko.Data;
 using Parichko.Models;
 using System;
 using System.Collections.Generic;
@@ -69,17 +70,20 @@ namespace Parichko.ViewModels
 
                 await Task.Run(async () =>
                 {
-                    var newIncome = new Income
-                    {
-                        Name = name,
-                        Amount = amount
-                    };
+                    Income newIncome = new Income();
+                    newIncome.Name = name;
+                    newIncome.Amount = amount;
+                    newIncome.UserProfileId = Preferences.Get("LoggedUserId", 0);
 
-                    await _context.Incomes.AddAsync(newIncome);
+                    var currentUser = await _context.UserProfiles
+                        .FirstOrDefaultAsync(up => up.Id == Preferences.Get("LoggedUserId", 0));
+
+                    _context.Incomes.Add(newIncome);
+                    currentUser.Incomes.Add(newIncome);
 
                     try
                     {
-                        await _context.SaveChangesAsync();
+                        _context.SaveChanges();
                         return true;
                     }
                     catch (Exception ex)

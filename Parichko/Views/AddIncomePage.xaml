@@ -24,7 +24,8 @@
                 </Frame>
                 <Button
                     Text="Добави"
-                    Style="{StaticResource AddButton}"/>
+                    Style="{StaticResource AddButton}"
+                    Clicked="OnAddClicked"/>
             </VerticalStackLayout>
         </Frame>
         <CollectionView ItemsSource="{Binding Incomes}">
