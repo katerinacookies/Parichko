@@ -24,7 +24,9 @@ namespace Parichko.ViewModels
         {
             try
             {
-                var incomesFromDb = _context.Incomes.ToList();
+                var incomesFromDb = await _context.Incomes
+                    .Where(i => i.UserProfileId == Preferences.Get("LoggedUserId", 0))
+                    .ToListAsync();
 
                 Incomes.Clear();
 
