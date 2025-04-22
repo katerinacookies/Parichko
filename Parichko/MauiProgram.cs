@@ -55,6 +55,8 @@ namespace Parichko
             builder.Services.AddTransient<PopupViewModel>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<ProfilePage>();
+            builder.Services.AddTransient<FriendsPage>();
+            builder.Services.AddTransient<FriendViewModel>();
             //tuk kato nqma bd kak da stane che da raboti i sus i bez
             var dbContext = new ParichkoDbContext();
             //dbContext.Database.EnsureDeleted();

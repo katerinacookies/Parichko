@@ -6,7 +6,7 @@
              Shell.TabBarIsVisible="True"
              Title="FriendsPage">
     <VerticalStackLayout
-        Padding="30, 0, 30, 0">
+        Padding="25, 0, 25, 0">
         <Grid
             ColumnDefinitions="*,*"
             RowDefinitions="*">
@@ -48,26 +48,64 @@
         </Grid>
         <Frame
             BackgroundColor="{StaticResource Cutesyblue}"
-            BorderColor="Transparent">
+            BorderColor="Transparent"
+            Padding="10"
+            >
             <Grid
                 ColumnDefinitions="*,*"
                 RowDefinitions="*">
-                <Image
-                    Source="profileicon.png"
-                    HeightRequest="30"
-                    WidthRequest="30"
-                    HorizontalOptions="Start"
-                    Grid.Column="0"/>
                 <Entry
-                    Grid.Column="1"
+                    x:Name="EmailEntry"
+                    Grid.Column="0"
                     HorizontalTextAlignment="End"
-                    Placeholder="Потърси приятел чрез имейл..."/>
+                    Placeholder="Добави приятел чрез имейл..."
+                    PlaceholderColor="DarkGray"
+                    WidthRequest="300"
+                    HeightRequest="40"/>
+                <Button
+                    Grid.Column="1"
+                    Style="{StaticResource AddFriendBtn}"
+                    Clicked="OnAddFriendClicked"/>
             </Grid>
         </Frame>
         <Label
             Text="Покани за приятелство"/>
-        <CollectionView>
-            
+        <CollectionView ItemsSource="{Binding FriendRequests}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame 
+                        Padding="10"
+                        BackgroundColor="White"
+                        BorderColor="Transparent">
+                        <Grid
+                            ColumnDefinitions="*,*,*,*"
+                            RowDefinitions="*,*">
+                            <Image
+                                Grid.Column="0"
+                                Source="parichkoadvice.png"
+                                HeightRequest="100"
+                                WidthRequest="100"
+                                 />
+                            <Label 
+                                Grid.Column="1"
+                                TextColor="Black" 
+                                Text="{Binding FromUser.Login.Email}" 
+                                FontSize="14" />
+                            <Label 
+                                Grid.Column="1"
+                                TextColor="Black" 
+                                Text="{Binding FromUser.Name}" 
+                                FontSize="14" />
+                            <Image
+                                Grid.Column="3"
+                                Source="heartbreak.png"
+                                HeightRequest="40"
+                                WidthRequest="40"
+                                Margin="0"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
         </CollectionView>
         <Label
             Text="Приятели"
