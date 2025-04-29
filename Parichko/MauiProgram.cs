@@ -45,14 +45,15 @@ namespace Parichko
             builder.Services.AddTransient<IncomeViewModel>();
             builder.Services.AddTransient<AddExpensePage>();
             builder.Services.AddTransient<ExpenseViewModel>();
+            builder.Services.AddTransient<DropdownViewModel>();
             builder.Services.AddTransient<AddGoalPage>();
             builder.Services.AddTransient<AddCategoryPage>();
             builder.Services.AddTransient<CategoryViewModel>();
             builder.Services.AddTransient<AdminHomePage>();
             builder.Services.AddTransient<GoalsPage>();
+            builder.Services.AddTransient<GoalViewModel>();
             builder.Services.AddTransient<AdminHomePageViewModel>();
             builder.Services.AddTransient<LoginViewModel>();
-            builder.Services.AddTransient<PopupViewModel>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<ProfilePage>();
             builder.Services.AddTransient<FriendsPage>();

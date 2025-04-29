@@ -23,23 +23,72 @@
                         x:Name="ExpenseAmountEntry"
                         Style="{StaticResource AddEntry}"/>
                 </Frame>
+                
+                <!-- Бутон за падащо меню
+                Text="{Binding SelectedItemName}" -->
+                <Button 
+                    Text="Категория"
+                    TextColor="{StaticResource Primary}"
+                    Clicked="OpenPicker"
+                    ImageSource="{Binding SelectedItemImage}"
+                    ContentLayout="Top,10"
+                    BackgroundColor="White" 
+                    Padding="10" 
+                    CornerRadius="20"
+                    HeightRequest="50"/>
+
+                <!-- Modal view, който играе ролята на падащо меню -->
+                <!--<ContentView 
+                    x:Name="CategoriesView" 
+                    IsVisible="False"
+                    BackgroundColor="#88000000" Padding="20">
+                    
+                        <CollectionView 
+                            x:Name="CategoriesDropdown"
+                            
+                            SelectionMode="Single" 
+                            SelectionChanged="OnItemSelected">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+
+                                    <StackLayout Orientation="Horizontal" Padding="0">
+                                        
+                                        <Label Text="bazinga" 
+                                               TextColor="Pink"
+                                               VerticalOptions="Center"
+                                               Margin="0,0,0,0"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    
+                </ContentView>>-->
                 <!--<Picker
                     x:Name="CategoryDropdown"
-                    Title="Категория">
+                    Title="Категория"
+                    ItemsSource="{Binding CategoryNames}"
+                    SelectedItem="{Binding SelectedCategory}">
                     
                 </Picker>-->
+                
+                
+                
                 <CollectionView 
                     x:Name="categoryDropdown"
-                    IsVisible="False"
+                    IsVisible="True"
                     SelectionMode="Single"
-                    
-                    Margin="0">
+                    SelectionChanged="OnItemSelected"
+                    Margin="0,0,0,0">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame
-                                >
+                            <Frame Margin="0,10,0,0" 
+                                   BackgroundColor="White"
+                                   BorderColor="Transparent"
+                                   CornerRadius="30">
                                 <Label
-                                    Text="{Binding}"/>
+                                    Text="{Binding Name}"
+                                    TextColor="{StaticResource Primary}"
+                                    x:Name="CatLabel"/>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

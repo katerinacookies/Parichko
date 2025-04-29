@@ -20,7 +20,7 @@ namespace Parichko.Models
         public string Color { get; set; }
         public bool Starred { get; set; } = false;
 
-        //dali da e spisuk s potrebitelq ili prazen spisuk (samo za priqtelite mu)
+        //дали да е списък с потребителя, или празен списък (само за приятелите му)
         public IList<UserGoal> Savers { get; set; } = new List<UserGoal>();
     }
 }

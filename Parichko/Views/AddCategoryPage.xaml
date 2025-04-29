@@ -32,13 +32,15 @@
                 </Frame>
                 <Button
                     Text="Добави"
-                    Style="{StaticResource AddButton}"/>
+                    Style="{StaticResource AddButton}"
+                    Clicked="OnAddClicked"/>
             </VerticalStackLayout>
         </Frame>
         <CollectionView ItemsSource="{Binding Categories}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame 
+                        Padding="10"
                         Style="{StaticResource EntityFrame}">
                         <Grid
                             ColumnDefinitions="*,*,*"
@@ -52,6 +54,7 @@
                             <Label 
                                 Grid.Column="1"
                                 TextColor="Black" 
+                                VerticalTextAlignment="Center"
                                 Text="{Binding Name}" 
                                 FontSize="14" />
                             <Image

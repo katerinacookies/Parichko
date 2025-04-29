@@ -12,14 +12,28 @@
                     Style="{StaticResource AddEntryFrame}">
                     <Entry
                         Placeholder="Име"
-                        x:Name="IncomenameEntry"
+                        x:Name="GoalnameEntry"
+                        Style="{StaticResource AddEntry}"/>
+                </Frame>
+                <Frame
+                    Style="{StaticResource AddEntryFrame}">
+                    <Entry
+                        Placeholder="Сума"
+                        x:Name="GoalAmountEntry"
+                        Style="{StaticResource AddEntry}"/>
+                </Frame>
+                <Frame
+                    Style="{StaticResource AddEntryFrame}">
+                    <Entry
+                        Placeholder="Иконка"
+                        x:Name="IconnameEntry"
                         Style="{StaticResource AddEntry}"/>
                 </Frame>
                 <Frame
                     Style="{StaticResource AddEntryFrame}">
                     <Entry
                         Placeholder="Цвят"
-                        x:Name="IncomeAmountEntry"
+                        x:Name="GoalColorEntry"
                         Style="{StaticResource AddEntry}"/>
                 </Frame>
                 <Button

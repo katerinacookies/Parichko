@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.AddIncomePage"
-             Title="AddIncomePage">
+             Title="AddIncomePage"
+             BackgroundColor="#efecec">
     <VerticalStackLayout
         Padding="20, 10, 20, 10">
         <Frame
@@ -18,7 +19,7 @@
                 <Frame
                     Style="{StaticResource AddEntryFrame}">
                     <Entry
-                        Placeholder="Цвят"
+                        Placeholder="Сума"
                         x:Name="IncomeAmountEntry"
                         Style="{StaticResource AddEntry}"/>
                 </Frame>
@@ -31,11 +32,36 @@
         <CollectionView ItemsSource="{Binding Incomes}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5" CornerRadius="10">
-                        <StackLayout>
-                            <Label TextColor="Black" Text="{Binding Name}" FontSize="14" />
-                            <Label TextColor="Black" Text="{Binding Id}" FontSize="14" />
-                        </StackLayout>
+                    <Frame Padding="10" 
+                           Margin="5" 
+                           CornerRadius="30"
+                           BorderColor="Transparent"
+                           BackgroundColor="White"
+                           HeightRequest="60">
+                        <Grid
+                            ColumnDefinitions="*,*"
+                            RowDefinitions="*,*">
+                            <Label 
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                TextColor="Black" 
+                                Text="{Binding Name}" 
+                                FontSize="14" />
+                            <Label 
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                TextColor="Black" 
+                                Text="{Binding Amount}"
+                                FontSize="14" />
+                            <Image
+                                Grid.Column="1"
+                                Source="heartbreak.png"
+                                HeightRequest="35"
+                                WidthRequest="35"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center"
+                                Margin="0"/>
+                        </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

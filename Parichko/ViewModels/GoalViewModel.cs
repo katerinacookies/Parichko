@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Parichko.Data;
+﻿using Parichko.Data;
 using Parichko.Models;
 using System;
 using System.Collections.Generic;
@@ -10,29 +9,30 @@ using System.Threading.Tasks;
 
 namespace Parichko.ViewModels
 {
-    public class ExpenseViewModel
+    public class GoalViewModel
     {
         private readonly ParichkoDbContext _context;
-        public ObservableCollection<Expense> Expenses { get; set; } = new();
-        public ObservableCollection<Category> Categories { get; set; } = new();
+        public ObservableCollection<Goal> Goals { get; set; } = new();
 
-        public ExpenseViewModel(ParichkoDbContext context)
+        public GoalViewModel(ParichkoDbContext context)
         {
             _context = context;
         }
-        public async Task<bool> LoadExpensesAsync()
+        public async Task<bool> LoadGoalsAsync()
         {
             try
             {
-                var expensesFromDb = _context.Expenses.Include(e => e.Category).ToList();
+                List<UserGoal> userGoals = new List<UserGoal>();
+                userGoals = await _context.UserGoa
+                var goalsFromDb = await _context.Goals
+                    .Where(g => g.UserProfileId == Preferences.Get("LoggedUserId", 0))
+                    .ToListAsync();
 
-                Expenses.Clear();
-                //Categories.Clear();
+                Incomes.Clear();
 
-                foreach (var expense in expensesFromDb)
+                foreach (var income in incomesFromDb)
                 {
-                    Expenses.Add(expense);
-                    //Categories.Add(expense.Category);
+                    Incomes.Add(income);
                 }
                 return true;
             }
@@ -46,7 +46,7 @@ namespace Parichko.ViewModels
             }
         }
 
-        public async Task<bool> AddExpenseAsync(string? name, decimal amount, string categoryId)
+        public async Task<bool> AddIncomesAsync(string name, decimal amount)
         {
             try
             {
@@ -58,10 +58,9 @@ namespace Parichko.ViewModels
                     });
                     return false;
                 }
-
                 name = name.Trim().ToString();
 
-                if (string.IsNullOrWhiteSpace(name) || amount == 0)
+                if (string.IsNullOrWhiteSpace(name))
                 {
                     await MainThread.InvokeOnMainThreadAsync(() =>
                     {
@@ -70,44 +69,24 @@ namespace Parichko.ViewModels
                     return false;
                 }
 
-                //Проверка за категорията
-               
-                var categoryFromDb = await Task.Run(async () =>
-                    _context.Categories.FirstOrDefault(c => c.Name == categoryId));
-               
-                if(categoryFromDb == null)
-                {
-                    await MainThread.InvokeOnMainThreadAsync(() =>
-                    {
-                        Shell.Current.DisplayAlert("Грешка", "Няма такава категория.", "Добре");
-                    });
-                    return false;
-                }
-                
 
                 await Task.Run(async () =>
                 {
-                    /*var newExpense = new Expense
-                    {
-                        Name = "Giros",
-                        Amount = 3.40M,
-                        CategoryId = 2,
-                        Category = categoryFromDb
-                    };*/
-                    var newExpense = new Expense
-                    {
-                        Name = name,
-                        Amount = amount,
-                        CategoryId = categoryFromDb.Id,
-                        Category = categoryFromDb
-                    };
+                    Income newIncome = new Income();
+                    newIncome.Name = name;
+                    newIncome.Amount = amount;
+                    newIncome.UserProfileId = Preferences.Get("LoggedUserId", 0);
 
-                    await _context.Expenses.AddAsync(newExpense);
+                    var currentUser = await _context.UserProfiles
+                        .FirstOrDefaultAsync(up => up.Id == Preferences.Get("LoggedUserId", 0));
+
+                    _context.Incomes.Add(newIncome);
+                    currentUser.Incomes.Add(newIncome);
 
                     try
                     {
-                        await _context.SaveChangesAsync();
-                        categoryFromDb.Expenses.Add(newExpense);
+                        _context.SaveChanges();
+                        System.Diagnostics.Debug.WriteLine("Приходът е добавен!");
                         return true;
                     }
                     catch (Exception ex)
@@ -170,24 +149,6 @@ namespace Parichko.ViewModels
                         }
                     }
                 }
-                return false;
-            }
-        }
-
-        public async Task<bool> CategoriesForDropdown()
-        {
-            try
-            {
-                var catsFromDb = await _context.Categories.ToListAsync();
-                Categories.Clear();
-                foreach(Category cat in catsFromDb)
-                {
-                    Categories.Add(cat);
-                }
-                return true;
-            }
-            catch(Exception ex)
-            {
                 return false;
             }
         }

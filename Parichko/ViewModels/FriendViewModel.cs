@@ -48,6 +48,8 @@ namespace Parichko.ViewModels
                 return false;
             }
         }
+
+        //Добавяне на приятелите в списък
         public async Task<bool> LoadFriendsAsync()
         {
             try
@@ -75,6 +77,7 @@ namespace Parichko.ViewModels
             }
         }
 
+        //Добавяне на нов приятел
         public async Task<bool> AddFriend(string email)
         {
             try

@@ -30,6 +30,7 @@ namespace Parichko.ViewModels
                 }
 
                 displayname = displayname.Trim();
+                //Присвояване на ID на влезлия потребител
                 int userId = Preferences.Get("LoggedUserId", 0);
                 if (string.IsNullOrWhiteSpace(displayname))
                 {

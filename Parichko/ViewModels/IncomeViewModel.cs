@@ -86,6 +86,7 @@ namespace Parichko.ViewModels
                     try
                     {
                         _context.SaveChanges();
+                        System.Diagnostics.Debug.WriteLine("Приходът е добавен!");
                         return true;
                     }
                     catch (Exception ex)

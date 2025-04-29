@@ -41,7 +41,6 @@ namespace Parichko.ViewModels
                 var userFromDb = await Task.Run(async () =>
                     _context.Logins.FirstOrDefault(l => l.Email == userEmail && l.PasswordHash == userPass));
                 
-
                 if (userFromDb == null)
                 {
                     await Shell.Current.DisplayAlert("Грешка", "Няма такъв потребител!", "Добре");

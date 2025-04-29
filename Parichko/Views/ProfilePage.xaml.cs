@@ -24,6 +24,7 @@ public partial class ProfilePage : ContentPage
 	}
     public async void OnFriendsClicked(object sender, EventArgs e)
     {
+        System.Diagnostics.Debug.Write("Бутонът е натиснат.");
         await Shell.Current.GoToAsync("///FriendsPage");
 
     }

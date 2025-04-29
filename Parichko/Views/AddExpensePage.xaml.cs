@@ -6,13 +6,17 @@ namespace Parichko.Views;
 public partial class AddExpensePage : ContentPage
 {
     private readonly ExpenseViewModel _viewModel;
-    public AddExpensePage(ExpenseViewModel viewModel)
+    private readonly DropdownViewModel _viewModel1;
+    private string chosenCat;
+    public AddExpensePage(ExpenseViewModel viewModel, DropdownViewModel viewModel1)
     {
         InitializeComponent();
         BindingContext = viewModel;
         _viewModel = viewModel;
         ShowExpenses();
-
+        _viewModel1 = viewModel1;
+        _viewModel.CategoriesForDropdown();
+        categoryDropdown.ItemsSource = _viewModel.Categories;
         //PopulateDropdown();
     }
     private async void ShowExpenses()
@@ -20,23 +24,33 @@ public partial class AddExpensePage : ContentPage
         await _viewModel.LoadExpensesAsync();
     }
 
-    private void OnShowClicked(object sender, EventArgs e)
+    private void OpenPicker(object sender, EventArgs e)
     {
-        //показва се
         categoryDropdown.IsVisible = !categoryDropdown.IsVisible;
     }
-
-    private void OnCatSelected(object sender, EventArgs e)
+    private void OnItemSelected(object sender, SelectionChangedEventArgs e)
     {
+        //var vm = BindingContext as DropdownViewModel;
+        if (e.CurrentSelection.FirstOrDefault() is string SelectedItem)
+        {
+            chosenCat = Convert.ToString(categoryDropdown.SelectedItem);
+            categoryDropdown.IsVisible = false;
 
+            //
+            categoryDropdown.SelectedItem = null;
+
+
+            //vm.SelectedCategory = selected;
+            //categoryDropdown.IsVisible = false;
+        }
     }
-
     private async void OnAddClicked(object sender, EventArgs e)
     {
         string expenseName = ExpensenameEntry.Text.ToString();
         decimal expenseAmount = decimal.Parse(ExpenseAmountEntry.Text);
+        string expenseCat = chosenCat;
         //string expenseCat = CategoryDropdown.SelectedItem.ToString();
-        //await _viewModel.AddExpenseAsync(expenseName, expenseAmount, expenseCat);
+        await _viewModel.AddExpenseAsync(expenseName, expenseAmount, expenseCat);
     }
 
     

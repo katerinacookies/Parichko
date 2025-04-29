@@ -94,6 +94,7 @@ namespace Parichko.ViewModels
                     try
                     {
                         await _context.SaveChangesAsync();
+                        //ЗА ИЗПЪЛНЕНИЕ:
                         //проверка за категорията
                         await MainThread.InvokeOnMainThreadAsync(() =>
                         {

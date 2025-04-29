@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Parichko.ViewModels
@@ -21,6 +22,9 @@ namespace Parichko.ViewModels
 
         public async Task<bool> RegisterAsync(string? userEmail, string? userPass, string? userPass2)
         {
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            string passwordPattern = @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).+$";
+
             try
             {
                 if (_context == null)
@@ -31,6 +35,7 @@ namespace Parichko.ViewModels
                     });
                     return false;
                 }
+
                 userEmail = userEmail?.Trim().ToLower();
                 userPass = userPass?.Trim();
                 userPass2 = userPass2?.Trim();
@@ -53,7 +58,24 @@ namespace Parichko.ViewModels
                     return false;
                 }
 
-                
+                if(!Regex.IsMatch(userEmail, emailPattern))
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("Грешка", "Имейлът не е в коректен формат.", "Доббе");
+                    });
+                    return false;
+                }
+
+                if (!Regex.IsMatch(userEmail, emailPattern))
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("Грешка", "Паролата не е достатъчно сигурна.", "Доббе");
+                    });
+                    return false;
+                }
+
                 var userFromDb = await Task.Run(async () =>
                     _context.Logins.FirstOrDefault(l => l.Email == userEmail && l.PasswordHash == userPass));
 
@@ -85,6 +107,7 @@ namespace Parichko.ViewModels
                     await _context.UserProfiles.AddAsync(newProfile);
                     Preferences.Set("LoggedUserId", newProfile.Id);
                     Preferences.Set("LoggedUserEmail", userEmail);
+                    System.Diagnostics.Debug.WriteLine("Профилът е добавен!");
 
                     try
                     {
