@@ -4,6 +4,7 @@ using Parichko.Data;
 using Parichko.Utilities;
 using DataAccess;
 using CommunityToolkit.Maui;
+using Syncfusion.Maui.Core.Hosting;
 using Parichko.ViewModels;
 using Parichko.Views;
 using Parichko.Data;
@@ -18,6 +19,7 @@ namespace Parichko
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .ConfigureSyncfusionCore()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -28,7 +30,7 @@ namespace Parichko
                     fonts.AddFont("AtkinsonHyperlegible-Regular.ttf", "AtkinsonRegular");
                 });
 
-            //chgpt
+            //начален код
             
             builder.Services.AddDbContext<ParichkoDbContext>();
             //var dbContext = builder.Services.BuildServiceProvider().GetRequiredService<ParichkoDbContext>();

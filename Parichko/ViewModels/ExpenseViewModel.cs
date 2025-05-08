@@ -15,6 +15,7 @@ namespace Parichko.ViewModels
         private readonly ParichkoDbContext _context;
         public ObservableCollection<Expense> Expenses { get; set; } = new();
         public ObservableCollection<Category> Categories { get; set; } = new();
+        
 
         public ExpenseViewModel(ParichkoDbContext context)
         {

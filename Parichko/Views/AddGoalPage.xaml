@@ -18,7 +18,7 @@
                 <Frame
                     Style="{StaticResource AddEntryFrame}">
                     <Entry
-                        Placeholder="Сума"
+                        Placeholder="Предвидена сума"
                         x:Name="GoalAmountEntry"
                         Style="{StaticResource AddEntry}"/>
                 </Frame>
@@ -38,16 +38,17 @@
                 </Frame>
                 <Button
                     Text="Добави"
-                    Style="{StaticResource AddButton}"/>
+                    Style="{StaticResource AddButton}"
+                    Clicked="OnAddClicked"/>
             </VerticalStackLayout>
         </Frame>
-        <CollectionView ItemsSource="{Binding Incomes}">
+        <CollectionView ItemsSource="{Binding Goals}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" Margin="5" CornerRadius="10">
                         <StackLayout>
                             <Label TextColor="Black" Text="{Binding Name}" FontSize="14" />
-                            <Label TextColor="Black" Text="{Binding Id}" FontSize="14" />
+                            <Label TextColor="Black" Text="{Binding GoalAmount}" FontSize="14" />
                         </StackLayout>
                     </Frame>
                 </DataTemplate>

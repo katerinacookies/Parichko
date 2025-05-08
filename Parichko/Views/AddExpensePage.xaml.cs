@@ -31,9 +31,10 @@ public partial class AddExpensePage : ContentPage
     private void OnItemSelected(object sender, SelectionChangedEventArgs e)
     {
         //var vm = BindingContext as DropdownViewModel;
-        if (e.CurrentSelection.FirstOrDefault() is string SelectedItem)
+        if (e.CurrentSelection.FirstOrDefault() is string selectedItem)
         {
-            chosenCat = Convert.ToString(categoryDropdown.SelectedItem);
+            chosenCat = selectedItem;
+            //chosenCat = Convert.ToString(categoryDropdown.SelectedItem);
             categoryDropdown.IsVisible = false;
 
             //

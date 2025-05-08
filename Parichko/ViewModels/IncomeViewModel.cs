@@ -14,11 +14,18 @@ namespace Parichko.ViewModels
     {
         private readonly ParichkoDbContext _context;
         public ObservableCollection<Income> Incomes { get; set; } = new();
+        public List<Income> Data { get; set; }
 
         public IncomeViewModel(ParichkoDbContext context)
         {
             _context = context;
-            //LoadCatsAsync();
+
+            Data = new List<Income>();
+            Data = Incomes.ToList();
+        }
+        public IncomeViewModel()
+        {
+
         }
         public async Task<bool> LoadIncomesAsync()
         {

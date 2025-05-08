@@ -21,6 +21,7 @@ namespace Parichko.Models
         public bool Starred { get; set; } = false;
 
         //дали да е списък с потребителя, или празен списък (само за приятелите му)
-        public IList<UserGoal> Savers { get; set; } = new List<UserGoal>();
+        public IList<UserProfile> Savers { get; set; } = new List<UserProfile>();
+        public IList<UserGoal> UGoals { get; set; } = new List<UserGoal>();
     }
 }

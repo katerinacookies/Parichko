@@ -1,4 +1,5 @@
-﻿using Parichko.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Parichko.Data;
 using Parichko.Models;
 using System;
 using System.Collections.Generic;
@@ -23,16 +24,23 @@ namespace Parichko.ViewModels
             try
             {
                 List<UserGoal> userGoals = new List<UserGoal>();
-                userGoals = await _context.UserGoa
-                var goalsFromDb = await _context.Goals
-                    .Where(g => g.UserProfileId == Preferences.Get("LoggedUserId", 0))
+                userGoals = await _context.UserGoals
+                    .Where(ug => ug.UserProfileId == Preferences.Get("LoggedUserId", 0))
                     .ToListAsync();
 
-                Incomes.Clear();
+                List<Goal> goalsFromDb = new List<Goal>();
 
-                foreach (var income in incomesFromDb)
+                foreach (UserGoal usergoal in userGoals)
                 {
-                    Incomes.Add(income);
+                    var goal = await _context.Goals.FirstOrDefaultAsync(g => g.Id == usergoal.GoalId);
+                    goalsFromDb.Add(goal);
+                }
+
+                Goals.Clear();
+
+                foreach (var goal in goalsFromDb)
+                {
+                    Goals.Add(goal);
                 }
                 return true;
             }
@@ -46,7 +54,7 @@ namespace Parichko.ViewModels
             }
         }
 
-        public async Task<bool> AddIncomesAsync(string name, decimal amount)
+        public async Task<bool> AddGoalsAsync(string name, decimal amount, string icon, string color)
         {
             try
             {
@@ -58,8 +66,27 @@ namespace Parichko.ViewModels
                     });
                     return false;
                 }
-                name = name.Trim().ToString();
+                name = name.Trim();
+                icon = icon.Trim();
+                color = color.Trim();
+                
 
+                if (string.IsNullOrWhiteSpace(icon))
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("Грешка", "Попълнете всички полета!", "Добре");
+                    });
+                    return false;
+                }
+                if (string.IsNullOrWhiteSpace(color))
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("Грешка", "Попълнете всички полета!", "Добре");
+                    });
+                    return false;
+                }
                 if (string.IsNullOrWhiteSpace(name))
                 {
                     await MainThread.InvokeOnMainThreadAsync(() =>
@@ -72,21 +99,27 @@ namespace Parichko.ViewModels
 
                 await Task.Run(async () =>
                 {
-                    Income newIncome = new Income();
-                    newIncome.Name = name;
-                    newIncome.Amount = amount;
-                    newIncome.UserProfileId = Preferences.Get("LoggedUserId", 0);
+                    Goal newGoal = new Goal();
+                    newGoal.Name = name;
+                    newGoal.GoalAmount = amount;
 
-                    var currentUser = await _context.UserProfiles
-                        .FirstOrDefaultAsync(up => up.Id == Preferences.Get("LoggedUserId", 0));
 
-                    _context.Incomes.Add(newIncome);
-                    currentUser.Incomes.Add(newIncome);
+                    var currentUser = await Task.Run(async () =>
+                        _context.UserProfiles.FirstOrDefault(up => up.Id == Preferences.Get("LoggedUserId", 0)));
+                    newGoal.Savers.Add(currentUser);
+
+                    _context.Goals.Add(newGoal);
+
+                    UserGoal ug = new UserGoal();
+                    ug.UserProfileId = Preferences.Get("LoggedUserId", 0);
+                    ug.GoalId = newGoal.Id;
+
+                    _context.UserGoals.Add(ug);
 
                     try
                     {
                         _context.SaveChanges();
-                        System.Diagnostics.Debug.WriteLine("Приходът е добавен!");
+                        System.Diagnostics.Debug.WriteLine("Целта е добавена!");
                         return true;
                     }
                     catch (Exception ex)
