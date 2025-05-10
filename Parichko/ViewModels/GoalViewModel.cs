@@ -54,6 +54,19 @@ namespace Parichko.ViewModels
             }
         }
 
+        /*
+         modelBuilder.Entity<UserGoal>()
+              .HasKey(ug => new { ug.GoalId, ug.UserProfileId });
+
+          modelBuilder.Entity<UserGoal>()
+              .HasOne(g => g.Goal)
+              .WithMany(g => g.Savers)
+              .HasForeignKey(g => g.GoalId);
+          modelBuilder.Entity<UserGoal>()
+              .HasOne(g => g.UserProfile)
+              .WithMany(u => u.Goals)
+              .HasForeignKey(g => g.UserProfileId);
+      }*/
         public async Task<bool> AddGoalsAsync(string name, decimal amount, string icon, string color)
         {
             try

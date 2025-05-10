@@ -1,14 +1,22 @@
+using Parichko.ViewModels;
+
 namespace Parichko.Views;
 
 public partial class HomePage : ContentPage
 {
-	public HomePage()
-	{
-		InitializeComponent();
-		Displaythename();
+    private readonly ExpenseViewModel _viewModel;
+    public HomePage(ExpenseViewModel viewModel)
+    {
+        InitializeComponent();
+        _viewModel = viewModel;
+        Displaythename();
+    }
+    public HomePage()
+    {
+
     }
 
-	public async Task Displaythename()
+    public async Task Displaythename()
 	{
 		//? await
 		string name = Preferences.Get("LoggedUserName", "");
