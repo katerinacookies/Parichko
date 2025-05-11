@@ -2,31 +2,34 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.AddExpensePage"
-             Title="AddExpensePage">
+             Title="AddExpensePage"
+             BackgroundColor="#efecec">
+    
     <VerticalStackLayout
         Padding="20, 10, 20, 10">
-        <Frame
+        <Grid>
+            <Frame
             Style="{StaticResource AddPageFrame}">
-            <VerticalStackLayout>
-                <Frame
+                <VerticalStackLayout>
+                    <Frame
                     Style="{StaticResource AddEntryFrame}">
-                    <Entry
+                        <Entry
                         Placeholder="Име"
                         x:Name="ExpensenameEntry"
                         Style="{StaticResource AddEntry}"
                         />
-                </Frame>
-                <Frame
+                    </Frame>
+                    <Frame
                     Style="{StaticResource AddEntryFrame}">
-                    <Entry
+                        <Entry
                         Placeholder="Стойност"
                         x:Name="ExpenseAmountEntry"
                         Style="{StaticResource AddEntry}"/>
-                </Frame>
-                
-                <!-- Бутон за падащо меню
+                    </Frame>
+
+                    <!-- Бутон за падащо меню
                 Text="{Binding SelectedItemName}" -->
-                <Button 
+                    <Button 
                     Text="Категория"
                     TextColor="{StaticResource Primary}"
                     Clicked="OpenPicker"
@@ -37,8 +40,8 @@
                     CornerRadius="20"
                     HeightRequest="50"/>
 
-                <!-- Modal view, който играе ролята на падащо меню -->
-                <!--<ContentView 
+                    <!-- Modal view, който играе ролята на падащо меню -->
+                    <!--<ContentView 
                     x:Name="CategoriesView" 
                     IsVisible="False"
                     BackgroundColor="#88000000" Padding="20">
@@ -63,54 +66,60 @@
                         </CollectionView>
                     
                 </ContentView>>-->
-                <!--<Picker
+                    <!--<Picker
                     x:Name="CategoryDropdown"
                     Title="Категория"
                     ItemsSource="{Binding CategoryNames}"
                     SelectedItem="{Binding SelectedCategory}">
                     
                 </Picker>-->
-                
-                
-                
-                <CollectionView 
+
+
+
+                    <CollectionView 
                     x:Name="categoryDropdown"
-                    IsVisible="True"
+                    IsVisible="true"
                     SelectionMode="Single"
                     SelectionChanged="OnItemSelected"
-                    Margin="0,0,0,0">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame Margin="0,10,0,0" 
-                                   BackgroundColor="White"
-                                   BorderColor="Transparent"
+                    HeightRequest="200"
+                    SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame 
+                                   BackgroundColor="Black"
+                                   BorderColor="Red"
                                    CornerRadius="30">
-                                <Label
+                                    <Label
                                     Text="{Binding Name}"
                                     TextColor="{StaticResource Primary}"
-                                    x:Name="CatLabel"/>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                
-                <Button
+                                    x:Name="CatLabel">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnItemTapped"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Button
                     Text="Добави"
                     Style="{StaticResource AddButton}"
                     Clicked="OnAddClicked"/>
-            </VerticalStackLayout>
-        </Frame>
-        <CollectionView ItemsSource="{Binding Expenses}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="10" Margin="5" CornerRadius="10">
-                        <StackLayout>
-                            <Label TextColor="Black" Text="{Binding Name}" FontSize="14" />
-                            <Label TextColor="Black" Text="{Binding Amount}" FontSize="14" />
-                        </StackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+            <CollectionView ItemsSource="{Binding Expenses}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5" CornerRadius="10">
+                            <StackLayout>
+                                <Label TextColor="Black" Text="{Binding Name}" FontSize="14" />
+                                <Label TextColor="Black" Text="{Binding Amount}" FontSize="14" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

@@ -98,8 +98,10 @@ namespace Parichko.ViewModels
                         //проверка за категорията
                         await MainThread.InvokeOnMainThreadAsync(() =>
                         {
-                            Shell.Current.DisplayAlert("Грешка", name, newCat.Id.ToString());
+                            Shell.Current.DisplayAlert("Готово", name, newCat.Id.ToString());
                         });
+
+                        Categories.Add(newCat);
                         return true;
                     }
                     catch (Exception ex)

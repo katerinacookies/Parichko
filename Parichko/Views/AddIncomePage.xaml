@@ -39,22 +39,35 @@
                            BackgroundColor="White"
                            HeightRequest="60">
                         <Grid
-                            ColumnDefinitions="*,*"
+                            ColumnDefinitions="*,*,*,*"
                             RowDefinitions="*,*">
-                            <Label 
+                            <Image
+                                Source="income.png"
+                                HeightRequest="40"
+                                WidthRequest="40"
                                 Grid.Column="0"
+                                />
+                            <Label 
+                                Grid.Column="1"
                                 Grid.Row="0"
                                 TextColor="Black" 
                                 Text="{Binding Name}" 
-                                FontSize="14" />
+                                FontSize="18" />
                             <Label 
-                                Grid.Column="0"
+                                Grid.Column="1"
                                 Grid.Row="1"
                                 TextColor="Black" 
-                                Text="{Binding Amount}"
+                                Text="{Binding Date}"
                                 FontSize="14" />
+                            <Label 
+                                Grid.Column="2"
+                                TextColor="Black" 
+                                Text="{Binding Amount}"
+                                FontAttributes="Bold"
+                                HorizontalTextAlignment="End"
+                                FontSize="18" />
                             <Image
-                                Grid.Column="1"
+                                Grid.Column="3"
                                 Source="heartbreak.png"
                                 HeightRequest="35"
                                 WidthRequest="35"

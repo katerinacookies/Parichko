@@ -91,7 +91,7 @@ namespace Parichko.Data
 
             modelBuilder.Entity<UserGoal>()
                 .HasOne(g => g.Goal)
-                .WithMany(u => u.UGoals)
+                .WithMany(g => g.Savers)
                 .HasForeignKey(g => g.GoalId);
             modelBuilder.Entity<UserGoal>()
                 .HasOne(g => g.UserProfile)

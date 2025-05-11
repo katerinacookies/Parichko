@@ -20,8 +20,8 @@ namespace Parichko.Models
         public string Color { get; set; }
         public bool Starred { get; set; } = false;
 
-        //дали да е списък с потребителя, или празен списък (само за приятелите му)
-        public IList<UserProfile> Savers { get; set; } = new List<UserProfile>();
+        //public IList<UserProfile> Savers { get; set; } = new List<UserProfile>();
         public IList<UserGoal> UGoals { get; set; } = new List<UserGoal>();
+        public ICollection<UserGoal> Savers { get; set; } = new List<UserGoal>();
     }
 }

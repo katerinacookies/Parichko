@@ -25,9 +25,6 @@ namespace Parichko.Models
         public IList<UserProfile> Friends { get; set; } = new List<UserProfile>();
         public IList<UserGoal> Goals { get; }
 
-        //realm user id za associaciq
-        //public string UserId { get; set; } = string.Empty;
-
         //настройки за достъпност
         public int FontSize { get; set; } = 14; //po podrazbirane
         public bool HighContrast { get; set; } = false;

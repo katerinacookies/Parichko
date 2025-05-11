@@ -109,6 +109,8 @@ namespace Parichko.ViewModels
                     {
                         await _context.SaveChangesAsync();
                         categoryFromDb.Expenses.Add(newExpense);
+
+                        Expenses.Add(newExpense);
                         return true;
                     }
                     catch (Exception ex)

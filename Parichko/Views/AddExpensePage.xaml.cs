@@ -30,20 +30,21 @@ public partial class AddExpensePage : ContentPage
     }
     private void OnItemSelected(object sender, SelectionChangedEventArgs e)
     {
+        System.Diagnostics.Debug.WriteLine("SelectionChanged fired!");
         //var vm = BindingContext as DropdownViewModel;
-        if (e.CurrentSelection.FirstOrDefault() is string selectedItem)
+        if (e.CurrentSelection.FirstOrDefault() is Category selectedItem)
         {
-            chosenCat = selectedItem;
+            chosenCat = selectedItem.Name.ToString();
             //chosenCat = Convert.ToString(categoryDropdown.SelectedItem);
             categoryDropdown.IsVisible = false;
 
             //
             categoryDropdown.SelectedItem = null;
-
-
-            //vm.SelectedCategory = selected;
-            //categoryDropdown.IsVisible = false;
         }
+    }
+    private void OnItemTapped(object sender, EventArgs e)
+    {
+        System.Diagnostics.Debug.WriteLine("Item was tapped");
     }
     private async void OnAddClicked(object sender, EventArgs e)
     {

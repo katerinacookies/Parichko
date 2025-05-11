@@ -54,5 +54,18 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <!--<CollectionView ItemsSource="{Binding Goals}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" CornerRadius="10">
+                        <StackLayout>
+                            <Label TextColor="Black" Text="{Binding Name}" FontSize="14" />
+                            <Label TextColor="Black" Text="{Binding GoalAmount}" FontSize="14" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>-->
     </VerticalStackLayout>
 </ContentPage>

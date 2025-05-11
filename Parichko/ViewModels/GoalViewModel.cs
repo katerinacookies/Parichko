@@ -4,6 +4,7 @@ using Parichko.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Parichko.ViewModels
         }
         public async Task<bool> LoadGoalsAsync()
         {
-            try
+            /*try
             {
                 List<UserGoal> userGoals = new List<UserGoal>();
                 userGoals = await _context.UserGoals
@@ -51,22 +52,45 @@ namespace Parichko.ViewModels
                     Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
                 });
                 return false;
+            }*/
+            try
+            {
+                int userId = Preferences.Get("LoggedUserId", 0);
+                Debug.WriteLine($"[LoadGoalsAsync] LoggedUserId = {userId}");
+
+                var userGoals = await _context.UserGoals
+                    .Where(ug => ug.UserProfileId == userId)
+                    .Include(ug => ug.Goal)
+                    .ToListAsync();
+
+                Debug.WriteLine($"[LoadGoalsAsync] userGoals.Count = {userGoals.Count}");
+
+                Goals.Clear();
+                foreach (var ug in userGoals)
+                {
+                    if (ug.Goal != null)
+                    {
+                        Goals.Add(ug.Goal);
+                        Debug.WriteLine($"[LoadGoalsAsync] Цел: {ug.Goal.Name}, ID: {ug.Goal.Id}");
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"[LoadGoalsAsync] null Goal при UserGoal с GoalId: {ug.GoalId}");
+                    }
+                }
+
+                Debug.WriteLine($"[LoadGoalsAsync] Goals.Count = {Goals.Count}");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                    Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре"));
+                return false;
             }
         }
 
-        /*
-         modelBuilder.Entity<UserGoal>()
-              .HasKey(ug => new { ug.GoalId, ug.UserProfileId });
-
-          modelBuilder.Entity<UserGoal>()
-              .HasOne(g => g.Goal)
-              .WithMany(g => g.Savers)
-              .HasForeignKey(g => g.GoalId);
-          modelBuilder.Entity<UserGoal>()
-              .HasOne(g => g.UserProfile)
-              .WithMany(u => u.Goals)
-              .HasForeignKey(g => g.UserProfileId);
-      }*/
+        
         public async Task<bool> AddGoalsAsync(string name, decimal amount, string icon, string color)
         {
             try
@@ -75,37 +99,19 @@ namespace Parichko.ViewModels
                 {
                     await MainThread.InvokeOnMainThreadAsync(() =>
                     {
-                        Shell.Current.DisplayAlert("Грешка", "Контекстът е нъл.", "Добре");
+                        Shell.Current.DisplayAlert("Грешка", "Контекстът е null.", "Добре");
                     });
                     return false;
                 }
                 name = name.Trim();
                 icon = icon.Trim();
                 color = color.Trim();
-                
 
-                if (string.IsNullOrWhiteSpace(icon))
+
+                if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(icon) || string.IsNullOrWhiteSpace(color))
                 {
                     await MainThread.InvokeOnMainThreadAsync(() =>
-                    {
-                        Shell.Current.DisplayAlert("Грешка", "Попълнете всички полета!", "Добре");
-                    });
-                    return false;
-                }
-                if (string.IsNullOrWhiteSpace(color))
-                {
-                    await MainThread.InvokeOnMainThreadAsync(() =>
-                    {
-                        Shell.Current.DisplayAlert("Грешка", "Попълнете всички полета!", "Добре");
-                    });
-                    return false;
-                }
-                if (string.IsNullOrWhiteSpace(name))
-                {
-                    await MainThread.InvokeOnMainThreadAsync(() =>
-                    {
-                        Shell.Current.DisplayAlert("Грешка", "Попълнете всички полета!", "Добре");
-                    });
+                        Shell.Current.DisplayAlert("Грешка", "Попълнете всички полета!", "Добре"));
                     return false;
                 }
 
@@ -115,55 +121,55 @@ namespace Parichko.ViewModels
                     Goal newGoal = new Goal();
                     newGoal.Name = name;
                     newGoal.GoalAmount = amount;
-
-
-                    var currentUser = await Task.Run(async () =>
-                        _context.UserProfiles.FirstOrDefault(up => up.Id == Preferences.Get("LoggedUserId", 0)));
-                    newGoal.Savers.Add(currentUser);
-
-                    _context.Goals.Add(newGoal);
-
-                    UserGoal ug = new UserGoal();
-                    ug.UserProfileId = Preferences.Get("LoggedUserId", 0);
-                    ug.GoalId = newGoal.Id;
-
-                    _context.UserGoals.Add(ug);
+                    newGoal.SavedAmount = 0;
+                    newGoal.SavedPercent = 0;
+                    newGoal.IconName = icon;
+                    newGoal.Starred = false;
+                    newGoal.Color = color;
 
                     try
                     {
-                        _context.SaveChanges();
-                        System.Diagnostics.Debug.WriteLine("Целта е добавена!");
-                        return true;
+                        _context.Goals.Add(newGoal);
+                        await _context.SaveChangesAsync();
                     }
-                    catch (Exception ex)
+                    catch(Exception ex)
                     {
                         await MainThread.InvokeOnMainThreadAsync(() =>
-                        {
-                            Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
-                        });
-                        if (ex.InnerException != null)
-                        {
-                            await MainThread.InvokeOnMainThreadAsync(() =>
-                            {
-                                Shell.Current.DisplayAlert("Грешка", ex.InnerException.Message, "Добре");
-                            });
-                            if (ex.InnerException.InnerException != null)
-                            {
-                                await MainThread.InvokeOnMainThreadAsync(() =>
-                                {
-                                    Shell.Current.DisplayAlert("Грешка", ex.InnerException.InnerException.Message, "Добре");
-                                });
-                                if (ex.InnerException.InnerException.InnerException != null)
-                                {
-                                    await MainThread.InvokeOnMainThreadAsync(() =>
-                                    {
-                                        Shell.Current.DisplayAlert("Грешка", ex.InnerException.InnerException.InnerException.Message, "Добре");
-                                    });
-                                }
-                            }
-                        }
+                        Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре"));
                         return false;
                     }
+
+                    int userId = Preferences.Get("LoggedUserId", 0);
+                    var currentUser = await _context.UserProfiles.FindAsync(userId);
+                    //var currentUser = await _context.UserProfiles.FirstOrDefault(up => up.Id == userId);
+                    if (currentUser == null)
+                    {
+                        await MainThread.InvokeOnMainThreadAsync(() =>
+                            Shell.Current.DisplayAlert("Грешка", "Не е намерен текущият потребител!", "Добре"));
+                        return false;
+                    }
+
+                    UserGoal newUG = new UserGoal();
+                    newUG.GoalId = newGoal.Id;
+                    newUG.UserProfileId = userId;
+                    newUG.Goal = newGoal;
+                    newUG.UserProfile = currentUser;
+
+                    try
+                    {
+                        _context.UserGoals.Add(newUG);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch(Exception ex)
+                    {
+                        await MainThread.InvokeOnMainThreadAsync(() =>
+                        Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре"));
+                        return false;
+                    }
+
+                    //обновява UI
+                    Goals.Add(newGoal);
+                    return true;
                 });
                 return true;
             }
