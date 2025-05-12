@@ -30,15 +30,14 @@
                     <!-- Бутон за падащо меню
                 Text="{Binding SelectedItemName}" -->
                     <Button 
-                    Text="Категория"
-                    TextColor="{StaticResource Primary}"
-                    Clicked="OpenPicker"
-                    ImageSource="{Binding SelectedItemImage}"
-                    ContentLayout="Top,10"
-                    BackgroundColor="White" 
-                    Padding="10" 
-                    CornerRadius="20"
-                    HeightRequest="50"/>
+                        Text="Категория"
+                        TextColor="{StaticResource Primary}"
+                        ContentLayout="Top,10"
+                        BackgroundColor="White" 
+                        Clicked="OpenPicker"
+                        Padding="10" 
+                        CornerRadius="20"
+                        HeightRequest="50"/>
 
                     <!-- Modal view, който играе ролята на падащо меню -->
                     <!--<ContentView 
@@ -66,38 +65,19 @@
                         </CollectionView>
                     
                 </ContentView>>-->
-                    <!--<Picker
-                    x:Name="CategoryDropdown"
-                    Title="Категория"
-                    ItemsSource="{Binding CategoryNames}"
-                    SelectedItem="{Binding SelectedCategory}">
-                    
-                </Picker>-->
-
-
 
                     <CollectionView 
-                    x:Name="categoryDropdown"
-                    IsVisible="true"
-                    SelectionMode="Single"
-                    SelectionChanged="OnItemSelected"
-                    HeightRequest="200"
-                    SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+                        x:Name="categoryDropdown"
+                        IsVisible="False"
+                        SelectionMode="Single"
+                        SelectionChanged="OnItemSelected">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame 
-                                   BackgroundColor="Black"
-                                   BorderColor="Red"
-                                   CornerRadius="30">
-                                    <Label
+                                <Label
                                     Text="{Binding Name}"
                                     TextColor="{StaticResource Primary}"
                                     x:Name="CatLabel">
-                                        <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="OnItemTapped"/>
-                                        </Label.GestureRecognizers>
-                                    </Label>
-                                </Frame>
+                                </Label>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

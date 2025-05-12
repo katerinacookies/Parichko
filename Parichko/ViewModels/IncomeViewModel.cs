@@ -94,6 +94,7 @@ namespace Parichko.ViewModels
                     {
                         _context.SaveChanges();
                         System.Diagnostics.Debug.WriteLine("Приходът е добавен!");
+                        Incomes.Add(newIncome);
                         return true;
                     }
                     catch (Exception ex)

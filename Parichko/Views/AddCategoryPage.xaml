@@ -47,21 +47,23 @@
                             RowDefinitions="*">
                             <Image
                                 Grid.Column="0"
-                                
+                                Source="{Binding IconName}"
                                 HeightRequest="100"
                                 WidthRequest="100"
+                                HorizontalOptions="Start"
                                 />
                             <Label 
                                 Grid.Column="1"
                                 TextColor="Black" 
                                 VerticalTextAlignment="Center"
                                 Text="{Binding Name}" 
-                                FontSize="14" />
+                                FontSize="18" />
                             <Image
                                 Grid.Column="2"
                                 Source="heartbreak.png"
                                 HeightRequest="40"
                                 WidthRequest="40"
+                                HorizontalOptions="End"
                                 Margin="0"/>
                         </Grid>
                     </Frame>
