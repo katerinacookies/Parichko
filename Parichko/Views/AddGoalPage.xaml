@@ -58,25 +58,31 @@
                                 Grid.Column="0"
                                 Source="{Binding IconName}"
                                 WidthRequest="40"
-                                HeightRequest="40"/>
+                                HeightRequest="40"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"/>
                             <Label 
                                 Grid.Column="1"
                                 Grid.Row="0"
                                 TextColor="Black" 
                                 Text="{Binding Name}" 
                                 FontSize="18" 
-                                FontAttributes="Bold"/>
+                                FontAttributes="Bold"
+                                HorizontalTextAlignment="Start"/>
                             <Label 
                                 Grid.Column="1"
                                 Grid.Row="1"
                                 TextColor="Black" 
                                 Text="{Binding GoalAmount}" 
-                                FontSize="14" />
+                                FontSize="14"
+                                HorizontalTextAlignment="Start"/>
                             <Image
                                 Grid.Column="2"
                                 Source="heartbreak.png"
                                 HeightRequest="40"
-                                WidthRequest="40"/>
+                                WidthRequest="40"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center"/>
                             <!--<Label
                                 Grid.Column="2"
                                 TextColor="DarkGray"

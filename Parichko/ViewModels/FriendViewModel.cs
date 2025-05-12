@@ -1,11 +1,14 @@
 ﻿using DataAccess.Models;
+using Kotlin.Properties;
 using Microsoft.EntityFrameworkCore;
 using Parichko.Data;
 using Parichko.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,17 +19,39 @@ namespace Parichko.ViewModels
         private readonly ParichkoDbContext _context;
         public ObservableCollection<FriendRequest> FriendRequests { get; set; } = new();
         public ObservableCollection<UserProfile> Friends { get; set; } = new();
+        private int friendCount;
+        public int FriendCount
+        {
+            get => friendCount;
+            set
+            {
+                if (friendCount != value)
+                {
+                    friendCount = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public FriendViewModel(ParichkoDbContext context)
         {
             _context = context;
+            Friends.CollectionChanged += (s, e) =>
+            {
+                FriendCount = Friends.Count;
+            };
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
         public async Task<bool> LoadRequestsAsync()
         {
             try
             {
                 var requestsFromDb = _context.FriendRequests
+                    .Include(r => r.FromUser.Login)
                     .Include(r => r.FromUser)
                     .Where(r => r.ToUserId == Preferences.Get("LoggedUserId", 0) && r.Status == DataAccess.Recources.Status.Pending)
                     .ToList();

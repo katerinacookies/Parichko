@@ -13,11 +13,13 @@
             <Frame
                 Grid.Column="0"
                 BorderColor="Transparent"
-                HorizontalOptions="Start">
+                HorizontalOptions="Start"
+                Padding="0, 10">
                 <Button
                     x:Name="BackBtn"
                     Style="{StaticResource BackBtn}"
-                    Clicked="OnBackClicked"/>
+                    Clicked="OnBackClicked"
+                    HorizontalOptions="Start"/>
             </Frame>
             <Frame
                 Grid.Column="1"
@@ -34,15 +36,22 @@
             RowDefinitions="*">
             <Frame
                 Grid.Column="0"
-                BorderColor="Transparent">
+                BorderColor="Transparent"
+                Padding="0, 20">
                 <Label
-                    Text="Приятели"/>
+                    Text="Приятели"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Start"/>
             </Frame>
             <Frame
                 Grid.Column="1"
                 BorderColor="Transparent">
                 <Label
-                    Text="0"
+                    Text="{Binding FriendCount}"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    TextColor="DarkGray"
                     HorizontalTextAlignment="End"/>
             </Frame>
         </Grid>
@@ -50,6 +59,8 @@
             BackgroundColor="{StaticResource Cutesyblue}"
             BorderColor="Transparent"
             Padding="10"
+            CornerRadius="30"
+            HeightRequest="65"
             >
             <Grid
                 ColumnDefinitions="*,*"
@@ -69,7 +80,10 @@
             </Grid>
         </Frame>
         <Label
-            Text="Покани за приятелство"/>
+            Margin="0, 20, 0, 0"
+            Text="Покани за приятелство"
+            FontSize="22"
+            FontAttributes="Bold"/>
         <CollectionView ItemsSource="{Binding FriendRequests}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -82,9 +96,10 @@
                             RowDefinitions="*,*">
                             <Image
                                 Grid.Column="0"
-                                Source="parichkoadvice.png"
+                                Source="profileicon.png"
                                 HeightRequest="40"
                                 WidthRequest="40"
+                                HorizontalOptions="Start"
                                  />
                             <Label 
                                 Grid.Column="1"
@@ -95,13 +110,22 @@
                                 Grid.Column="1"
                                 Grid.Row="1"
                                 TextColor="Black" 
-                                Text="{Binding FromUser.Name}" />
+                                Text="{Binding FromUser.DisplayName}" />
+                            <Image
+                                Grid.Column="2"
+                                Source="heart.png"
+                                HeightRequest="40"
+                                WidthRequest="40"
+                                Margin="0"
+                                HorizontalOptions="End"
+                                />
                             <Image
                                 Grid.Column="3"
                                 Source="heartbreak.png"
                                 HeightRequest="40"
                                 WidthRequest="40"
-                                Margin="0"/>
+                                Margin="0"
+                                HorizontalOptions="End"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>
@@ -109,7 +133,10 @@
         </CollectionView>
         <Label
             Text="Приятели"
-            HorizontalTextAlignment="Start"/>
+            HorizontalTextAlignment="Start"
+            FontSize="22"
+            FontAttributes="Bold"
+            Margin="0, 20, 0, 0"/>
         <CollectionView>
             
         </CollectionView>
