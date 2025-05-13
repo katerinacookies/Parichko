@@ -7,7 +7,7 @@
     
     <VerticalStackLayout
         Padding="20, 10, 20, 10">
-        <Grid>
+        
             <Frame
             Style="{StaticResource AddPageFrame}">
                 <VerticalStackLayout>
@@ -31,8 +31,7 @@
                 Text="{Binding SelectedItemName}" -->
                     <Button 
                         Text="Категория"
-                        TextColor="{StaticResource Primary}"
-                        ContentLayout="Top,10"
+                        TextColor="{StaticResource Primary}" 
                         BackgroundColor="White" 
                         Clicked="OpenPicker"
                         Padding="10" 
@@ -100,6 +99,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </Grid>
+       
     </VerticalStackLayout>
 </ContentPage>

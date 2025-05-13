@@ -88,20 +88,28 @@ namespace Parichko.ViewModels
 
                 await Task.Run(async () =>
                 {
-                    /*var newExpense = new Expense
+                    int currentUserId = Preferences.Get("LoggedUserId", 0);
+
+                    var currentUser = await _context.UserProfiles
+                        .FirstOrDefaultAsync(up => up.Id == currentUserId);
+
+                    if(currentUser == null)
                     {
-                        Name = "Giros",
-                        Amount = 3.40M,
-                        CategoryId = 2,
-                        Category = categoryFromDb
-                    };*/
-                    var newExpense = new Expense
-                    {
-                        Name = name,
-                        Amount = amount,
-                        CategoryId = categoryFromDb.Id,
-                        Category = categoryFromDb
-                    };
+                        await MainThread.InvokeOnMainThreadAsync(() =>
+                        {
+                            Shell.Current.DisplayAlert("Грешка", "Текущият потребител не може да бъде намерен.", "Добре");
+                        });
+                        return false;
+                    }
+                    var newExpense = new Expense();
+
+                    newExpense.Name = name;
+                    newExpense.Amount = amount;
+                    newExpense.CategoryId = categoryFromDb.Id;
+                    newExpense.Category = categoryFromDb;
+                    newExpense.UserProfile = currentUser;
+                    newExpense.UserProfileId = currentUserId;
+                   
 
                     await _context.Expenses.AddAsync(newExpense);
 
