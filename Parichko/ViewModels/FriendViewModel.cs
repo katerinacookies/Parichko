@@ -1,5 +1,5 @@
 ﻿using DataAccess.Models;
-using Kotlin.Properties;
+//using Kotlin.Properties;
 using Microsoft.EntityFrameworkCore;
 using Parichko.Data;
 using Parichko.Models;
@@ -122,7 +122,18 @@ namespace Parichko.ViewModels
 
                 int currentUserId = Preferences.Get("LoggedUserId", 0);
 
-                var currentUser = await _context.UserProfiles.FirstOrDefaultAsync(u => u.Id == currentUserId);
+                var currentUser = await _context.UserProfiles
+                    .Include (u => u.Login)
+                    .FirstOrDefaultAsync(u => u.Id == currentUserId);
+
+                if(currentUser == null)
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("Грешка", "Не е намерен текущият потребител.", "Добре");
+                    });
+                    return false;
+                }
 
                 if (email == currentUser.Login.Email)
                 {
@@ -170,7 +181,7 @@ namespace Parichko.ViewModels
 
                     await MainThread.InvokeOnMainThreadAsync(() =>
                     {
-                        Shell.Current.DisplayAlert("Успех", "Май стана", "Добре");
+                        Shell.Current.DisplayAlert("Успех", "Поканата е изпратена!", "Добре");
                     });
 
                     return true;
@@ -204,6 +215,165 @@ namespace Parichko.ViewModels
                         Shell.Current.DisplayAlert("Грешка", ex.InnerException.Message, "Добре");
                     });
                 }
+                return false;
+            }
+        }
+
+        //Отхвърляне на покана
+        public async Task<bool> DenyRequest(int fromUserId)
+        {
+            int currentUserId = Preferences.Get("LoggedUserId", 0);
+
+            var currentRequest = await _context.FriendRequests
+                    .FirstOrDefaultAsync(fr => fr.ToUser.Id == currentUserId && fr.FromUser.Id == fromUserId);
+
+            if(currentRequest == null)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", "Няма такава покана.", "Добре");
+                });
+                return false;
+            }
+
+            try
+            {
+                FriendRequests.Remove(currentRequest);
+                var currentUser = await _context.UserProfiles
+                    .FirstOrDefaultAsync(up => up.Id == currentUserId);
+                if(currentUser == null)
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("Грешка", "Няма такъв потребител.", "Добре");
+                    });
+                    return false;
+                }
+
+                currentUser.FriendRequests.Remove(currentRequest);
+
+                _context.FriendRequests.Remove(currentRequest);
+                await _context.SaveChangesAsync();
+
+                
+                return true;
+            }
+            catch(Exception ex)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                });
+                return false;
+            }
+        }
+
+        //Приемане на покана
+        public async Task<bool> AcceptRequest(int fromUserId)
+        {
+            int currentUserId = Preferences.Get("LoggedUserId", 0);
+
+            var currentRequest = await _context.FriendRequests
+                    .FirstOrDefaultAsync(fr => fr.ToUser.Id == currentUserId && fr.FromUser.Id == fromUserId);
+
+            if (currentRequest == null)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", "Няма такава покана.", "Добре");
+                });
+                return false;
+            }
+
+            try
+            {
+                var currentUser = await _context.UserProfiles
+                    .FirstOrDefaultAsync(up => up.Id == currentUserId);
+                if (currentUser == null)
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("Грешка", "Няма такъв потребител.", "Добре");
+                    });
+                    return false;
+                }
+
+                var fromUser = await _context.UserProfiles
+                    .FirstOrDefaultAsync(up => up.Id == fromUserId);
+
+                if(fromUser == null)
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("Грешка", "Няма такъв потребител..", "Добре");
+                    });
+                    return false;
+                }
+
+                currentUser.Friends.Add(fromUser);
+                fromUser.Friends.Add(currentUser);
+
+                FriendRequests.Remove(currentRequest);
+                Friends.Add(fromUser);
+                currentUser.FriendRequests.Remove(currentRequest);
+
+                _context.FriendRequests.Remove(currentRequest);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                });
+                return false;
+            }
+        }
+
+        //
+        public async Task<bool> RemoveFriend(int friendId)
+        {
+            int currentUserId = Preferences.Get("LoggedUserId", 0);
+
+            var friend = await _context.UserProfiles
+                    .FirstOrDefaultAsync(up => up.Id == friendId);
+
+            if (friend == null)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", "Няма такъв потребител.", "Добре");
+                });
+                return false;
+            }
+
+            try
+            {
+                Friends.Remove(friend);
+                var currentUser = await _context.UserProfiles
+                    .FirstOrDefaultAsync(up => up.Id == currentUserId);
+                if (currentUser == null)
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                    {
+                        Shell.Current.DisplayAlert("Грешка", "Няма такъв потребител.", "Добре");
+                    });
+                    return false;
+                }
+
+                currentUser.Friends.Remove(friend);
+                friend.Friends.Remove(currentUser);
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                });
                 return false;
             }
         }

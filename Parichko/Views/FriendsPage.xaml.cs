@@ -1,3 +1,5 @@
+using DataAccess.Models;
+using Parichko.Models;
 using Parichko.ViewModels;
 using System.Globalization;
 
@@ -28,9 +30,35 @@ public partial class FriendsPage : ContentPage
     {
         string email = EmailEntry.Text.ToString();
         await _viewModel.AddFriend(email);
+        EmailEntry.Text = string.Empty;
     }
     public async void OnBackClicked(object sender, EventArgs e)
 	{
 		await Shell.Current.GoToAsync("///ProfilePage");
 	}
+
+    public async void OnDenyRequestClicked(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.BindingContext is FriendRequest request)
+        {
+            int fromUserId = request.FromUser.Id;
+            await _viewModel.DenyRequest(fromUserId);
+        }
+    }
+    public async void OnAcceptRequestClicked(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.BindingContext is FriendRequest request)
+        {
+            int fromUserId = request.FromUser.Id;
+            await _viewModel.AcceptRequest(fromUserId);
+        }
+    }
+    public async void OnRemoveFriendClicked(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.BindingContext is UserProfile friend)
+        {
+            int friendId = friend.Id;
+            await _viewModel.RemoveFriend(friendId);
+        }
+    }
 }

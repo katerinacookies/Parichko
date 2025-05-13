@@ -7,7 +7,7 @@
     <VerticalStackLayout
         BackgroundColor="#efecec"
         Padding="30, 10">
-        <Image Source="icon.png"
+        <Image Source="profileicon.png"
                WidthRequest="100"
                HeightRequest="100"
                Margin="30">
