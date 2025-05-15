@@ -18,7 +18,7 @@
             <ShellContent ContentTemplate="{DataTemplate v:GoalsPage}" Route="GoalsPage"/>
         </Tab>
         <Tab 
-            Icon="addicon.png">
+            Icon="addiconcut.png">
             <ShellContent Title="Разходи" ContentTemplate="{DataTemplate v:AddExpensePage}" Route="AddExpensePage"/>
             <ShellContent Title="Приходи" ContentTemplate="{DataTemplate v:AddIncomePage}" Route="AddIncomePage"/>
             <ShellContent Title="Цели" ContentTemplate="{DataTemplate v:AddGoalPage}" Route="AddGoalPage"/>

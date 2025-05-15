@@ -15,8 +15,11 @@ namespace Parichko.ViewModels
         private readonly ParichkoDbContext _context;
         public ObservableCollection<Expense> Expenses { get; set; } = new();
         public ObservableCollection<Category> Categories { get; set; } = new();
-        
+        public ObservableCollection<Expense> ExpensesForChart { get; set; }
+        public ExpenseViewModel()
+        {
 
+        }
         public ExpenseViewModel(ParichkoDbContext context)
         {
             _context = context;
@@ -201,6 +204,48 @@ namespace Parichko.ViewModels
             {
                 return false;
             }
+        }
+
+        private async void LoadWeeklyChart()
+        {
+            var allExpenses = Expenses.ToList();
+
+            var startOfWeek = GetStartOfWeek();
+            var endOfWeek = startOfWeek.AddDays(7);
+
+            var weeklyExpenses = allExpenses
+                .Where(e => e.Date >= startOfWeek && e.Date < endOfWeek)
+                .ToList();
+
+            var grouped = allExpenses
+                .Where(e => e.Date >= startOfWeek && e.Date < endOfWeek)
+                .GroupBy(e => e.Date.DayOfWeek)
+                .OrderBy(g => g.Key)
+                .Select(g => new Expense
+                {
+                    Date = DateTimeOffset.Now, // just a placeholder
+                    Amount = g.Sum(x => x.Amount),
+                    // Use Id to store day of week order, optional
+                    Id = (int)g.Key
+                });
+
+            // Use Display-friendly version of the day as the tag
+            ExpensesForChart = new ObservableCollection<Expense>(
+                grouped.Select(e =>
+                {
+                    //e.Name = TranslateDay((DayOfWeek)e.Id); // You'd have to add a Name prop to Expense
+                    return e;
+                }));
+
+            //OnPropertyChanged(nameof(ExpensesForChart));
+        }
+
+        private DateTimeOffset GetStartOfWeek()
+        {
+            var now = DateTimeOffset.Now;
+            int diff = (7 + (now.DayOfWeek - DayOfWeek.Monday)) % 7;
+            var startOfWeek = now.AddDays(-diff);
+            return startOfWeek.Date; // strips time, keeps date only
         }
     }
 }

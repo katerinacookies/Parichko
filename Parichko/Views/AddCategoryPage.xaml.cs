@@ -7,6 +7,7 @@ namespace Parichko.Views;
 public partial class AddCategoryPage : ContentPage
 {
 	private readonly CategoryViewModel _viewModel;
+    private string chosenIcon;
 	public AddCategoryPage(CategoryViewModel viewModel)
 	{
 		InitializeComponent();
@@ -22,7 +23,12 @@ public partial class AddCategoryPage : ContentPage
     {
         string catName = CatnameEntry.Text.ToString();
         string catColor = ColorEntry.Text.ToString();
-        string catIcon = IconEntry.Text.ToString();
-        await _viewModel.AddCategoryAsync(catName, catColor, catIcon);
+        await _viewModel.AddCategoryAsync(catName, catColor, chosenIcon);
     }
+    private void OpenPicker(object sender, EventArgs e)
+    {
+        CategoryIcons.IsVisible = !CategoryIcons.IsVisible;
+    }
+
+    //Иконка на категория е натисната
 }

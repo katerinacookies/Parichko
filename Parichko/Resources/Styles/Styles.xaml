@@ -162,6 +162,12 @@
         <Setter Property="WidthRequest" Value="330"/>
         <Setter Property="HeightRequest" Value="50"/>
     </Style>
+    <Style TargetType="Button" x:Key="CatButton">
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="CornerRadius" Value="30"/>
+        <Setter Property="WidthRequest" Value="90"/>
+        <Setter Property="HeightRequest" Value="90"/>
+    </Style>
 
     <!--CollectionView Styles-->
     <Style TargetType="Frame" x:Key="EntityFrame">
@@ -171,6 +177,9 @@
         <Setter Property="BorderColor" Value="Transparent"/>        
         <Setter Property="HeightRequest" Value="70"/>        
     </Style>
+    
+    
+  
 
     <Style TargetType="CheckBox">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
