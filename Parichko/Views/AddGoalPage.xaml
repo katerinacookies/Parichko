@@ -4,7 +4,8 @@
              x:Class="Parichko.Views.AddGoalPage"
              Title="AddGoalPage"
              BackgroundColor="#efecec">
-    <VerticalStackLayout
+    <ScrollView>
+        <VerticalStackLayout
         Padding="20, 10, 20, 10">
         <Frame
             Style="{StaticResource AddPageFrame}">
@@ -23,19 +24,165 @@
                         x:Name="GoalAmountEntry"
                         Style="{StaticResource AddEntry}"/>
                 </Frame>
+
+                <Button 
+                    Text="Иконка"
+                    TextColor="{StaticResource Primary}" 
+                    Clicked="OpenPicker"
+                    BackgroundColor="White"
+                    CornerRadius="30"
+                    HeightRequest="50"/>
+                
                 <Frame
-                    Style="{StaticResource AddEntryFrame}">
-                    <Entry
-                        Placeholder="Иконка"
-                        x:Name="IconnameEntry"
-                        Style="{StaticResource AddEntry}"/>
-                </Frame>
-                <Frame
-                    Style="{StaticResource AddEntryFrame}">
-                    <Entry
-                        Placeholder="Цвят"
-                        x:Name="GoalColorEntry"
-                        Style="{StaticResource AddEntry}"/>
+                    x:Name="GoalIcons"
+                    Padding="0"
+                    IsVisible="False"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent">
+                    <Grid
+                        ColumnDefinitions="*,*,*,*"
+                        RowDefinitions="*,*,*,*,*">
+                        <Button
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            ImageSource="healthgoal.png"
+                            Clicked="OnFoodClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            ImageSource="retirementgoal.png"
+                            Clicked="OnTeaClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="2"
+                            Grid.Row="0"
+                            ImageSource="groceriescat.png"
+                            Clicked="OnGroceriesClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="3"
+                            Grid.Row="0"
+                            ImageSource="sofagoal.png"
+                            Clicked="OnCleanClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            ImageSource="travelgoal.png"
+                            Clicked="OnMedsClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            ImageSource="presentscat.png"
+                            Clicked="OnPresentsClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="2"
+                            Grid.Row="1"
+                            ImageSource="moneygoal.png"
+                            Clicked="OnNailsClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="3"
+                            Grid.Row="1"
+                            ImageSource="ticketscat.png"
+                            Clicked="OnTicketsClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="0"
+                            Grid.Row="2"
+                            ImageSource="housegoal.png"
+                            Clicked="OnBooksClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            ImageSource="schoolcat.png"
+                            Clicked="OnSchoolClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="2"
+                            Grid.Row="2"
+                            ImageSource="petcat.png"
+                            Clicked="OnPetClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="3"
+                            Grid.Row="2"
+                            ImageSource="charitygoal.png"
+                            Clicked="OnSportsClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="0"
+                            Grid.Row="3"
+                            ImageSource="techcat.png"
+                            Clicked="OnTechClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="1"
+                            Grid.Row="3"
+                            ImageSource="transportcat.png"
+                            Clicked="OnTransportClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="2"
+                            Grid.Row="3"
+                            ImageSource="clothescat.png"
+                            Clicked="OnClothesClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="3"
+                            Grid.Row="3"
+                            ImageSource="businessgoal.png"
+                            Clicked="OnWifiClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="0"
+                            Grid.Row="4"
+                            ImageSource="babycat.png"
+                            Clicked="OnBabyClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="1"
+                            Grid.Row="4"
+                            ImageSource="weddinggoal.png"
+                            Clicked="OnJewelsClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="2"
+                            Grid.Row="4"
+                            ImageSource="gamegoal.png"
+                            Clicked="OnUnderwearClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                        <Button
+                            Grid.Column="3"
+                            Grid.Row="4"
+                            ImageSource="otherscat.png"
+                            Clicked="OnOthersClicked"
+                            Style="{DynamicResource CatButton}"
+                            />
+                    </Grid>
                 </Frame>
                 <Button
                     Text="Добави"
@@ -107,4 +254,5 @@
             </CollectionView.ItemTemplate>
         </CollectionView>-->
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

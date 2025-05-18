@@ -167,5 +167,44 @@ namespace Parichko.ViewModels
                 return false;
             }
         }
+
+        public async Task<bool> DeleteCat(int catId)
+        { 
+            var currentCat = await _context.Categories
+                    .FirstOrDefaultAsync(c => c.Id == catId);
+
+            if (currentCat == null)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", "Няма такава категория.", "Добре");
+                });
+                return false;
+            }
+
+            try
+            {
+                Categories.Remove(currentCat);
+                var expenses = await _context.Expenses
+                    .Where(e => e.CategoryId == catId)
+                    .ToListAsync();
+
+                foreach (var expense in expenses)
+                {
+                    _context.Expenses.Remove(expense);
+                }
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                });
+                return false;
+            }
+        }
     }
 }
