@@ -46,14 +46,14 @@
                             Grid.Column="0"
                             Grid.Row="0"
                             ImageSource="healthgoal.png"
-                            Clicked="OnFoodClicked"
+                            Clicked="OnHealthClicked"
                             Style="{DynamicResource CatButton}"
                             />
                         <Button
                             Grid.Column="1"
                             Grid.Row="0"
                             ImageSource="retirementgoal.png"
-                            Clicked="OnTeaClicked"
+                            Clicked="OnRetirementClicked"
                             Style="{DynamicResource CatButton}"
                             />
                         <Button
@@ -67,14 +67,14 @@
                             Grid.Column="3"
                             Grid.Row="0"
                             ImageSource="sofagoal.png"
-                            Clicked="OnCleanClicked"
+                            Clicked="OnSofaClicked"
                             Style="{DynamicResource CatButton}"
                             />
                         <Button
                             Grid.Column="0"
                             Grid.Row="1"
                             ImageSource="travelgoal.png"
-                            Clicked="OnMedsClicked"
+                            Clicked="OnTravelClicked"
                             Style="{DynamicResource CatButton}"
                             />
                         <Button
@@ -88,7 +88,7 @@
                             Grid.Column="2"
                             Grid.Row="1"
                             ImageSource="moneygoal.png"
-                            Clicked="OnNailsClicked"
+                            Clicked="OnMoneyClicked"
                             Style="{DynamicResource CatButton}"
                             />
                         <Button
@@ -102,7 +102,7 @@
                             Grid.Column="0"
                             Grid.Row="2"
                             ImageSource="housegoal.png"
-                            Clicked="OnBooksClicked"
+                            Clicked="OnHouseClicked"
                             Style="{DynamicResource CatButton}"
                             />
                         <Button
@@ -123,7 +123,7 @@
                             Grid.Column="3"
                             Grid.Row="2"
                             ImageSource="charitygoal.png"
-                            Clicked="OnSportsClicked"
+                            Clicked="OnCharityClicked"
                             Style="{DynamicResource CatButton}"
                             />
                         <Button
@@ -151,7 +151,7 @@
                             Grid.Column="3"
                             Grid.Row="3"
                             ImageSource="businessgoal.png"
-                            Clicked="OnWifiClicked"
+                            Clicked="OnBusinessClicked"
                             Style="{DynamicResource CatButton}"
                             />
                         <Button
@@ -165,14 +165,14 @@
                             Grid.Column="1"
                             Grid.Row="4"
                             ImageSource="weddinggoal.png"
-                            Clicked="OnJewelsClicked"
+                            Clicked="OnWeddingClicked"
                             Style="{DynamicResource CatButton}"
                             />
                         <Button
                             Grid.Column="2"
                             Grid.Row="4"
                             ImageSource="gamegoal.png"
-                            Clicked="OnUnderwearClicked"
+                            Clicked="OnGameClicked"
                             Style="{DynamicResource CatButton}"
                             />
                         <Button
@@ -223,14 +223,13 @@
                                 Text="{Binding GoalAmount}" 
                                 FontSize="14"
                                 HorizontalTextAlignment="Start"/>
-                            <Image
-                                Grid.Column="2"
-                                Source="heartbreak.png"
-                                HeightRequest="40"
-                                WidthRequest="40"
-                                HorizontalOptions="End"
-                                VerticalOptions="Center"/>
-                            <!--<Label
+                                <Button
+                                    Grid.Column="2"
+                                    ImageSource="heartbreak.png"
+                                    HeightRequest="40"
+                                    HorizontalOptions="End"
+                                    Clicked="OnDeleteClicked"/>
+                                <!--<Label
                                 Grid.Column="2"
                                 TextColor="DarkGray"
                                 Text="{Binding SavedPercent}"

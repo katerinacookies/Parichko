@@ -1,3 +1,4 @@
+using Parichko.Models;
 using Parichko.ViewModels;
 
 namespace Parichko.Views;
@@ -29,17 +30,26 @@ public partial class AddGoalPage : ContentPage
     {
         GoalIcons.IsVisible = !GoalIcons.IsVisible;
     }
+    public async void OnDeleteClicked(object sender, EventArgs e)
+    {
+            if (sender is Button button && button.BindingContext is Goal goal)
+            {
+                int goalId = goal.Id;
+                await _viewModel.DeleteGoal(goalId);
+            }
+      
+    }
 
     //Иконка на категория е натисната
-    private void OnFoodClicked(object sender, EventArgs e)
+    private void OnHealthClicked(object sender, EventArgs e)
     {
-        chosenIcon = "foodcat.png";
+        chosenIcon = "healthgoal.png";
         chosenColor = "#f24a02";
         GoalIcons.IsVisible = false;
     }
-    private void OnTeaClicked(object sender, EventArgs e)
+    private void OnRetirementClicked(object sender, EventArgs e)
     {
-        chosenIcon = "teacat.png";
+        chosenIcon = "retirementgoal.png";
         chosenColor = "#0d522c";
         GoalIcons.IsVisible = false;
     }
@@ -49,15 +59,15 @@ public partial class AddGoalPage : ContentPage
         chosenColor = "#561826";
         GoalIcons.IsVisible = false;
     }
-    private void OnCleanClicked(object sender, EventArgs e)
+    private void OnSofaClicked(object sender, EventArgs e)
     {
-        chosenIcon = "cleancat.png";
+        chosenIcon = "sofagoal.png";
         chosenColor = "#004369";
         GoalIcons.IsVisible = false;
     }
-    private void OnMedsClicked(object sender, EventArgs e)
+    private void OnTravelClicked(object sender, EventArgs e)
     {
-        chosenIcon = "medscat.png";
+        chosenIcon = "travelgoal.png";
         chosenColor = "#004369";
         GoalIcons.IsVisible = false;
     }
@@ -67,9 +77,9 @@ public partial class AddGoalPage : ContentPage
         chosenColor = "#ac8a02";
         GoalIcons.IsVisible = false;
     }
-    private void OnNailsClicked(object sender, EventArgs e)
+    private void OnMoneyClicked(object sender, EventArgs e)
     {
-        chosenIcon = "nailscat.png";
+        chosenIcon = "moneygoal.png";
         chosenColor = "#265802";
         GoalIcons.IsVisible = false;
     }
@@ -79,9 +89,9 @@ public partial class AddGoalPage : ContentPage
         chosenColor = "#a7060f";
         GoalIcons.IsVisible = false;
     }
-    private void OnBooksClicked(object sender, EventArgs e)
+    private void OnHouseClicked(object sender, EventArgs e)
     {
-        chosenIcon = "bookscat.png";
+        chosenIcon = "housegoal.png";
         chosenColor = "#0e522d";
         GoalIcons.IsVisible = false;
     }
@@ -97,9 +107,9 @@ public partial class AddGoalPage : ContentPage
         chosenColor = "#66200a";
         GoalIcons.IsVisible = false;
     }
-    private void OnSportsClicked(object sender, EventArgs e)
+    private void OnCharityClicked(object sender, EventArgs e)
     {
-        chosenIcon = "sportscat.png";
+        chosenIcon = "charity.png";
         chosenColor = "#bb3fde";
         GoalIcons.IsVisible = false;
     }
@@ -121,9 +131,9 @@ public partial class AddGoalPage : ContentPage
         chosenColor = "#004263";
         GoalIcons.IsVisible = false;
     }
-    private void OnWifiClicked(object sender, EventArgs e)
+    private void OnBusinessClicked(object sender, EventArgs e)
     {
-        chosenIcon = "wificat.png";
+        chosenIcon = "businessgoal.png";
         chosenColor = "#f3b70f";
         GoalIcons.IsVisible = false;
     }
@@ -133,15 +143,15 @@ public partial class AddGoalPage : ContentPage
         chosenColor = "#004263";
         GoalIcons.IsVisible = false;
     }
-    private void OnJewelsClicked(object sender, EventArgs e)
+    private void OnWeddingClicked(object sender, EventArgs e)
     {
-        chosenIcon = "jewelscat.png";
+        chosenIcon = "weddinggoal.png";
         chosenColor = "#5a5858";
         GoalIcons.IsVisible = false;
     }
-    private void OnUnderwearClicked(object sender, EventArgs e)
+    private void OnGameClicked(object sender, EventArgs e)
     {
-        chosenIcon = "underwearcat.png";
+        chosenIcon = "gamegoal.png";
         chosenColor = "#e44201";
         GoalIcons.IsVisible = false;
     }

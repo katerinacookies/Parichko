@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Android.Webkit;
+using Microsoft.EntityFrameworkCore;
 using Parichko.Data;
 using Parichko.Models;
 using System;
@@ -201,6 +202,52 @@ namespace Parichko.ViewModels
                         }
                     }
                 }
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteGoal(int goalId)
+        {
+            var currentGoal = await _context.Goals
+                    .FirstOrDefaultAsync(c => c.Id == goalId);
+            var currentUG = await _context.UserGoals
+                .Where(ug => ug.GoalId == goalId)
+                .ToListAsync();
+
+            if (currentGoal == null)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", "Няма такава цел.", "Добре");
+                });
+                return false;
+            }
+
+            foreach(UserGoal usergoal in currentUG)
+            {
+                int userId = usergoal.UserProfileId;
+                var user = await _context.UserProfiles
+                    .FirstOrDefaultAsync(up => up.Id == userId);
+                user.Goals.Remove(usergoal);
+
+                _context.UserGoals.Remove(usergoal);
+            }
+            try
+            {
+                Goals.Remove(currentGoal);
+
+                    _context.Goals.Remove(currentGoal);
+                
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                });
                 return false;
             }
         }
