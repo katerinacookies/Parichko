@@ -193,58 +193,74 @@
         <CollectionView ItemsSource="{Binding Goals}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame 
-                        Padding="10" 
-                        Margin="5" 
-                        CornerRadius="10"
-                        BorderColor="Transparent">
-                        <Grid
-                            ColumnDefinitions="*,*,*,*"
-                            RowDefinitions="*,*">
-                            <Image
-                                Grid.Column="0"
-                                Source="{Binding IconName}"
-                                WidthRequest="40"
-                                HeightRequest="40"
-                                HorizontalOptions="Start"
-                                VerticalOptions="Center"/>
-                            <Label 
-                                Grid.Column="1"
-                                Grid.Row="0"
-                                TextColor="Black" 
-                                Text="{Binding Name}" 
-                                FontSize="18" 
-                                FontAttributes="Bold"
-                                HorizontalTextAlignment="Start"/>
-                            <Label 
-                                Grid.Column="1"
-                                Grid.Row="1"
-                                TextColor="Black" 
-                                Text="{Binding GoalAmount}" 
-                                FontSize="14"
-                                HorizontalTextAlignment="Start"/>
-                            <Picker
-                                x:Name="FriendPicker"
-                                Title="Добави приятел"
-                                Grid.Column="1"
-                                Grid.Row="3"
-                                ItemsSource="{Binding Friends}"
-                                ItemDisplayBinding="{Binding DisplayName}"/>
-                            <Button
-                                    Grid.Column="3"
-                                    ImageSource="heartbreak.png"
-                                    HeightRequest="50"
-                                    HorizontalOptions="End"
-                                    Clicked="OnDeleteClicked"
-                                    BackgroundColor="Transparent"/>
-                                <!--<Label
+                        <VerticalStackLayout>
+                            <Frame 
+                                Padding="10" 
+                                Margin="5" 
+                                CornerRadius="10"
+                                BorderColor="Transparent">
+                                <Grid
+                                    ColumnDefinitions="*,*,*,*"
+                                    RowDefinitions="*,*">
+                                    <Image
+                                        Grid.Column="0"
+                                        Source="{Binding IconName}"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="Center"/>
+                                    <Label 
+                                        Grid.Column="1"
+                                        Grid.Row="0"
+                                        TextColor="Black" 
+                                        Text="{Binding Name}" 
+                                        FontSize="18" 
+                                        FontAttributes="Bold"
+                                        HorizontalTextAlignment="Start"/>
+                                    <Label 
+                                        Grid.Column="1"
+                                        Grid.Row="1"
+                                        TextColor="Black" 
+                                        Text="{Binding GoalAmount}" 
+                                        FontSize="14"
+                                        HorizontalTextAlignment="Start"/>
+                                    <!--<Picker
+                                        x:Name="FriendPicker"
+                                        Title="Добави приятел"
+                                        Grid.Column="1"
+                                        Grid.Row="3"
+                                        ItemsSource="{Binding Friends}"
+                                        ItemDisplayBinding="{Binding DisplayName}"/>-->
+                                    <Button
+                                        Grid.Column="2"
+                                        ImageSource="addtogoal.png"
+                                        HeightRequest="50"
+                                        HorizontalOptions="End"
+                                        Clicked="OnDeleteClicked"
+                                        BackgroundColor="Transparent"/>
+                                    <Button
+                                        Grid.Column="3"
+                                        ImageSource="heartbreak.png"
+                                        HeightRequest="50"
+                                        HorizontalOptions="End"
+                                        Clicked="OnDeleteClicked"
+                                        BackgroundColor="Transparent"/>
+                                    <!--<Label
                                 Grid.Column="2"
                                 TextColor="DarkGray"
                                 Text="{Binding SavedPercent}"
                                 FontSize="18"/>-->
-                        </Grid>
-                    </Frame>
-                </DataTemplate>
+                                </Grid>
+                            </Frame>
+                            <Frame
+                                x:Name="AddFriend"
+                                Padding="0"
+                                IsVisible="True"
+                                BackgroundColor="White"
+                                BorderColor="Transparent">
+                            </Frame>
+                        </VerticalStackLayout>
+                    </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 

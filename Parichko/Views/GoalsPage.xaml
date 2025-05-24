@@ -8,12 +8,12 @@
         <VerticalStackLayout
         Padding="25, 10, 25, 10">
             <Label 
-            Text="Твоите цели"
-            VerticalOptions="Center" 
-            HorizontalOptions="Start"
-            TextColor="{StaticResource PrimaryDarkText}"
-            FontAttributes="Bold"
-            Style="{StaticResource SubHeadline}"/>
+                Text="Твоите цели"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start"
+                TextColor="{StaticResource PrimaryDarkText}"
+                FontAttributes="Bold"
+                Style="{StaticResource SubHeadline}"/>
             <Frame
             BackgroundColor="{StaticResource Cutesyblue}"
             BorderColor="Transparent"
