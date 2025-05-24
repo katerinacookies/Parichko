@@ -92,6 +92,14 @@
         Title="QName"
         Route="QName" 
         ContentTemplate="{DataTemplate v:QName}" />
+    <ShellContent 
+        Title="QTextSize"
+        Route="QTextSize" 
+        ContentTemplate="{DataTemplate v:QTextSize}" />
+    <ShellContent 
+        Title="AllDonePage"
+        Route="AllDonePage" 
+        ContentTemplate="{DataTemplate v:AllDonePage}" />
 
     <ShellContent 
         Title="AdminHomePage"

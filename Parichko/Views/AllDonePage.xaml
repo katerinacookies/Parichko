@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Parichko.Views.AllDonePage"
+             Shell.NavBarIsVisible="False"
+             BackgroundImageSource="background.png"
+             Title="AllDonePage">
+    
+    <VerticalStackLayout
+        Padding="50, 100">
+        <Label
+            Text="Готово!"
+            TextColor="{StaticResource Tertiary}"
+            Style="{StaticResource Headline}"
+            Padding="0, 0, 0, 0"
+            HorizontalOptions="Start"
+            SemanticProperties.HeadingLevel="Level1"/>
+
+        <Label
+            Text="Имам всичко, което ми трябва!"
+            TextColor="{StaticResource Tertiary}"
+            Padding="0, 0, 0, 0"
+            FontSize="21"
+            HorizontalOptions="Start"
+            Style="{StaticResource SubHeadline}"/>
+        
+        <Image
+            Margin="50"
+            Source="alldone.png"
+            HeightRequest="300"
+            />
+
+        <Button
+            x:Name="LoginBtn"
+            Text="Към приложението"
+            Margin="0, 20, 0, 0"
+            HorizontalOptions="Fill"
+            Style="{StaticResource LoginBtn}"
+            SemanticProperties.Description="Препраща към началната страница"
+            Clicked="OnForwardBtnClicked"/>
+    </VerticalStackLayout>
+</ContentPage>

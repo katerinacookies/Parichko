@@ -67,33 +67,26 @@
             BorderColor="Transparent"
             Padding="10">
                 <HorizontalStackLayout>
-                    <Frame
-                    Padding="0"
-                    BorderColor="Transparent"
-                    BackgroundColor="Transparent"
-                    Margin="0, 0, 25, 0">
-                        <VerticalStackLayout>
-                            <Image
-                            Source="heartbreak.png"
-                            HeightRequest="40"
-                            WidthRequest="40"/>
-                            <Label
-                            Text="Кольо"/>
-                        </VerticalStackLayout>
-                    </Frame>
-                    <Frame
-                    Padding="0"
-                    BorderColor="Transparent"
-                    BackgroundColor="Transparent">
-                        <VerticalStackLayout>
-                            <Image
-                            Source="heartbreak.png"
-                            HeightRequest="40"
-                            WidthRequest="40"/>
-                            <Label
-                            Text="Калина"/>
-                        </VerticalStackLayout>
-                    </Frame>
+                    <CollectionView ItemsSource="{Binding Friends}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    RowDefinitions="*,*">
+                                    <Image
+                                        Grid.Row="0"
+                                        Source="heartbreak.png"
+                                        HeightRequest="40"
+                                        WidthRequest="40"/>
+                                    <Label
+                                        Grid.Row="1"
+                                        HorizontalTextAlignment="Center"
+                                        FontSize="18"
+                                        Margin="0, 5, 0, 0"
+                                        Text="{Binding DisplayName}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </HorizontalStackLayout>
             </Frame>
             <!--

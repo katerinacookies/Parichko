@@ -23,10 +23,11 @@ public partial class QName : ContentPage
         {
             string displayname = UsernameEntry.Text.ToString();
             await _viewModel.SetDisplayNameAsync(displayname);
+            await Shell.Current.GoToAsync("///AllDonePage?refresh=true");
         }
 		catch(Exception ex)
         {
-            await DisplayAlert("Error", $"Unexpected Error: {ex.Message}", "OK");
+            await DisplayAlert("Грешка", ex.Message, "Добре");
         }
 		
 	}

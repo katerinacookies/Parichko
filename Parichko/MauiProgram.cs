@@ -43,6 +43,8 @@ namespace Parichko
             builder.Services.AddTransient<Register>();
             builder.Services.AddTransient<QName>();
             builder.Services.AddTransient<QNameViewModel>();
+            builder.Services.AddTransient<QTextSize>();
+            builder.Services.AddTransient<AllDonePage>();
             builder.Services.AddTransient<AddIncomePage>();
             builder.Services.AddTransient<IncomeViewModel>();
             builder.Services.AddTransient<AddExpensePage>();

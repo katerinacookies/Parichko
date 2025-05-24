@@ -60,7 +60,15 @@ namespace Parichko.ViewModels
                 Debug.WriteLine($"[LoadGoalsAsync] LoggedUserId = {userId}");
                 
                 var currentUser = await _context.UserProfiles
+                    .Include(up => up.Friends)
                     .FirstOrDefaultAsync(up => up.Id == userId);
+
+                if(currentUser == null)
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                        Shell.Current.DisplayAlert("Грешка", "Текущият потребител не е намерен.", "Добре"));
+                }
+
                 foreach(UserProfile friend in currentUser.Friends)
                 {
                     Friends.Add(friend);

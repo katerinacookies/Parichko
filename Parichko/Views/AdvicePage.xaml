@@ -2,76 +2,78 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.AdvicePage"
+             Shell.NavBarIsVisible="False"
              Title="AdvicePage">
-    <VerticalStackLayout
-        Padding="25"
-        >
-        <Grid
-            RowDefinitions="*"
-            ColumnDefinitions="*,*">
-            <Label
-                Grid.Column="0"
-                Text="Ноември"/>
-            <Label
-                Grid.Column="1"
-                Text="+ 20,34"
-                HorizontalTextAlignment="End"/>
-        </Grid>
-        <Frame
-            BorderColor="Transparent"
-            BackgroundColor="#ffdbe8"
-            HeightRequest="250"
-            CornerRadius="30"
-            Margin="0, 20">
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="25">
             <Grid
-                RowDefinitions="*,*"
+                RowDefinitions="*"
                 ColumnDefinitions="*,*">
                 <Label
-                    Grid.Row="0"
-                    Text="Разходи по категория"/>
-            </Grid>
-            
-        </Frame>
-        <Label
-            Text="Съветът на Паричко"/>
-        <Frame
-            BorderColor="Transparent"
-            BackgroundColor="{StaticResource Cutesyblue}"
-            Padding="10"
-            CornerRadius="20"
-            Margin="0, 10">
-            <Grid
-                ColumnDefinitions="*,*">
-                <Image
                     Grid.Column="0"
-                    Source="parichkoadvice.png"
-                    HeightRequest="40"
-                    WidthRequest="40"
-                    HorizontalOptions="Start"/>
+                    Text="Ноември"/>
                 <Label
                     Grid.Column="1"
-                    HorizontalTextAlignment="Start"
-                    Text="Опитай да ограничиш разходите си за козметика."/>
+                    Text="+ 20,34"
+                    HorizontalTextAlignment="End"/>
             </Grid>
-        </Frame>
-        <Frame
-            BorderColor="Transparent"
-            BackgroundColor="#ffdbe8"
-            CornerRadius="30"
-            HeightRequest="300"
-            Margin="0, 10">
-            <VerticalStackLayout>
-                <Label
-                    Text="Приходи и разходи за месеца"/>
-            </VerticalStackLayout>
-        </Frame>
+            <Frame
+                BorderColor="Transparent"
+                BackgroundColor="#ffdbe8"
+                HeightRequest="250"
+                CornerRadius="30"
+                Margin="0, 20">
+                <Grid
+                    RowDefinitions="*,*"
+                    ColumnDefinitions="*,*">
+                    <Label
+                    Grid.Row="0"
+                    Text="Разходи по категория"/>
+                </Grid>
 
-        <Frame>
-            <Grid
+            </Frame>
+            <Label
+                Text="Съветът на Паричко"/>
+            <Frame
+                BorderColor="Transparent"
+                BackgroundColor="{StaticResource Cutesyblue}"
+                Padding="10"
+                CornerRadius="20"
+                Margin="0, 10">
+                <Grid
+                    ColumnDefinitions="*,*">
+                    <Image
+                        Grid.Column="0"
+                        Source="parichkoadvice.png"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="Start"/>
+                    <Label
+                        Grid.Column="1"
+                        HorizontalTextAlignment="Start"
+                        Text="Опитай да ограничиш разходите си за козметика."/>
+                </Grid>
+            </Frame>
+            <Frame
+                BorderColor="Transparent"
+                BackgroundColor="#ffdbe8"
+                CornerRadius="30"
+                HeightRequest="300"
+                Margin="0, 10">
+                <VerticalStackLayout>
+                    <Label
+                    Text="Приходи и разходи за месеца"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame>
+                <Grid
                 RowDefinitions="*,*"
                 ColumnDefinitions="*,*">
-                
-            </Grid>
-        </Frame>
-    </VerticalStackLayout>
+
+                </Grid>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

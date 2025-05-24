@@ -58,7 +58,7 @@ namespace Parichko.ViewModels
                 try
                 {
                     await _context.SaveChangesAsync();
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -88,8 +88,6 @@ namespace Parichko.ViewModels
                         }
                     }
                 }
-
-                await Shell.Current.GoToAsync("///HomePage?refresh=true");
                 return true;
             }
             catch(Exception ex)
