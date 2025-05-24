@@ -160,5 +160,37 @@ namespace Parichko.ViewModels
                 return false;
             }
         }
+        public async Task<bool> DeleteIncome(int incomeId)
+        {
+            var currentIncome = await _context.Incomes
+                    .FirstOrDefaultAsync(i => i.Id == incomeId);
+
+            if (currentIncome == null)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", "Няма такъв приход.", "Добре");
+                });
+                return false;
+            }
+
+            try
+            {
+                Incomes.Remove(currentIncome);
+
+                _context.Incomes.Remove(currentIncome);
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                });
+                return false;
+            }
+        }
     }
 }

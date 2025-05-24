@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.AddIncomePage"
              Title="AddIncomePage"
+             Shell.NavBarIsVisible="False"
              BackgroundColor="#efecec">
     <VerticalStackLayout
         Padding="20, 10, 20, 10">
@@ -46,6 +47,8 @@
                                 HeightRequest="40"
                                 WidthRequest="40"
                                 Grid.Column="0"
+                                HorizontalOptions="Start"
+                                Margin="0, 17, 0, 0"
                                 />
                             <Label 
                                 Grid.Column="1"
@@ -66,14 +69,14 @@
                                 FontAttributes="Bold"
                                 HorizontalTextAlignment="End"
                                 FontSize="18" />
-                            <Image
+                            <Button
                                 Grid.Column="3"
-                                Source="heartbreak.png"
-                                HeightRequest="35"
-                                WidthRequest="35"
+                                ImageSource="heartbreak.png"
+                                HeightRequest="55"
                                 HorizontalOptions="End"
-                                VerticalOptions="Center"
-                                Margin="0"/>
+                                Margin="0, 17, 0, 0"
+                                Clicked="OnDeleteClicked"
+                                BackgroundColor="Transparent"/>
                         </Grid>
                     </Frame>
                 </DataTemplate>

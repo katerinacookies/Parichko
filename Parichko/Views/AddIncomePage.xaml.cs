@@ -1,3 +1,4 @@
+using Parichko.Models;
 using Parichko.ViewModels;
 
 namespace Parichko.Views;
@@ -23,5 +24,13 @@ public partial class AddIncomePage : ContentPage
         string incomeName = IncomenameEntry.Text.ToString();
         decimal incomeAmount = decimal.Parse(IncomeAmountEntry.Text);
         await _viewModel.AddIncomesAsync(incomeName, incomeAmount);
+    }
+    public async void OnDeleteClicked(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.BindingContext is Income income)
+        {
+            int incomeId = income.Id;
+            await _viewModel.DeleteIncome(incomeId);
+        }
     }
 }
