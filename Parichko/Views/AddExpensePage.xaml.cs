@@ -34,7 +34,7 @@ public partial class AddExpensePage : ContentPage
         if (e.CurrentSelection.FirstOrDefault() is Category selectedItem)
         {
             string chosen = selectedItem.Name;
-            DisplayAlert("you chose", chosen, "ok");
+            DisplayAlert("Избрана е категория.", chosen, "Добре");
             chosenCat = chosen;
 
             categoryDropdown.IsVisible = false;
@@ -56,7 +56,14 @@ public partial class AddExpensePage : ContentPage
         await _viewModel.AddExpenseAsync(expenseName, expenseAmount, expenseCat);
     }
 
-    
+    public async void OnDeleteClicked(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.BindingContext is Expense expense)
+        {
+            int expenseId = expense.Id;
+            await _viewModel.DeleteExpense(expenseId);
+        }
+    }
 
     /*private async void PopulateDropdown()
     {

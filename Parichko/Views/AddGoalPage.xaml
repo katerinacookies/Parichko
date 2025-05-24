@@ -199,7 +199,7 @@
                         CornerRadius="10"
                         BorderColor="Transparent">
                         <Grid
-                            ColumnDefinitions="*,*,*"
+                            ColumnDefinitions="*,*,*,*"
                             RowDefinitions="*,*">
                             <Image
                                 Grid.Column="0"
@@ -223,12 +223,17 @@
                                 Text="{Binding GoalAmount}" 
                                 FontSize="14"
                                 HorizontalTextAlignment="Start"/>
+                                <Picker
+                                    x:Name="FriendPicker"
+                                    Title="Добави приятел"
+                                    ItemsSource="{Binding Friends}"/>
                                 <Button
-                                    Grid.Column="2"
+                                    Grid.Column="3"
                                     ImageSource="heartbreak.png"
-                                    HeightRequest="40"
+                                    HeightRequest="50"
                                     HorizontalOptions="End"
-                                    Clicked="OnDeleteClicked"/>
+                                    Clicked="OnDeleteClicked"
+                                    BackgroundColor="Transparent"/>
                                 <!--<Label
                                 Grid.Column="2"
                                 TextColor="DarkGray"

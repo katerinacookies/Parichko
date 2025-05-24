@@ -205,6 +205,38 @@ namespace Parichko.ViewModels
                 return false;
             }
         }
+        public async Task<bool> DeleteExpense(int expenseId)
+        {
+            var currentExpense = await _context.Expenses
+                    .FirstOrDefaultAsync(e => e.Id == expenseId);
+
+            if (currentExpense == null)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", "Няма такъв разход.", "Добре");
+                });
+                return false;
+            }
+
+            try
+            {
+                Expenses.Remove(currentExpense);
+
+                _context.Expenses.Remove(currentExpense);
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                });
+                return false;
+            }
+        }
 
         private async void LoadWeeklyChart()
         {

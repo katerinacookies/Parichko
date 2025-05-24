@@ -47,12 +47,12 @@
             <Frame
                 Grid.Column="1"
                 BorderColor="Transparent">
-                <Label
+                <!--<Label
                     Text="{Binding FriendCount}"
                     FontSize="24"
                     FontAttributes="Bold"
                     TextColor="DarkGray"
-                    HorizontalTextAlignment="End"/>
+                    HorizontalTextAlignment="End"/>-->
             </Frame>
         </Grid>
         <Frame
@@ -105,11 +105,13 @@
                                 Grid.Column="1"
                                 Grid.Row="0"
                                 TextColor="Black" 
-                                Text="{Binding FromUser.Login.Email}"/>
+                                Text="{Binding FromUser.Login.Email}"
+                                VerticalTextAlignment="Center"/>
                             <Label 
                                 Grid.Column="1"
                                 Grid.Row="1"
                                 TextColor="Black" 
+                                VerticalTextAlignment="Start"
                                 Text="{Binding FromUser.DisplayName}"/>
                             <Button
                                 Grid.Column="2"
@@ -173,7 +175,8 @@
                                 WidthRequest="150"
                                 HeightRequest="30"
                                 FontSize="14"
-                                Margin="0"/>
+                                Margin="0"
+                                HorizontalTextAlignment="Center"/>
                             <Button
                                 Grid.Column="3"
                                 ImageSource="heartbreak.png"

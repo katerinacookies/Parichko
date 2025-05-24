@@ -10,10 +10,7 @@ public partial class HomePage : ContentPage
         InitializeComponent();
         _viewModel = viewModel;
         Displaythename();
-    }
-    public HomePage()
-    {
-
+        System.Diagnostics.Debug.WriteLine("IncomeViewModel инициализиран.");
     }
 
     public async Task Displaythename()

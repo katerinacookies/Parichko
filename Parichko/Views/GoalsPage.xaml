@@ -4,154 +4,156 @@
              x:Class="Parichko.Views.GoalsPage"
              Shell.NavBarIsVisible="False"
              Title="GoalsPage">
-    <VerticalStackLayout
+    <ScrollView>
+        <VerticalStackLayout
         Padding="25, 10, 25, 10">
-        <Label 
+            <Label 
             Text="Твоите цели"
             VerticalOptions="Center" 
             HorizontalOptions="Start"
             TextColor="{StaticResource PrimaryDarkText}"
             FontAttributes="Bold"
             Style="{StaticResource SubHeadline}"/>
-        <Frame
+            <Frame
             BackgroundColor="{StaticResource Cutesyblue}"
             BorderColor="Transparent"
             HeightRequest="180"
             CornerRadius="30"
             Margin="0, 20">
-            <VerticalStackLayout>
-                <Grid
+                <VerticalStackLayout>
+                    <Grid
                     RowDefinitions="*,*,*"
                     ColumnDefinitions="*,*,*,*">
-                    <Image
+                        <Image
                         Source="heartbreak.png"
                         Grid.Column="0"
                         Grid.Row="0"
                         HeightRequest="40"
                         WidthRequest="40"
                         HorizontalOptions="Start"/>
-                    <Label
+                        <Label
                         Text="Квартира"
                         Grid.Column="1"
                         Grid.Row="0"/>
-                    <Label
+                        <Label
                         Text="Спестени средства"
                         Grid.Column="0"
                         Grid.Row="1"/>
-                    <Label
+                        <Label
                         Text="240,00 лв"
                         Grid.Row="2"
                         Grid.Column="0"/>
-                </Grid>
-            </VerticalStackLayout>
-        </Frame>
-        <Grid
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+            <Grid
             ColumnDefinitions="*,*"
             RowDefinitions="*">
-            <Label
+                <Label
                 Grid.Column="0"
                 Text="Приятели"/>
-            <Button
+                <Button
                 Grid.Column="1"
                 Text="Виж всички"
                 TextColor="Grey"
                 HorizontalOptions="End"
                 BackgroundColor="Transparent"
                 Padding="0"/>
-        </Grid>
-        
-        <Frame
+            </Grid>
+
+            <Frame
             HeightRequest="90"
             BackgroundColor="Transparent"
             BorderColor="Transparent"
             Padding="10">
-            <HorizontalStackLayout>
-                <Frame
+                <HorizontalStackLayout>
+                    <Frame
                     Padding="0"
                     BorderColor="Transparent"
                     BackgroundColor="Transparent"
                     Margin="0, 0, 25, 0">
-                    <VerticalStackLayout>
-                        <Image
+                        <VerticalStackLayout>
+                            <Image
                             Source="heartbreak.png"
                             HeightRequest="40"
                             WidthRequest="40"/>
-                        <Label
+                            <Label
                             Text="Кольо"/>
-                    </VerticalStackLayout>
-                </Frame>
-                <Frame
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame
                     Padding="0"
                     BorderColor="Transparent"
                     BackgroundColor="Transparent">
-                    <VerticalStackLayout>
-                        <Image
+                        <VerticalStackLayout>
+                            <Image
                             Source="heartbreak.png"
                             HeightRequest="40"
                             WidthRequest="40"/>
-                        <Label
+                            <Label
                             Text="Калина"/>
-                    </VerticalStackLayout>
-                </Frame>    
-            </HorizontalStackLayout>
-        </Frame>
-        <Label
+                        </VerticalStackLayout>
+                    </Frame>
+                </HorizontalStackLayout>
+            </Frame>
+            <!--
+            <Label
             Text="Съветът на Паричко"/>
-        <Frame
+            <Frame
             BackgroundColor="#ffdbe8"
             BorderColor="Transparent"
             Padding="10"
             Margin="0, 10">
-            <HorizontalStackLayout>
-                <Image
+                <HorizontalStackLayout>
+                    <Image
                     Source="parichkoadvice.png"
                     HeightRequest="40"
                     WidthRequest="40"/>
-                <Label
+                    <Label
                     Text="Важно е да спестяваш по малка сума пари всеки ден."/>
-            </HorizontalStackLayout>
-        </Frame>
+                </HorizontalStackLayout>
+            </Frame>-->
 
-        <Grid
+            <Grid
             ColumnDefinitions="*,*"
             RowDefinitions="*">
-            <Label
+                <Label
                 Grid.Column="0"
                 Text="Твоите цели"/>
-            <Button
+                <Button
                 Grid.Column="1"
                 Text="Виж всички"
                 TextColor="Grey"
                 HorizontalOptions="End"
                 BackgroundColor="Transparent"
-                Padding="0"/> 
-        </Grid>
-        
-        <Frame
+                Padding="0"/>
+            </Grid>
+
+            <Frame
             BackgroundColor="Transparent"
             BorderColor="Transparent"
             Padding="0"
             Margin="0, 10">
-            <VerticalStackLayout>
-                <CollectionView ItemsSource="{Binding Goals}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame 
+                <VerticalStackLayout>
+                    <CollectionView ItemsSource="{Binding Goals}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame 
                                 Padding="10" 
                                 Margin="5" 
                                 CornerRadius="10"
                                 BorderColor="Transparent">
-                                <Grid
+                                    <Grid
                                     ColumnDefinitions="*,*,*"
                                     RowDefinitions="*,*">
-                                    <Image
+                                        <Image
                                         Grid.Column="0"
                                         Source="{Binding IconName}"
                                         WidthRequest="40"
                                         HeightRequest="40"
                                         HorizontalOptions="Start"
                                         VerticalOptions="Center"/>
-                                    <Label 
+                                        <Label 
                                         Grid.Column="1"
                                         Grid.Row="0"
                                         TextColor="Black" 
@@ -159,31 +161,32 @@
                                         FontSize="18" 
                                         FontAttributes="Bold"
                                         HorizontalTextAlignment="Start"/>
-                                    <Label 
+                                        <Label 
                                         Grid.Column="1"
                                         Grid.Row="1"
                                         TextColor="Black" 
                                         Text="{Binding GoalAmount}" 
                                         FontSize="14"
                                         HorizontalTextAlignment="Start"/>
-                                    <Label
+                                        <Label
                                         Grid.Column="2"
                                         Text="{Binding SavedPercent}"
                                         HorizontalOptions="End"
                                         VerticalOptions="Center"
                                         TextColor="DarkGray"/>
-                                    <!--<Label
+                                        <!--<Label
                         Grid.Column="2"
                         TextColor="DarkGray"
                         Text="{Binding SavedPercent}"
                         FontSize="18"/>-->
-                                </Grid>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-            </VerticalStackLayout>
-        </Frame>
-    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

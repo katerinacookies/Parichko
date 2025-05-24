@@ -184,7 +184,7 @@ namespace Parichko.ViewModels
 
             try
             {
-                Categories.Remove(currentCat);
+                
                 var expenses = await _context.Expenses
                     .Where(e => e.CategoryId == catId)
                     .ToListAsync();
@@ -193,6 +193,10 @@ namespace Parichko.ViewModels
                 {
                     _context.Expenses.Remove(expense);
                 }
+
+                Categories.Remove(currentCat);
+
+                _context.Categories.Remove(currentCat);
 
                 await _context.SaveChangesAsync();
                 return true;

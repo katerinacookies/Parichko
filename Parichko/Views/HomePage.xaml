@@ -10,9 +10,9 @@
              >
 
     <ContentPage.BindingContext>
-        <model:IncomeViewModel/>
+        <model:ExpenseViewModel/>
     </ContentPage.BindingContext>
-    
+
     <VerticalStackLayout
         Padding="30">
         <Label 
@@ -36,8 +36,11 @@
                 Margin="0, 20, 5, 10"
                 BorderColor="Transparent">
                 <VerticalStackLayout>
-                    <Frame>
-                        <!--<chart:SfCartesianChart>
+                    <Frame
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent">
+                        <!--<chart:SfCartesianChart
+                            HeightRequest="300">
 
                             <chart:SfCartesianChart.Title>
                                 <Label Text="Height Comparison"/>
@@ -50,7 +53,7 @@
                             <chart:SfCartesianChart.XAxes>
                                 <chart:CategoryAxis>
                                     <chart:CategoryAxis.Title>
-                                        <chart:ChartAxisTitle Text="Приход"/>
+                                        <chart:ChartAxisTitle Text="Разход"/>
                                     </chart:CategoryAxis.Title>
                                 </chart:CategoryAxis>
                             </chart:SfCartesianChart.XAxes>
@@ -61,16 +64,23 @@
                                         <chart:ChartAxisTitle Text="Сума"/>
                                     </chart:NumericalAxis.Title>
                                 </chart:NumericalAxis>
-                            </chart:SfCartesianChart.YAxes>-->
+                            </chart:SfCartesianChart.YAxes>
 
-                            <!--Инициализиране на данните-->
-                            <!--<chart:ColumnSeries ItemsSource="{Binding Data}"
+                            <chart:SfCartesianChart.XAxes>
+                                <chart:NumericalAxis ShowMajorGridLines="False"/>
+                            </chart:SfCartesianChart.XAxes>
+                            <chart:SfCartesianChart.YAxes>
+                                <chart:NumericalAxis/>
+                            </chart:SfCartesianChart.YAxes>
+
+                            Инициализиране на данните
+                            <chart:ColumnSeries ItemsSource="{Binding Expenses}"
                             XBindingPath="Name" 
                             YBindingPath="Amount"
                             EnableTooltip="True"
                             ShowDataLabels="True"
                             Label="Height"
-                            Fill="Pink">
+                            Fill="{StaticResource Primary}">
                                 <chart:ColumnSeries.DataLabelSettings>
                                     <chart:CartesianDataLabelSettings LabelPlacement="Inner"/>
                                 </chart:ColumnSeries.DataLabelSettings>
@@ -78,6 +88,37 @@
 
                         </chart:SfCartesianChart>-->
 
+                        <VerticalStackLayout>
+                            <chart:SfCartesianChart HeightRequest="300">
+                                <chart:SfCartesianChart.XAxes>
+                                    <chart:CategoryAxis>
+                                        <chart:CategoryAxis.Title>
+                                            <chart:ChartAxisTitle Text="Ден"/>
+                                        </chart:CategoryAxis.Title>
+                                    </chart:CategoryAxis>
+                                </chart:SfCartesianChart.XAxes>
+
+                                <chart:SfCartesianChart.YAxes>
+                                    <chart:NumericalAxis>
+                                        <chart:NumericalAxis.Title>
+                                            <chart:ChartAxisTitle Text="Сума (лв)"/>
+                                        </chart:NumericalAxis.Title>
+                                    </chart:NumericalAxis>
+                                </chart:SfCartesianChart.YAxes>
+
+                                <chart:ColumnSeries
+                                    ItemsSource="{Binding ExpensesForChart}"
+                                    XBindingPath="Name"
+                                    YBindingPath="Amount"
+                                    EnableTooltip="True"
+                                    ShowDataLabels="True"
+                                    Fill="#FF6B81">
+                                    <chart:ColumnSeries.DataLabelSettings>
+                                        <chart:CartesianDataLabelSettings LabelPlacement="Inner"/>
+                                    </chart:ColumnSeries.DataLabelSettings>
+                                </chart:ColumnSeries>
+                            </chart:SfCartesianChart>
+                        </VerticalStackLayout>
                     </Frame>
 
                     <Label

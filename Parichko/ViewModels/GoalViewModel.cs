@@ -16,7 +16,7 @@ namespace Parichko.ViewModels
     {
         private readonly ParichkoDbContext _context;
         public ObservableCollection<Goal> Goals { get; set; } = new();
-
+        public ObservableCollection<UserProfile> Friends { get; set; } = new();
         public GoalViewModel(ParichkoDbContext context)
         {
             _context = context;
@@ -58,6 +58,13 @@ namespace Parichko.ViewModels
             {
                 int userId = Preferences.Get("LoggedUserId", 0);
                 Debug.WriteLine($"[LoadGoalsAsync] LoggedUserId = {userId}");
+                
+                var currentUser = await _context.UserProfiles
+                    .FirstOrDefaultAsync(up => up.Id == userId);
+                foreach(UserProfile friend in currentUser.Friends)
+                {
+                    Friends.Add(friend);
+                }
 
                 var userGoals = await _context.UserGoals
                     .Where(ug => ug.UserProfileId == userId)

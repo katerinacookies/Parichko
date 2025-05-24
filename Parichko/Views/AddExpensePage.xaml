@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.AddExpensePage"
              Title="AddExpensePage"
+             Shell.NavBarIsVisible="False"
              BackgroundColor="#efecec">
     
     <VerticalStackLayout
@@ -72,12 +73,16 @@
                         SelectionChanged="OnItemSelected">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Label
+                            <Label
                                     Text="{Binding Name}"
                                     TextColor="{StaticResource Primary}"
-                                    x:Name="CatLabel">
-                                </Label>
-                            </DataTemplate>
+                                    x:Name="CatLabel"
+                                    BackgroundColor="White"
+                                    HeightRequest="40"
+                                    Margin="0, 10, 0, 0"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
+                        </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
@@ -90,11 +95,49 @@
             <CollectionView ItemsSource="{Binding Expenses}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="10" Margin="5" CornerRadius="10">
+                        <Frame 
+                            Padding="20, 10" 
+                            Margin="0, 15, 0, 0" 
+                            CornerRadius="30"
+                            BorderColor="{Binding Category.Color}">
                             <StackLayout>
-                                <Label TextColor="Black" Text="{Binding Name}" FontSize="14" />
-                                <Label TextColor="Black" Text="{Binding Amount}" FontSize="14" />
-                            </StackLayout>
+                            <Grid
+                                ColumnDefinitions="*,*,*,*"
+                                RowDefinitions="*">
+                                <Image
+                                    Grid.Column="0"
+                                    Source="{Binding Category.IconName}"
+                                    HeightRequest="40"
+                                    HorizontalOptions="Start"/>
+                                <Label 
+                                    Grid.Column="1"
+                                    TextColor="Black" 
+                                    Text="{Binding Name}" 
+                                    FontSize="18"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
+                                <!--<Label
+                                    Grid.Column="1"
+                                    Grid.Row="1"
+                                    TextColor="Black"
+                                    Text="{Binding Date}"/>-->
+                                <Label 
+                                    Grid.Column="2"
+                                    TextColor="Black" 
+                                    Text="{Binding Amount}" 
+                                    FontSize="18"
+                                    HorizontalTextAlignment="End"
+                                    VerticalTextAlignment="Center"/>
+                                <Button
+                                    Grid.Column="3"
+                                    ImageSource="heartbreak.png"
+                                    HeightRequest="50"
+                                    Margin="0"
+                                    HorizontalOptions="End"
+                                    BackgroundColor="Transparent"
+                                    Clicked="OnDeleteClicked"/>
+                            </Grid>
+                        </StackLayout>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
