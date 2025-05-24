@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.QName"
              Shell.FlyoutBehavior="Disabled"
-             Title="QName">
+             Title="QName"
+             Shell.NavBarIsVisible="False"
+             BackgroundImageSource="background.png">
 
     <ScrollView>
         <VerticalStackLayout
@@ -13,8 +15,7 @@
             <Button
                 x:Name="BackBtn"
                 Style="{StaticResource BackBtn}"/>
-
-
+            
             <Label
                 Text="Как искаш да се обръщам към теб?"
                 TextColor="{StaticResource Tertiary}"
@@ -34,7 +35,8 @@
 
             <Frame
                 Margin="0, 60, 0, 10"
-                Style="{StaticResource SignFrame}">
+                Style="{StaticResource SignFrame}"
+                WidthRequest="350">
                 <Entry 
                     Placeholder="Твоето име или прякор" 
                     Keyboard="Email"
@@ -51,6 +53,7 @@
                 HorizontalOptions="Fill"
                 Style="{StaticResource LoginBtn}"
                 CornerRadius="30"
+                WidthRequest="350"
                 Clicked="OnForwardBtnClicked"/>
 
 

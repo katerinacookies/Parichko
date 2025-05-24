@@ -12,8 +12,6 @@
 
             <Button
                 Style="{StaticResource BackBtn}"/>
-
-
             <Label
                 Text="Следват няколко въпроса..."
                 TextColor="{StaticResource Tertiary}"
@@ -52,19 +50,9 @@
                 SemanticProperties.Hint="Продължава към първия въпрос"
                 HorizontalOptions="Fill"
                 Style="{StaticResource LoginBtn}"
-                CornerRadius="20"
+                CornerRadius="30"
+                WidthRequest="350"
                 Clicked="OnGotitClicked"/>
-
-            <!--Tozi buton ne se vizualizira i ne znam zashto-->
-            <Button
-                x:Name="SkipBtn"
-                Text="Пропусни" 
-                SemanticProperties.Hint="Препраща към страница за регистрация"
-                HorizontalOptions="Fill"
-                Style="{StaticResource RegisterBtn}"
-                CornerRadius="20"/>
-
-
         </VerticalStackLayout>
     </ScrollView>
 
