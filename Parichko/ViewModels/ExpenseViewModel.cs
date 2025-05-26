@@ -118,8 +118,8 @@ namespace Parichko.ViewModels
 
                     try
                     {
-                        await _context.SaveChangesAsync();
                         categoryFromDb.Expenses.Add(newExpense);
+                        await _context.SaveChangesAsync();
 
                         Expenses.Add(newExpense);
                         return true;
