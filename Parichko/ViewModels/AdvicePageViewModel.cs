@@ -44,8 +44,9 @@ namespace Parichko.ViewModels
                         .Where(exp => exp.CategoryId == cat.Id)
                         .Sum(exp => exp.Amount)
                 }).ToList();
-                data.OrderByDescending(ec => ec.TotalExpense)
-                    .Take(5);
+            expenses = expenses.OrderByDescending(e => e.Date)
+                    .Take(5)
+                    .ToList();
                 return data;
         }
         public async Task LoadExpenseCategoryChart()
