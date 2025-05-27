@@ -1,4 +1,4 @@
-﻿using Android.Webkit;
+﻿//using Android.Webkit;
 using Microsoft.EntityFrameworkCore;
 using Parichko.Data;
 using Parichko.Models;
@@ -253,6 +253,24 @@ namespace Parichko.ViewModels
 
                     _context.Goals.Remove(currentGoal);
                 
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                });
+                return false;
+            }
+        }
+        public async Task<bool> UpdateSavedAmountAsync(Goal goal, decimal addedAmount)
+        {
+            try
+            {
+                goal.SavedAmount += addedAmount;
 
                 await _context.SaveChangesAsync();
                 return true;

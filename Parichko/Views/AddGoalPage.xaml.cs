@@ -8,11 +8,13 @@ public partial class AddGoalPage : ContentPage
     private readonly GoalViewModel _viewModel;
     private string chosenIcon;
     private string chosenColor;
+    private int addedFriend;
     public AddGoalPage(GoalViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
         _viewModel = viewModel;
+        //AddFriendDropdown.ItemsSource = _viewModel.Friends;
         ShowGoals();
     }
     private async void ShowGoals()
@@ -32,13 +34,37 @@ public partial class AddGoalPage : ContentPage
     }
     public async void OnDeleteClicked(object sender, EventArgs e)
     {
-            if (sender is Button button && button.BindingContext is Goal goal)
-            {
-                int goalId = goal.Id;
-                await _viewModel.DeleteGoal(goalId);
-            }
-      
+        if (sender is Button button && button.BindingContext is Goal goal)
+        {
+            int goalId = goal.Id;
+            await _viewModel.DeleteGoal(goalId);
+        }
     }
+    private void OpenFriends(object sender, EventArgs e)
+    {
+        //AddFriendDropdown.IsVisible = !AddFriendDropdown.IsVisible;
+    }
+    private void OnFriendSelected(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.FirstOrDefault() is UserProfile selectedFriend)
+        {
+            int chosen = selectedFriend.Id;
+            DisplayAlert("Избран е приятел.", selectedFriend.DisplayName, "Добре");
+            addedFriend = chosen;
+
+            //AddFriendDropdown.IsVisible = false;
+            //AddFriendDropdown.SelectedItem = null;
+        }
+    }
+    public async void OnAddFriendClicked(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.BindingContext is Goal goal)
+        {
+            int goalId = goal.Id;
+            //await _viewModel.AddFriendAsync(goalId, addedFriend);
+        }
+    }
+
 
     //Иконка на категория е натисната
     private void OnHealthClicked(object sender, EventArgs e)

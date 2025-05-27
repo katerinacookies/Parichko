@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parichko.Views.AddGoalPage"
              Title="AddGoalPage"
+             Shell.NavBarIsVisible="False"
              BackgroundColor="#efecec">
     <ScrollView>
         <VerticalStackLayout
@@ -236,7 +237,7 @@
                                         ImageSource="addtogoal.png"
                                         HeightRequest="50"
                                         HorizontalOptions="End"
-                                        Clicked="OnDeleteClicked"
+                                        Clicked="OpenFriends"
                                         BackgroundColor="Transparent"/>
                                     <Button
                                         Grid.Column="3"
@@ -252,13 +253,25 @@
                                 FontSize="18"/>-->
                                 </Grid>
                             </Frame>
-                            <Frame
-                                x:Name="AddFriend"
-                                Padding="0"
-                                IsVisible="True"
-                                BackgroundColor="White"
-                                BorderColor="Transparent">
-                            </Frame>
+                            <CollectionView 
+                                x:Name="AddFriendDropdown"
+                                IsVisible="False"
+                                SelectionMode="Single"
+                                SelectionChanged="OnFriendSelected">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label
+                                            Text="{Binding DisplayName}"
+                                            TextColor="{StaticResource Primary}"
+                                            x:Name="CatLabel"
+                                            BackgroundColor="White"
+                                            HeightRequest="40"
+                                            Margin="0, 10, 0, 0"
+                                            HorizontalTextAlignment="Center"
+                                            VerticalTextAlignment="Center"/>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                         </VerticalStackLayout>
                     </DataTemplate>
             </CollectionView.ItemTemplate>
