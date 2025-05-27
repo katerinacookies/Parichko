@@ -28,7 +28,11 @@ namespace Parichko.ViewModels
         {
             try
             {
-                var expensesFromDb = _context.Expenses.Include(e => e.Category).ToList();
+                int userId = Preferences.Get("LoggedUserId", 0);
+                var expensesFromDb = _context.Expenses
+                    .Include(e => e.Category)
+                    .Where(e => e.UserProfileId == userId)
+                    .ToList();
 
                 Expenses.Clear();
                 //Categories.Clear();
