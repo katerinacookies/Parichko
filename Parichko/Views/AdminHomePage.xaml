@@ -4,25 +4,62 @@
              x:Class="Parichko.Views.AdminHomePage"
              Shell.FlyoutItemIsVisible="False"
              Shell.NavBarIsVisible="False"
-             Shell.TabBarIsVisible="True"
+             Shell.TabBarIsVisible="False"
              Title="AdminHomePage">
-    <VerticalStackLayout>
-        <CollectionView ItemsSource="{Binding Users}">
+    <VerticalStackLayout
+        Padding="20">
+        <Label
+            Text="Администраторски панел"
+            Style="{StaticResource Headline}"
+            FontSize="25"
+            HorizontalTextAlignment="Start"
+            Margin="10"/>
+        <ScrollView
+            Margin="0, 10, 0, 0"
+            HeightRequest="450">
+            <CollectionView ItemsSource="{Binding Users}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" Margin="5" CornerRadius="10">
                         <StackLayout>
-                           
-                            <Label Text="{Binding DisplayName}" FontSize="14" />
-                            <Label Text="{Binding Login.Email}" FontSize="14" />
+                            <Grid
+                                ColumnDefinitions="*,*"
+                                RowDefinitions="*,*">
+                                <Label 
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Text="{Binding DisplayName}" 
+                                    FontSize="14"/>
+                                <Label 
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Text="{Binding Login.Email}" 
+                                    FontSize="14"/>
+                                <Button
+                                    Grid.Column="1"
+                                    ImageSource="heartbreak.png"
+                                    HeightRequest="60"
+                                    Margin="0"
+                                    HorizontalOptions="End"
+                                    BackgroundColor="Transparent"
+                                    Clicked="OnDeleteClicked"
+                                    />
+                            </Grid>
+                            
                         </StackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        </ScrollView>
+        <Image
+            Source="admin.png"
+            HeightRequest="170"
+            Margin="10"/>
         <Button
             Text="Изход"
             Clicked="OnLogoutClicked"
+            Style="{StaticResource LoginBtn}"
             />
     </VerticalStackLayout>
 </ContentPage>

@@ -66,6 +66,8 @@ namespace Parichko
             builder.Services.AddTransient<HomePageViewModel>();
             builder.Services.AddTransient<AdvicePage>();
             builder.Services.AddTransient<AdvicePageViewModel>();
+            builder.Services.AddTransient<EditProfilePage>();
+            builder.Services.AddTransient<EditPageViewModel>();
             //tuk kato nqma bd kak da stane che da raboti i sus i bez
             var dbContext = new ParichkoDbContext();
             //dbContext.Database.EnsureDeleted();
