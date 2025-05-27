@@ -27,10 +27,10 @@ public partial class EditProfilePage : ContentPage
     }
     public async void OnSaveClicked(object sender, EventArgs e)
     {
-        string userName = DisplayName.Text ?? ToString();
-        string userEmail = (UserEmail.Text ?? ToString()).ToLower();
-        string userPass = UserPass.Text ?? ToString();
-        string userPassRepeat = UserPassRepeat.Text ?? ToString();
+        string userName = DisplayName.Text ?? String.Empty;
+        string userEmail = (UserEmail.Text ?? String.Empty).ToLower();
+        string userPass = UserPass.Text ?? String.Empty;
+        string userPassRepeat = UserPassRepeat.Text ?? String.Empty;
 
         await _viewModel.UpdateProfileDataAsync(userName, userEmail, userPass, userPassRepeat);
     }

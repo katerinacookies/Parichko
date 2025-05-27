@@ -65,7 +65,7 @@ namespace Parichko.ViewModels
                     });
                     return false;
                 }
-                if(userName == "" && userEmail == "" && userPass == "")
+                if(userName == String.Empty && userEmail == String.Empty && userPass == String.Empty)
                 {
                     await MainThread.InvokeOnMainThreadAsync(() =>
                     {
@@ -73,20 +73,20 @@ namespace Parichko.ViewModels
                     });
                     return false;
                 }
-                if(userName != "")
+                if(userName != String.Empty)
                 {
                     userName = userName.Trim();
                     currentUser.DisplayName = userName;
                     Preferences.Set("LoggedUserName", userName);
                 }
-                if (userEmail != "")
+                if (userEmail != String.Empty)
                 {
                     userEmail = userEmail.ToLower().Trim();
                     currentUser.Login.Email = userEmail;
                 }
-                if (userPass != "")
+                if (userPass != String.Empty)
                 {
-                    if(userPassRepeat != "")
+                    if(userPassRepeat != String.Empty)
                     {
                         if(userPassRepeat == userPass)
                         {
