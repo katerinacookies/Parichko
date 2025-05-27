@@ -47,7 +47,8 @@
             <VerticalStackLayout>
                 <Button
                     Text="Промяна на личните данни"
-                    Style="{StaticResource ProfileBtns}"/>
+                    Style="{StaticResource ProfileBtns}"
+                    Clicked="OnEditClicked"/>
                 <Button
                     Text="Настройки за изгледа"
                     Style="{StaticResource ProfileBtns}"/>

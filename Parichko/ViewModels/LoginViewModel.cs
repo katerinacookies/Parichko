@@ -47,31 +47,41 @@ namespace Parichko.ViewModels
                     return false;
                 }
 
-                var userprofileFromDb = await Task.Run(async () =>
-                    _context.UserProfiles.FirstOrDefault(u => u.LoginId == userFromDb.Id));
-
-                if (userprofileFromDb == null)
-                {
-                    await Shell.Current.DisplayAlert("Грешка", "Няма такъв потребителски профил!", "Добре");
-                    return false;
-                }
-
-                await Task.Run(async () =>
-                {
-                    Preferences.Set("LoggedUserId", userprofileFromDb.Id);
-                    Preferences.Set("LoggedUserName", userprofileFromDb.DisplayName);
-                    Preferences.Set("LoggedUserEmail", userEmail);
-                    Preferences.Set("LoggedUserPic", userprofileFromDb.ProfilePic);
-                });
-
-                if(userEmail == "admin@admin.com")
+                if (userEmail == "admin@admin.com")
                 {
                     await Shell.Current.GoToAsync("///AdminHomePage?refresh=true");
                     return true;
                 }
+                else
+                {
 
-                await Shell.Current.GoToAsync("///HomePage?refresh=true");
-                return true;
+
+                    var userprofileFromDb = await Task.Run(async () =>
+                        _context.UserProfiles.FirstOrDefault(u => u.LoginId == userFromDb.Id));
+
+                    if (userprofileFromDb == null)
+                    {
+                        await Shell.Current.DisplayAlert("Грешка", "Няма такъв потребителски профил!", "Добре");
+                        return false;
+                    }
+
+                    await Task.Run(async () =>
+                    {
+                        Preferences.Set("LoggedUserId", userprofileFromDb.Id);
+                        Preferences.Set("LoggedUserName", userprofileFromDb.DisplayName);
+                        Preferences.Set("LoggedUserEmail", userEmail);
+                        Preferences.Set("LoggedUserPic", userprofileFromDb.ProfilePic);
+                    });
+
+                    if (userEmail == "admin@admin.com")
+                    {
+                        await Shell.Current.GoToAsync("///AdminHomePage?refresh=true");
+                        return true;
+                    }
+
+                    await Shell.Current.GoToAsync("///HomePage?refresh=true");
+                    return true;
+                }
             }
             catch (Exception ex)
             {

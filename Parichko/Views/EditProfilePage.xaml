@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Parichko.Views.EditProfilePage"
+             Title="EditProfilePage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#efecec">
+    <VerticalStackLayout>
+        <Frame
+    Grid.Column="0"
+    BorderColor="Transparent"
+    HorizontalOptions="Start"
+    Padding="0, 0">
+            <Button
+        x:Name="BackBtn"
+        Style="{StaticResource BackBtn}"
+                BackgroundColor="Transparent"
+        Clicked="OnBackClicked"
+        HorizontalOptions="Start"/>
+        </Frame>
+        <Label
+            Margin="0, 30, 0, 20"
+            Text="Промяна на данни"
+            Style="{StaticResource Headline}"
+            FontSize="25"
+            HorizontalTextAlignment="Start"/>
+        <Frame
+            Margin="20"
+            Style="{StaticResource AddPageFrame}">
+            <VerticalStackLayout>
+                <Frame
+                Style="{StaticResource AddEntryFrame}">
+                    <Entry
+                    x:Name="DisplayName"
+                    Style="{StaticResource AddEntry}"/>
+                </Frame>
+                <Frame
+                    Style="{StaticResource AddEntryFrame}">
+                    <Entry
+                        x:Name="UserEmail"
+                        Style="{StaticResource AddEntry}"/>
+                </Frame>
+                <Frame
+                    Style="{StaticResource AddEntryFrame}">
+                    <Entry
+                        Placeholder="Нова парола"
+                        x:Name="UserPassRepeat"
+                        IsPassword="True"
+                        Style="{StaticResource AddEntry}"/>
+                </Frame>
+                <Frame
+                    Style="{StaticResource AddEntryFrame}">
+                    <Entry
+                        Placeholder="Повтори нова парола"
+                        x:Name="UserPass"
+                        IsPassword="True"
+                        Style="{StaticResource AddEntry}"/>
+                </Frame>
+                <Button
+                    Text="Запази"
+                    Style="{StaticResource AddButton}"
+                    Clicked="OnSaveClicked"
+                />
+            </VerticalStackLayout>
+        </Frame>
+    </VerticalStackLayout>
+</ContentPage>

@@ -22,6 +22,11 @@ public partial class ProfilePage : ContentPage
         await Shell.Current.GoToAsync("//MainPage?refresh=true");
 
 	}
+    public async void OnEditClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///EditProfilePage");
+
+    }
     public async void OnFriendsClicked(object sender, EventArgs e)
     {
         System.Diagnostics.Debug.Write("Бутонът е натиснат.");
