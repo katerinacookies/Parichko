@@ -82,6 +82,14 @@
         Title="LoginPage"
         Route="LoginPage" 
         ContentTemplate="{DataTemplate v:LoginPage}" />
+    <ShellContent 
+        Title="EditProfilePage"
+        Route="EditProfilePage" 
+        ContentTemplate="{DataTemplate v:EditProfilePage}" />
+    <ShellContent 
+    Title="HelpPage"
+    Route="HelpPage" 
+    ContentTemplate="{DataTemplate v:HelpPage}" />
 
     <ShellContent 
         Title="QNext"

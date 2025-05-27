@@ -54,7 +54,8 @@
                     Style="{StaticResource ProfileBtns}"/>
                 <Button
                     Text="Информация / Помощ"
-                    Style="{StaticResource ProfileBtns}"/>
+                    Style="{StaticResource ProfileBtns}"
+                    Clicked="OnHelpClicked"/>
                 <Button
                     Text="Известия"
                     Style="{StaticResource ProfileBtns}"/>
