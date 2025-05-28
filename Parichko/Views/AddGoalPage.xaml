@@ -254,6 +254,7 @@
                                 </Grid>
                             </Frame>
                             <CollectionView 
+                                ItemsSource="{Binding Friends}"
                                 x:Name="AddFriendDropdown"
                                 IsVisible="False"
                                 SelectionMode="Single"

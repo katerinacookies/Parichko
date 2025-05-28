@@ -69,6 +69,7 @@ namespace Parichko.ViewModels
                         Shell.Current.DisplayAlert("Грешка", "Текущият потребител не е намерен.", "Добре"));
                 }
 
+                Friends.Clear();
                 foreach(UserProfile friend in currentUser.Friends)
                 {
                     Friends.Add(friend);
@@ -271,6 +272,44 @@ namespace Parichko.ViewModels
             try
             {
                 goal.SavedAmount += addedAmount;
+
+                await _context.SaveChangesAsync();
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                        Shell.Current.DisplayAlert("Готово", "Напредъкът за тази цел е добавен.", "Добре"));
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", ex.Message, "Добре");
+                });
+                return false;
+            }
+        }
+
+        public async Task<bool> AddFriendAsync(Goal goal, int friendId)
+        {
+            try
+            {
+                UserGoal ugoal = new UserGoal();
+                ugoal.UserProfileId = friendId;
+                ugoal.GoalId = goal.Id;
+
+                var friend = await _context.UserProfiles
+                    .FirstOrDefaultAsync(up => up.Id == friendId);
+                if(friend == null)
+                {
+                    await MainThread.InvokeOnMainThreadAsync(() =>
+                        Shell.Current.DisplayAlert("Грешка", "Приятелят не е намерен.", "Добре"));
+                    return false;
+                }
+                ugoal.UserProfile = friend;
+                ugoal.Goal = goal;
+
+                goal.Savers.Add(ugoal);
+                goal.UGoals.Add(ugoal);
+                friend.Goals.Add(ugoal);
 
                 await _context.SaveChangesAsync();
                 await MainThread.InvokeOnMainThreadAsync(() =>

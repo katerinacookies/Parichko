@@ -116,6 +116,7 @@ namespace Parichko.ViewModels
                     newExpense.Category = categoryFromDb;
                     newExpense.UserProfile = currentUser;
                     newExpense.UserProfileId = currentUserId;
+                    //newExpense.Date = DateTimeOffset.Now.Subtract(TimeSpan.FromDays(3)); 
                    
 
                     await _context.Expenses.AddAsync(newExpense);

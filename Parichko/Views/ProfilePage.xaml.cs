@@ -25,7 +25,10 @@ public partial class ProfilePage : ContentPage
     public async void OnEditClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///EditProfilePage");
-
+    }
+    public async void OnHelpClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///HelpPage");
     }
     public async void OnFriendsClicked(object sender, EventArgs e)
     {

@@ -82,6 +82,7 @@ namespace Parichko.ViewModels
                     Income newIncome = new Income();
                     newIncome.Name = name;
                     newIncome.Amount = amount;
+                    //newIncome.Date = DateTimeOffset.Now.Subtract(TimeSpan.FromDays(5));
                     newIncome.UserProfileId = Preferences.Get("LoggedUserId", 0);
 
                     var currentUser = await _context.UserProfiles

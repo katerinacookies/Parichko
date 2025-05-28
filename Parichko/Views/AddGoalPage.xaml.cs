@@ -42,29 +42,64 @@ public partial class AddGoalPage : ContentPage
     }
     private void OpenFriends(object sender, EventArgs e)
     {
-        //AddFriendDropdown.IsVisible = !AddFriendDropdown.IsVisible;
+        if (sender is Button button)
+        {
+            var dropdown = FindSiblingOfType<CollectionView>(button);
+
+            if (dropdown != null)
+            {
+                dropdown.IsVisible = !dropdown.IsVisible;
+            }
+            else
+            {
+                
+            }
+        }
     }
     private void OnFriendSelected(object sender, SelectionChangedEventArgs e)
     {
-        if (e.CurrentSelection.FirstOrDefault() is UserProfile selectedFriend)
+        if (sender is CollectionView dropdown &&
+        e.CurrentSelection.FirstOrDefault() is UserProfile selectedFriend &&
+        dropdown.BindingContext is Goal goal)
         {
-            int chosen = selectedFriend.Id;
-            DisplayAlert("Избран е приятел.", selectedFriend.DisplayName, "Добре");
-            addedFriend = chosen;
+            addedFriend = selectedFriend.Id;
 
-            //AddFriendDropdown.IsVisible = false;
-            //AddFriendDropdown.SelectedItem = null;
+            // Optional: store this per-goal, if needed
+            DisplayAlert("Избран е приятел.", selectedFriend.DisplayName, "Добре");
+
+            // Hide this specific dropdown and reset selection
+            dropdown.IsVisible = false;
+            dropdown.SelectedItem = null;
         }
     }
     public async void OnAddFriendClicked(object sender, EventArgs e)
     {
         if (sender is Button button && button.BindingContext is Goal goal)
         {
-            int goalId = goal.Id;
-            //await _viewModel.AddFriendAsync(goalId, addedFriend);
+            Goal chosenGoal = goal;
+            await _viewModel.AddFriendAsync(chosenGoal, addedFriend);
         }
     }
+    public static T? FindSiblingOfType<T>(Element start) where T : Element
+    {
+        var parent = start.Parent;
 
+        while (parent != null)
+        {
+            if (parent is Layout layout)
+            {
+                foreach (var child in layout.Children)
+                {
+                    if (child is T match)
+                        return match;
+                }
+            }
+
+            parent = parent.Parent;
+        }
+
+        return null;
+    }
 
     //Иконка на категория е натисната
     private void OnHealthClicked(object sender, EventArgs e)

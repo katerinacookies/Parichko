@@ -92,7 +92,10 @@
                     Clicked="OnAddClicked"/>
                 </VerticalStackLayout>
             </Frame>
-            <CollectionView ItemsSource="{Binding Expenses}">
+        <ScrollView>
+            <CollectionView 
+                ItemsSource="{Binding Expenses}"
+                HeightRequest="370">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame 
@@ -142,6 +145,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-       
+        </ScrollView>
     </VerticalStackLayout>
 </ContentPage>

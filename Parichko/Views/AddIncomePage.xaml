@@ -55,13 +55,15 @@
                                 Grid.Row="0"
                                 TextColor="Black" 
                                 Text="{Binding Name}" 
-                                FontSize="18" />
+                                FontSize="18"
+                                WidthRequest="100"/>
                             <Label 
                                 Grid.Column="1"
                                 Grid.Row="1"
                                 TextColor="Black" 
                                 Text="{Binding Date}"
-                                FontSize="14" />
+                                FontSize="14"
+                                WidthRequest="100"/>
                             <Label 
                                 Grid.Column="2"
                                 TextColor="Black" 
