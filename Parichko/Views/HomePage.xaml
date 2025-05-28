@@ -26,11 +26,16 @@
 
             
                 <!--Лява половина-->
+            <Label
+                Margin="0, 10, 0, 0"
+    Text="Седмични разходи"
+    FontSize="18"
+    FontAttributes="Bold"/>
                 <Frame
                 BackgroundColor="#ffdbe8"
                 CornerRadius="30"
-                Padding="20"
-                HeightRequest="350"
+                Padding="0"
+                HeightRequest="330"
                 Margin="0, 20, 5, 10"
                 BorderColor="Transparent">
                     <VerticalStackLayout>
@@ -39,12 +44,12 @@
                         BorderColor="Transparent">
 
                             <VerticalStackLayout>
-                            <chart:SfCartesianChart HeightRequest="300" Margin="0,20,0,0">
+                            <chart:SfCartesianChart HeightRequest="280" Margin="0,20,0,0">
 
                                 <chart:SfCartesianChart.XAxes>
                                     <chart:CategoryAxis>
                                         <chart:CategoryAxis.Title>
-                                            <chart:ChartAxisTitle Text="Day"/>
+                                            <chart:ChartAxisTitle Text=""/>
                                         </chart:CategoryAxis.Title>
                                     </chart:CategoryAxis>
                                 </chart:SfCartesianChart.XAxes>
@@ -63,7 +68,7 @@
                         EnableTooltip="True"
                         ShowDataLabels="True"
                         Label="Expenses"
-                        Fill="Pink">
+                        Fill="{StaticResource Primary}">
                                     <chart:ColumnSeries.DataLabelSettings>
                                         <chart:CartesianDataLabelSettings LabelPlacement="Inner"/>
                                     </chart:ColumnSeries.DataLabelSettings>
@@ -103,13 +108,14 @@
                             </VerticalStackLayout>
                         </Frame>
 
-                        <Label
-                        Text="Седмична дейност"/>
-                        <Label
-                        Text="Приходи в лв на ден"/>
+                       
                     </VerticalStackLayout>
                 </Frame>
-                <!--Дясна половина-->
+            <Image
+                Source="parichkohome.png"
+                HeightRequest="270"
+                Margin="0, 20, 0, 0"/>
+            <!--Дясна половина-->
                 <!--<Frame
                 Grid.Column="1"
                 Grid.Row="0"
