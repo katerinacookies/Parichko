@@ -15,6 +15,7 @@
                 FontAttributes="Bold"
                 Style="{StaticResource SubHeadline}"/>
             <ScrollView>
+                
                 <CollectionView ItemsSource="{Binding Goals}"
                             HeightRequest="600">
                     <CollectionView.ItemTemplate>
@@ -66,6 +67,7 @@
                                             BorderColor="Transparent">
                                             <Entry
                                                 x:Name="AddedAmountEntry"
+                                                x:Uid="AddedAmountEntry"
                                                 WidthRequest="200"
                                                 Placeholder="Добави спестяване"
                                                 PlaceholderColor="Black"
@@ -74,10 +76,12 @@
                                         </Frame>
                                         <Button
                                             Grid.Column="3"
+                                            Grid.Row="2"
                                             ImageSource="addtogoal.png"
                                             HeightRequest="50"
                                             HorizontalOptions="End"
-                                            Clicked="OnАddProgressClicked"
+                                            
+                                            Clicked="OnAddProgressClicked"
                                             BackgroundColor="Transparent"/>
                                     </Grid>
                                 </VerticalStackLayout>

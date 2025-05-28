@@ -273,6 +273,8 @@ namespace Parichko.ViewModels
                 goal.SavedAmount += addedAmount;
 
                 await _context.SaveChangesAsync();
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                        Shell.Current.DisplayAlert("Готово", "Напредъкът за тази цел е добавен.", "Добре"));
                 return true;
             }
             catch (Exception ex)
