@@ -12,10 +12,10 @@
     <ContentPage.BindingContext>
         <model:ExpenseViewModel/>
     </ContentPage.BindingContext>
-
-    <VerticalStackLayout
+    <ScrollView>
+        <VerticalStackLayout
         Padding="30">
-        <Label 
+            <Label 
             x:Name="displayhi"
             x:Uid="displayhi"
             VerticalOptions="Center" 
@@ -24,72 +24,54 @@
             FontAttributes="Bold"
             Style="{StaticResource SubHeadline}"/>
 
-        <Grid ColumnDefinitions="*,*" RowDefinitions="*,*">
-            <!--Лява половина-->
-            <Frame
-                Grid.Column="0"
-                Grid.RowSpan="2"
+            
+                <!--Лява половина-->
+                <Frame
                 BackgroundColor="#ffdbe8"
                 CornerRadius="30"
                 Padding="20"
                 HeightRequest="350"
                 Margin="0, 20, 5, 10"
                 BorderColor="Transparent">
-                <VerticalStackLayout>
-                    <Frame
+                    <VerticalStackLayout>
+                        <Frame
                         BackgroundColor="Transparent"
                         BorderColor="Transparent">
-                        <!--<chart:SfCartesianChart
-                            HeightRequest="300">
 
-                            <chart:SfCartesianChart.Title>
-                                <Label Text="Height Comparison"/>
-                            </chart:SfCartesianChart.Title>
+                            <VerticalStackLayout>
+                            <chart:SfCartesianChart HeightRequest="300" Margin="0,20,0,0">
 
-                            <chart:SfCartesianChart.Legend>
-                                <chart:ChartLegend/>
-                            </chart:SfCartesianChart.Legend>
+                                <chart:SfCartesianChart.XAxes>
+                                    <chart:CategoryAxis>
+                                        <chart:CategoryAxis.Title>
+                                            <chart:ChartAxisTitle Text="Day"/>
+                                        </chart:CategoryAxis.Title>
+                                    </chart:CategoryAxis>
+                                </chart:SfCartesianChart.XAxes>
 
-                            <chart:SfCartesianChart.XAxes>
-                                <chart:CategoryAxis>
-                                    <chart:CategoryAxis.Title>
-                                        <chart:ChartAxisTitle Text="Разход"/>
-                                    </chart:CategoryAxis.Title>
-                                </chart:CategoryAxis>
-                            </chart:SfCartesianChart.XAxes>
+                                <chart:SfCartesianChart.YAxes>
+                                    <chart:NumericalAxis>
+                                        <chart:NumericalAxis.Title>
+                                            <chart:ChartAxisTitle Text=""/>
+                                        </chart:NumericalAxis.Title>
+                                    </chart:NumericalAxis>
+                                </chart:SfCartesianChart.YAxes>
 
-                            <chart:SfCartesianChart.YAxes>
-                                <chart:NumericalAxis>
-                                    <chart:NumericalAxis.Title>
-                                        <chart:ChartAxisTitle Text="Сума"/>
-                                    </chart:NumericalAxis.Title>
-                                </chart:NumericalAxis>
-                            </chart:SfCartesianChart.YAxes>
+                                <chart:ColumnSeries ItemsSource="{Binding WeeklyExpenseChartData}"
+                        XBindingPath="Day"
+                        YBindingPath="Amount"
+                        EnableTooltip="True"
+                        ShowDataLabels="True"
+                        Label="Expenses"
+                        Fill="Pink">
+                                    <chart:ColumnSeries.DataLabelSettings>
+                                        <chart:CartesianDataLabelSettings LabelPlacement="Inner"/>
+                                    </chart:ColumnSeries.DataLabelSettings>
+                                </chart:ColumnSeries>
 
-                            <chart:SfCartesianChart.XAxes>
-                                <chart:NumericalAxis ShowMajorGridLines="False"/>
-                            </chart:SfCartesianChart.XAxes>
-                            <chart:SfCartesianChart.YAxes>
-                                <chart:NumericalAxis/>
-                            </chart:SfCartesianChart.YAxes>
+                            </chart:SfCartesianChart>
 
-                            Инициализиране на данните
-                            <chart:ColumnSeries ItemsSource="{Binding Expenses}"
-                            XBindingPath="Name" 
-                            YBindingPath="Amount"
-                            EnableTooltip="True"
-                            ShowDataLabels="True"
-                            Label="Height"
-                            Fill="{StaticResource Primary}">
-                                <chart:ColumnSeries.DataLabelSettings>
-                                    <chart:CartesianDataLabelSettings LabelPlacement="Inner"/>
-                                </chart:ColumnSeries.DataLabelSettings>
-                            </chart:ColumnSeries>
-
-                        </chart:SfCartesianChart>-->
-
-                        <VerticalStackLayout>
-                            <chart:SfCartesianChart HeightRequest="300">
+                            <!--<chart:SfCartesianChart HeightRequest="300">
                                 <chart:SfCartesianChart.XAxes>
                                     <chart:CategoryAxis>
                                         <chart:CategoryAxis.Title>
@@ -117,18 +99,18 @@
                                         <chart:CartesianDataLabelSettings LabelPlacement="Inner"/>
                                     </chart:ColumnSeries.DataLabelSettings>
                                 </chart:ColumnSeries>
-                            </chart:SfCartesianChart>
-                        </VerticalStackLayout>
-                    </Frame>
+                            </chart:SfCartesianChart>-->
+                            </VerticalStackLayout>
+                        </Frame>
 
-                    <Label
+                        <Label
                         Text="Седмична дейност"/>
-                    <Label
+                        <Label
                         Text="Приходи в лв на ден"/>
-                </VerticalStackLayout>
-            </Frame>
-            <!--Дясна половина-->
-            <Frame
+                    </VerticalStackLayout>
+                </Frame>
+                <!--Дясна половина-->
+                <!--<Frame
                 Grid.Column="1"
                 Grid.Row="0"
                 BackgroundColor="#ffe7db"
@@ -136,9 +118,9 @@
                 Padding="20"
                 Margin="5, 20, 0, 5"
                 BorderColor="Transparent">
-                
-            </Frame>
-            <Frame
+
+                </Frame>
+                <Frame
                 Grid.Column="1"
                 Grid.Row="1"
                 BackgroundColor="#c2f0fc"
@@ -146,8 +128,8 @@
                 CornerRadius="30"
                 Padding="20"
                 Margin="5, 5, 0, 10">
-                
-            </Frame>
-        </Grid>
-    </VerticalStackLayout>
+
+                </Frame>-->
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

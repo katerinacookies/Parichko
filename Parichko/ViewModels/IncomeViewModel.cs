@@ -86,7 +86,7 @@ namespace Parichko.ViewModels
 
                     var currentUser = await _context.UserProfiles
                         .FirstOrDefaultAsync(up => up.Id == Preferences.Get("LoggedUserId", 0));
-
+                     
                     _context.Incomes.Add(newIncome);
                     currentUser.Incomes.Add(newIncome);
 
