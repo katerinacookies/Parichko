@@ -24,7 +24,10 @@ namespace Parichko.ViewModels
         {
             try
             {
-                var catsFromDb = _context.Categories.ToList();
+                int userId = Preferences.Get("LoggedUserId", 0);
+                var catsFromDb = _context.Categories
+                    .Where(c => c.UserProfileId == userId)
+                    .ToList();
 
                 Categories.Clear();
 
@@ -81,14 +84,27 @@ namespace Parichko.ViewModels
 
                 await Task.Run(async () =>
                 {
+                    int userId = Preferences.Get("LoggedUserId", 0);
+                    var currentUser = await _context.UserProfiles
+                        .FirstOrDefaultAsync(up => up.Id == userId);
+                    if(currentUser == null)
+                    {
+                        await MainThread.InvokeOnMainThreadAsync(() =>
+                        {
+                            Shell.Current.DisplayAlert("Грешка", "Текущият потребител не е открит.", "Добре");
+                        });
+                        return false;
+                    }
                     var newCat = new Category
                     {
                         Name = name,
                         Color = color,
                         IconName = iconName,
-                        Expenses = new List<Expense>()
+                        Expenses = new List<Expense>(),
+                        UserProfileId = userId,
+                        UserProfile = currentUser
                     };
-
+                    currentUser.Categories.Add(newCat);
                     await _context.Categories.AddAsync(newCat);
 
                     try
@@ -182,6 +198,18 @@ namespace Parichko.ViewModels
                 return false;
             }
 
+            int userId = Preferences.Get("LoggedUserId", 0);
+            var currentUser = await _context.UserProfiles
+                .FirstOrDefaultAsync(up => up.Id == userId);
+            if (currentUser == null)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Shell.Current.DisplayAlert("Грешка", "Текущият потребител не е намерен.", "Добре");
+                });
+                return false;
+            }
+            currentUser.Categories.Remove(currentCat);
             try
             {
                 

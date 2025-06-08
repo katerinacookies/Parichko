@@ -18,6 +18,7 @@ namespace Parichko.Models
         public int LoginId { get; set; }
         public string ProfilePic { get; set; } = "default.jpg";
         public IList<Expense> Expenses { get; set; } = new List<Expense>();
+        public IList<Category> Categories { get; set; } = new List<Category>();
         public IList<Income> Incomes { get; set; } = new List<Income>();
         //ilist ili icollection?
         public IList<Advice> Advices { get; set; } = new List<Advice>();

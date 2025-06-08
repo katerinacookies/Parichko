@@ -16,6 +16,8 @@ namespace Parichko.Models
         //cvqt po podrazbirane - siv
         public string Color { get; set; } = "#5f5d5d";
         public string IconName { get; set; } = "others.png";
+        public UserProfile UserProfile { get; set; }
+        public int UserProfileId { get; set; }
         public IList<Expense> Expenses { get; set; }
     }
 }
