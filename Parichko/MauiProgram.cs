@@ -71,7 +71,7 @@ namespace Parichko
             builder.Services.AddTransient<HelpPage>();
             //tuk kato nqma bd kak da stane che da raboti i sus i bez
             var dbContext = new ParichkoDbContext();
-            //dbContext.Database.EnsureDeleted();
+            dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();
             dbContext.Dispose();
             //ot videoto
