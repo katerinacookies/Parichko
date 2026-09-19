@@ -14,17 +14,18 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Setup .NET SDK
+      # 2. Setup .NET 8 and force it via global.json
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
+          global-json-file: 'global.json'
 
-      # 3. Install MAUI workload explicitly
+      # 3. Install MAUI workload for .NET 8
       - name: Install MAUI Workload
         run: dotnet workload install maui
 
-      # 4. Restore Dependencies (disabling EOL warning checks)
+      # 4. Restore Dependencies
       - name: Restore Dependencies
         run: |
           dotnet restore Parichko/Parichko.csproj \
