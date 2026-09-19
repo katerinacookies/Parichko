@@ -40,43 +40,50 @@
                            BackgroundColor="White"
                            HeightRequest="60">
                         <Grid
-                            ColumnDefinitions="*,*,*,*"
-                            RowDefinitions="*,*">
+                            ColumnDefinitions="*,Auto,*,*"
+                            RowDefinitions="*">
                             <Image
                                 Source="income.png"
                                 HeightRequest="40"
                                 WidthRequest="40"
                                 Grid.Column="0"
-                                HorizontalOptions="Start"
-                                Margin="0, 17, 0, 0"
-                                />
-                            <Label 
+                                HorizontalOptions="Start"/>
+                            <Grid
                                 Grid.Column="1"
                                 Grid.Row="0"
-                                TextColor="Black" 
-                                Text="{Binding Name}" 
-                                FontSize="18"
-                                WidthRequest="100"/>
-                            <Label 
-                                Grid.Column="1"
-                                Grid.Row="1"
-                                TextColor="Black" 
-                                Text="{Binding Date}"
-                                FontSize="14"
-                                WidthRequest="100"/>
+                                ColumnDefinitions="*"
+                                RowDefinitions="Auto, *"
+                                VerticalOptions="Center">
+                                <Label 
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    TextColor="Black" 
+                                    Text="{Binding Name}" 
+                                    FontSize="18"
+                                    WidthRequest="100"/>
+                                <Label 
+                                    Grid.Column="0"
+                                    Grid.Row="1"
+                                    TextColor="Black" 
+                                    Text="{Binding Date}"
+                                    FontSize="14"
+                                    WidthRequest="100"/>
+                            </Grid>
+                            
                             <Label 
                                 Grid.Column="2"
                                 TextColor="Black" 
                                 Text="{Binding Amount}"
                                 FontAttributes="Bold"
                                 HorizontalTextAlignment="End"
+                                VerticalTextAlignment="Center"
+                                VerticalOptions="Center"
                                 FontSize="18" />
                             <Button
                                 Grid.Column="3"
                                 ImageSource="heartbreak.png"
                                 HeightRequest="55"
                                 HorizontalOptions="End"
-                                Margin="0, 17, 0, 0"
                                 Clicked="OnDeleteClicked"
                                 BackgroundColor="Transparent"/>
                         </Grid>
