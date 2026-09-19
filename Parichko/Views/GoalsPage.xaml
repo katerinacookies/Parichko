@@ -28,7 +28,7 @@
                                 <VerticalStackLayout>
                                     <Grid
                                 RowDefinitions="*,50,*"
-                                ColumnDefinitions="*,*,*,*">
+                                ColumnDefinitions="*,Auto,*,*">
                                         <Image
                                     Source="{Binding IconName}"
                                     Grid.Column="0"

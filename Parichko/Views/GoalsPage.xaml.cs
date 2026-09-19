@@ -5,6 +5,7 @@ namespace Parichko.Views;
 
 public partial class GoalsPage : ContentPage
 {
+    private CancellationTokenSource _cts;
     private readonly GoalViewModel _viewModel;
     private Goal chosenGoal;
     public GoalsPage(GoalViewModel viewModel)
@@ -12,6 +13,12 @@ public partial class GoalsPage : ContentPage
         InitializeComponent();
         BindingContext = viewModel;
         _viewModel = viewModel;
+        ShowGoals();
+    }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        _cts = new CancellationTokenSource();
         ShowGoals();
     }
     private async void ShowGoals()
@@ -45,6 +52,7 @@ public partial class GoalsPage : ContentPage
                     Shell.Current.DisplayAlert("Грешка", "Не е въведена валидна сума.", "Добре");
                 });
             }
+            ShowGoals();
         }
     }
     private Entry FindEntryInVisualTree(Element startElement)
@@ -112,5 +120,10 @@ public partial class GoalsPage : ContentPage
 
             return null;
         }
+    }
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        _cts.Cancel();
     }
 }
