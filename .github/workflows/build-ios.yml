@@ -14,14 +14,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Setup .NET 8 and force it via global.json
+      # 2. Setup .NET 8 and force via global.json
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
           global-json-file: 'global.json'
 
-      # 3. Install MAUI workload for .NET 8
+      # 3. Install MAUI workload
       - name: Install MAUI Workload
         run: dotnet workload install maui
 
@@ -31,15 +31,17 @@ jobs:
           dotnet restore Parichko/Parichko.csproj \
             -p:CheckEolTargetFramework=false
 
-      # 5. Build and Publish iOS App
+      # 5. Build & Publish WITHOUT Code Signing
       - name: Build MAUI iOS App
         run: |
           dotnet publish Parichko/Parichko.csproj \
             -f net8.0-ios \
             -c Release \
             -p:CheckEolTargetFramework=false \
+            -p:EnableCodeSigning=false \
+            -p:CodesignProvision= \
+            -p:CodesignKey= \
             -p:ArchiveOnBuild=false \
-            -p:CodesignProvision=false \
             -p:BuildIpa=true \
             -p:RuntimeIdentifier=ios-arm64
 
