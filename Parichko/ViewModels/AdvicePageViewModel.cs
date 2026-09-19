@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Java.Time;
+using Microsoft.EntityFrameworkCore;
 using Parichko.Data;
 using Parichko.Utilities;
 using System;
@@ -17,6 +18,8 @@ namespace Parichko.ViewModels
         public ObservableCollection<Brush> CustomBrushes { get; set; }
         public ObservableCollection<ExpenseCategory> CategoryExpenseData { get; set; } = new();
         public ObservableCollection<Chart> WeeklyExpenseChartData { get; set; } = new();
+        public ObservableCollection<Chart> MonthlyExpenseChartData { get; set; } = new();
+        public ObservableCollection<Chart> EveryMonthExpenseChartData { get; set; } = new();
         public ObservableCollection<Chart> WeeklyIncomeChartData { get; set; } = new();
 
         public AdvicePageViewModel(ParichkoDbContext context)
@@ -71,60 +74,68 @@ namespace Parichko.ViewModels
                 });
             }
         }
-        public async void LoadWeeklyExpenses()
+        public async Task LoadMonthlyExpenses()
         {
-            WeeklyExpenseChartData.Clear();
+            MonthlyExpenseChartData.Clear();
 
             var today = DateTimeOffset.Now.Date;
-            var last7Days = Enumerable.Range(0, 7)
-                                      .Select(i => today.AddDays(-i))
-                                      .OrderBy(d => d)
-                                      .ToList();
+
+            var last12months = Enumerable.Range(0, 12)
+                .Select(i => today.AddDays(-11 + i))
+                .ToList();
 
             int userId = Preferences.Get("LoggedUserId", 0);
+
             var allExpenses = await _context.Expenses
                 .Where(e => e.UserProfileId == userId)
                 .ToListAsync();
-            string day = String.Empty;
-            string dayBG = String.Empty;
-            foreach (var date in last7Days)
+
+
+            foreach (var date in last12months)
             {
-                //decimal total = 20;
                 decimal total = allExpenses
-                    .Where(e => e.Date.DayOfWeek == date.DayOfWeek)
+                    .Where(e => e.Date.LocalDateTime.Date == date)
                     .Sum(e => e.Amount);
-                day = date.ToString("ddd", CultureInfo.InvariantCulture);
-                switch (day)
+
+                MonthlyExpenseChartData.Add(new Chart
                 {
-                    case "Mon":
-                        dayBG = "Пн";
-                        break;
-                    case "Tue":
-                        dayBG = "Вт";
-                        break;
-                    case "Wed":
-                        dayBG = "Ср";
-                        break;
-                    case "Thu":
-                        dayBG = "Чт";
-                        break;
-                    case "Fri":
-                        dayBG = "Пт";
-                        break;
-                    case "Sat":
-                        dayBG = "Сб";
-                        break;
-                    case "Sun":
-                        dayBG = "Нд";
-                        break;
-                }
-                WeeklyExpenseChartData.Add(new Chart
-                {
-                    Day = dayBG,
+                    Day = date.Month.ToString(),
                     Amount = total
                 });
             }
         }
+
+        public async Task EveryMonthExpenses()
+        {
+            EveryMonthExpenseChartData.Clear();
+
+            var today = DateTimeOffset.Now.Date;
+
+            var last30Days = Enumerable.Range(0, 30)
+                .Select(i => today.AddDays(-29 + i))
+                .ToList();
+
+            int userId = Preferences.Get("LoggedUserId", 0);
+
+            var allExpenses = await _context.Expenses
+                .Where(e => e.UserProfileId == userId)
+                .ToListAsync();
+
+
+            foreach (var date in last30Days)
+            {
+                decimal total = allExpenses
+                    .Where(e => e.Date.LocalDateTime.Date == date)
+                    .Sum(e => e.Amount);
+
+                EveryMonthExpenseChartData.Add(new Chart
+                {
+                    Day = date.Date.Day.ToString(),
+                    Amount = total
+                });
+            }
+        }
+
         public async void LoadWeeklyIncomes()
         {
             WeeklyIncomeChartData.Clear();

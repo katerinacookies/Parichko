@@ -14,6 +14,7 @@ public partial class AdvicePage : ContentPage
         LoadDoughnut();
         SlayChart();
         IncomeChart();
+        EveryMonthChart();
     }
 
     public async Task LoadDoughnut()
@@ -22,7 +23,11 @@ public partial class AdvicePage : ContentPage
     }
     public async Task SlayChart()
     {
-        _viewModel.LoadWeeklyExpenses();
+        await _viewModel.LoadMonthlyExpenses();
+    }
+    public async Task EveryMonthChart()
+    {
+        await _viewModel.EveryMonthExpenses();
     }
     public async Task IncomeChart()
     {
