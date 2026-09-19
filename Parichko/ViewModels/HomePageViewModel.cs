@@ -18,59 +18,48 @@ namespace Parichko.ViewModels
     {
         private readonly ParichkoDbContext _context;
         public ObservableCollection<ExpenseDay> DayChartExpenses { get; set; } = new();
-        public ObservableCollection<Chart> WeeklyExpenseChartData { get; set; } = new();
+        public ObservableCollection<Chart> WeeklyExpenseChartData { get; set; } = new ObservableCollection<Chart>();
 
         public HomePageViewModel(ParichkoDbContext context)
         {
             _context = context;
         }
-        public async void LoadWeeklyExpenses()
+        public async Task LoadWeeklyExpenses()
         {
             WeeklyExpenseChartData.Clear();
 
             var today = DateTimeOffset.Now.Date;
+
             var last7Days = Enumerable.Range(0, 7)
-                                      .Select(i => today.AddDays(-i))
-                                      .OrderBy(d => d)
-                                      .ToList();
+                .Select(i => today.AddDays(-6 + i))
+                .ToList();
 
             int userId = Preferences.Get("LoggedUserId", 0);
+
             var allExpenses = await _context.Expenses
                 .Where(e => e.UserProfileId == userId)
                 .ToListAsync();
-            string day = String.Empty;
-            string dayBG = String.Empty;
+            
+
             foreach (var date in last7Days)
             {
-                //decimal total = 20;
                 decimal total = allExpenses
-                    .Where(e => e.Date.DayOfWeek == date.DayOfWeek)
+                    .Where(e => e.Date.LocalDateTime.Date == date)
                     .Sum(e => e.Amount);
-                day = date.ToString("ddd", CultureInfo.InvariantCulture);
-                switch (day)
+
+                string dayBG = date.DayOfWeek switch
                 {
-                    case "Mon":
-                        dayBG = "Пн";
-                        break;
-                    case "Tue":
-                        dayBG = "Вт";
-                        break;
-                    case "Wed":
-                        dayBG = "Ср";
-                        break;
-                    case "Thu":
-                        dayBG = "Чт";
-                        break;
-                    case "Fri":
-                        dayBG = "Пт";
-                        break;
-                    case "Sat":
-                        dayBG = "Сб";
-                        break;
-                    case "Sun":
-                        dayBG = "Нд";
-                        break;
-                }
+                    DayOfWeek.Monday => "Пн",
+                    DayOfWeek.Tuesday => "Вт",
+                    DayOfWeek.Wednesday => "Ср",
+                    DayOfWeek.Thursday => "Чт",
+                    DayOfWeek.Friday => "Пт",
+                    DayOfWeek.Saturday => "Сб",
+                    DayOfWeek.Sunday => "Нд",
+                    _ => ""
+                };
+
+
                 WeeklyExpenseChartData.Add(new Chart
                 {
                     Day = dayBG,
@@ -78,6 +67,8 @@ namespace Parichko.ViewModels
                 });
             }
         }
+
+
         public async Task<bool> LoadExpByDayAsync()
         {
             try

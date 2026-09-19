@@ -69,6 +69,7 @@
                         ShowDataLabels="True"
                         Label="Expenses"
                         Fill="{StaticResource Primary}">
+                                    
                                     <chart:ColumnSeries.DataLabelSettings>
                                         <chart:CartesianDataLabelSettings LabelPlacement="Inner"/>
                                     </chart:ColumnSeries.DataLabelSettings>
