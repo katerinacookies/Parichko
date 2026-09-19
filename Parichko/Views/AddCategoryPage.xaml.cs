@@ -7,15 +7,23 @@ namespace Parichko.Views;
 
 public partial class AddCategoryPage : ContentPage
 {
-	private readonly CategoryViewModel _viewModel;
+    private CancellationTokenSource _cts;
+    private readonly CategoryViewModel _viewModel;
     private string chosenIcon;
     private string chosenColor;
     private int deleteClicked = 0;
-	public AddCategoryPage(CategoryViewModel viewModel)
+
+    public AddCategoryPage(CategoryViewModel viewModel)
 	{
 		InitializeComponent();
         BindingContext = viewModel;
 		_viewModel = viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        _cts = new CancellationTokenSource();
         ShowCats();
     }
     private async void ShowCats()
@@ -173,5 +181,11 @@ public partial class AddCategoryPage : ContentPage
         chosenIcon = "otherscat.png";
         chosenColor = "#5a5858";
         CategoryIcons.IsVisible = false;
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        _cts.Cancel();
     }
 }

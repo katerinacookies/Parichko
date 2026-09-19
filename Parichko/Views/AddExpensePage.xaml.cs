@@ -5,6 +5,7 @@ namespace Parichko.Views;
 
 public partial class AddExpensePage : ContentPage
 {
+    private CancellationTokenSource _cts;
     private readonly ExpenseViewModel _viewModel;
     private readonly DropdownViewModel _viewModel1;
     private string chosenCat;
@@ -13,11 +14,18 @@ public partial class AddExpensePage : ContentPage
         InitializeComponent();
         BindingContext = viewModel;
         _viewModel = viewModel;
-        ShowExpenses();
         _viewModel1 = viewModel1;
-        _viewModel.CategoriesForDropdown();
         categoryDropdown.ItemsSource = _viewModel.Categories;
         //PopulateDropdown();
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        _cts = new CancellationTokenSource();
+        //това безопасно ли е?
+        await _viewModel.CategoriesForDropdown(); 
+        ShowExpenses();
     }
     private async void ShowExpenses()
     {
@@ -63,6 +71,12 @@ public partial class AddExpensePage : ContentPage
             int expenseId = expense.Id;
             await _viewModel.DeleteExpense(expenseId);
         }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        _cts.Cancel();
     }
 
     /*private async void PopulateDropdown()

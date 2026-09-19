@@ -6,7 +6,8 @@ namespace Parichko.Views;
 
 public partial class AddIncomePage : ContentPage
 {
-	private readonly IncomeViewModel _viewModel;
+    private CancellationTokenSource _cts;
+    private readonly IncomeViewModel _viewModel;
 	public AddIncomePage(IncomeViewModel viewModel)
 	{
 		InitializeComponent();
@@ -18,6 +19,12 @@ public partial class AddIncomePage : ContentPage
     private async void ShowIncomes()
     {
         await _viewModel.LoadIncomesAsync();
+    }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        _cts = new CancellationTokenSource();
+        ShowIncomes();
     }
     private async void OnAddClicked(object sender, EventArgs e)
     {
@@ -32,5 +39,11 @@ public partial class AddIncomePage : ContentPage
             int incomeId = income.Id;
             await _viewModel.DeleteIncome(incomeId);
         }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        _cts.Cancel();
     }
 }

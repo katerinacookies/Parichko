@@ -5,6 +5,7 @@ namespace Parichko.Views;
 
 public partial class AddGoalPage : ContentPage
 {
+    private CancellationTokenSource _cts;
     private readonly GoalViewModel _viewModel;
     private string chosenIcon;
     private string chosenColor;
@@ -15,6 +16,13 @@ public partial class AddGoalPage : ContentPage
         BindingContext = viewModel;
         _viewModel = viewModel;
         //AddFriendDropdown.ItemsSource = _viewModel.Friends;
+        ShowGoals();
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        _cts = new CancellationTokenSource();
         ShowGoals();
     }
     private async void ShowGoals()
@@ -221,5 +229,11 @@ public partial class AddGoalPage : ContentPage
         chosenIcon = "otherscat.png";
         chosenColor = "#5a5858";
         GoalIcons.IsVisible = false;
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        _cts.Cancel();
     }
 }
