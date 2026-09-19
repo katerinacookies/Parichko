@@ -14,26 +14,29 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Pin .NET SDK explicitly to .NET 8
-      - name: Setup .NET 8
+      # 2. Setup .NET SDK
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      # 3. Automatically restore all required workloads for your .csproj
-      - name: Restore Workloads
-        run: dotnet workload restore Parichko/Parichko.csproj
+      # 3. Install MAUI workload explicitly
+      - name: Install MAUI Workload
+        run: dotnet workload install maui
 
-      # 4. Restore Dependencies
+      # 4. Restore Dependencies (disabling EOL warning checks)
       - name: Restore Dependencies
-        run: dotnet restore Parichko/Parichko.csproj
+        run: |
+          dotnet restore Parichko/Parichko.csproj \
+            -p:CheckEolTargetFramework=false
 
-      # 5. Build ONLY for iOS target framework
+      # 5. Build and Publish iOS App
       - name: Build MAUI iOS App
         run: |
           dotnet publish Parichko/Parichko.csproj \
             -f net8.0-ios \
             -c Release \
+            -p:CheckEolTargetFramework=false \
             -p:ArchiveOnBuild=false \
             -p:CodesignProvision=false \
             -p:BuildIpa=true \
