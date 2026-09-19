@@ -3,35 +3,36 @@ name: Build .NET MAUI iOS App
 on:
   push:
     branches: [ "main", "master" ]
-  workflow_dispatch: # Allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 jobs:
   build-ios:
-    runs-on: macos-latest # Uses GitHub's free hosted Mac runner
+    runs-on: macos-latest
 
     steps:
       # 1. Checkout repository code
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Setup .NET SDK (adjust version if using .NET 8 or .NET 9)
-      - name: Setup .NET
+      # 2. Pin .NET SDK explicitly to .NET 8
+      - name: Setup .NET 8
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      # 3. Install .NET MAUI iOS Workload
-      - name: Install MAUI Workloads
-        run: dotnet workload install maui-ios
+      # 3. Automatically restore all required workloads for your .csproj
+      - name: Restore Workloads
+        run: dotnet workload restore Parichko/Parichko.csproj
 
       # 4. Restore Dependencies
       - name: Restore Dependencies
-        run: dotnet restore
+        run: dotnet restore Parichko/Parichko.csproj
 
-      # 5. Build unsigned iOS App (.app / .ipa)
+      # 5. Build ONLY for iOS target framework
       - name: Build MAUI iOS App
         run: |
-          dotnet publish -f net8.0-ios \
+          dotnet publish Parichko/Parichko.csproj \
+            -f net8.0-ios \
             -c Release \
             -p:ArchiveOnBuild=false \
             -p:CodesignProvision=false \
