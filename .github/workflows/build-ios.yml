@@ -1,0 +1,46 @@
+name: Build .NET MAUI iOS App
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  build-ios:
+    runs-on: macos-latest # Uses GitHub's free hosted Mac runner
+
+    steps:
+      # 1. Checkout repository code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Setup .NET SDK (adjust version if using .NET 8 or .NET 9)
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # 3. Install .NET MAUI iOS Workload
+      - name: Install MAUI Workloads
+        run: dotnet workload install maui-ios
+
+      # 4. Restore Dependencies
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      # 5. Build unsigned iOS App (.app / .ipa)
+      - name: Build MAUI iOS App
+        run: |
+          dotnet publish -f net8.0-ios \
+            -c Release \
+            -p:ArchiveOnBuild=false \
+            -p:CodesignProvision=false \
+            -p:BuildIpa=true \
+            -p:RuntimeIdentifier=ios-arm64
+
+      # 6. Upload output artifact to GitHub
+      - name: Upload iOS Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-app-build
+          path: '**/bin/Release/net8.0-ios/ios-arm64/publish/*.ipa'
